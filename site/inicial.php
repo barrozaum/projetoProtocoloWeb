@@ -1,79 +1,46 @@
-    <?php
-    session_start();
+<?php
+//valida para saber se o usuário está logado
+include "recursos/includes/estrutura/controle/validar_secao.php";
+?>
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta charset="utf-8">
+        <title>Arrecadação</title>
 
-    include ('recursos/includes/verSessao.inc');
-     $idUsuario = $_SESSION['idUsuario'];
-     $idSetorUsuario =$_SESSION['idSetorUsuario'];
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="recursos/css/bootstrap.css" rel="stylesheet">
+        <link href="recursos/css/menu.css" rel="stylesheet">
 
-    ?>
+        <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="recursos/js/jquery.min.js"></script>
+        <script src="recursos/js/bootstrap.min.js"></script>
+        <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
+        <script src="recursos/js/estrutura.js"></script>
 
-
-    <!DOCTYPE HTML>
-    <html lang="pt-br">
-    	<head>
-    		<meta charset="UTF-8">
-    		<link rel="stylesheet" type="text/css" href="recursos/css/estilo.css"/>
-    		<link rel="stylesheet" type="text/css" href="recursos/css/estiloedicao.css"/>
-    		<link rel="stylesheet" type="text/css" href="recursos/css/estilomenu.css"/>
-    		<link rel="stylesheet" type="text/css" href="recursos/css/conteudo.css"/>
-
-
-
-    	<title>Parvaim</title>
+        <script>
+            $(document).ready(function () {
+                $('#acessoRapido').load('recursos/includes/estrutura/acesso_rapido.php');
+            });
+        </script>
     </head>
+    <body>
+        <div id="cabecalho">
+            <!-- Não apagar, pois é onde encontra-se o menu do site -->
+        </div>
+        <hr />
 
+        <div id="acessoRapido">
 
+        </div>
 
-
-
-    <body class="laterais">
-    		<div id="externo">
-    			<div id="cabecalho">
-
-    						<a href="inicial.php"><h1 id="titulo"><span>Parvaim</span></h1></a>
-
-    			</div>
-
-    			<div id="menu">
-
-
-    						<?php
-    						// Inclui o menu do site
-    						include('recursos/includes/verMenu.inc');
-    						?>
-
-
-    			</div>
-
-
-    			<div id="centro1">
-
-    			</div>
-
-    			<div id="centro">
-
-    				<div id="conteudo">
-
-
-
-
-
-    				</div>
-    			</div>
-    			<div id="rodape">
-
-    				<div id="usuario">
-
-    				<?php
-    				// Inclui informações do usuario
-
-    				include('recursos/includes/inforUsuario.inc');
-    				?>
-
-    				</div>
-
-    			</div>
-    		</div>
-    	</body>
-
-    </html>
+        <div id="rodape">
+            <!-- Não apagar, pois é onde encontra-se o rodape da página -->
+        </div>
+    </body>
+</html>

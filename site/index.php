@@ -1,124 +1,63 @@
-<!DOCTYPE HTML>
+<?php
+session_start();
+session_destroy();
+
+// SABER SE É MANHÃ TARDE OU NOITE
+$hora = date('H');
+if ($hora >= 00 AND $hora <= 05) {
+    $msg = "Boa Magruda";
+} else if ($hora >= 6 AND $hora <= 11) {
+    $msg = "Bom Dia";
+} else if ($hora >= 12 AND $hora <= 18) {
+    $msg = "Boa Tarde";
+} else {
+    $msg = "Boa Noite";
+}
+?>
+<!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta HTTP-EQUIV="refresh" CONTENT="60">
-		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="recursos/css/estilologin.css"/>
-		<link rel="stylesheet" type="text/css" href="recursos/css/estiloedicaologin.css"/>
-		
-		<script language="JavaScript">
+    <head>
+        <title>Parvaim</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="recursos/css/login.css">
 
-		function validaSenha(){
-		   var login= document.f1.txtlogin.value;
-		   var senha= document.f1.txtsenha.value;
-		 
+    </head>
+    <body>
 
-		   if(login == ""){
-		   	window.alert('Campo Login não Preenchido !!!');
-		   	document.f1.txtlogin.focus();
-		   }else if(senha == ""){
-		   	window.alert('Campo Senha não Preenchido !!!');
-		   	document.f1.txtsenha.focus();
-		   } else{
-		  
-		   document.f1.txtlogin.value = login.toUpperCase();
-		   document.f1.txtsenha.value = senha.toUpperCase();
-		   document.f1.submit();
-		   }
+        <div class="card card-container">
+            <p align="center"> <?php print $msg; ?> !!!</p>
+            <p align="center">Bem Vindo ao  <strong>SAM</strong> !!!</p>
+            <p align="center"> <strong>SISTEMA DE ARRECADACAO MUNIICIPAL</strong></p>
+            <img id="profile-img" class="profile-img-card" src="recursos/imagens/estrutura/logo.jpg" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <!--<form class="form-signin">-->
+            <form id="loginform" name="f1" class="form-signin" role="form" method="post" action= "recursos/includes/estrutura/controle/validar_login.php">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input type="text" id="txtlogin" name="txtlogin" class="form-control" placeholder="Login" required autofocus>
+                <input type="password" id="txtsenha" name="txtsenha" class="form-control" placeholder="Senha" required>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Logar</button>
+            </form>
+            <!-- /form -->
+            <!--            <a href="#" class="forgot-password">
+                            Forgot the password?
+                        </a>-->
 
-		}
-		</script>
-			
-
-		<script type="text/javascript">
-		
-		function submitenter(myfield,e)
-		{
-
-
-		var keycode;
-		var login= document.f1.txtlogin.value;
-		var senha= document.f1.txtsenha.value;
-		
-		if (window.event) keycode = window.event.keyCode;
-		else if (e) keycode = e.which;
-		else return true;
-		
-	
-		if (keycode == 13)
-		   {
-		   
-			    if(login == ""){
-			    	window.alert('Campo Login não Preenchido !!!');
-			    	document.f1.txtlogin.focus();
-			   	}else if(senha == ""){
-			    	window.alert('Campo Senha não Preenchido !!!');
-			    	document.f1.txtsenha.focus();
-			   } else{
-				 document.f1.txtlogin.value = login.toUpperCase();
-				 document.f1.txtsenha.value = senha.toUpperCase();
-			  	 document.f1.submit();
-			   }
+            <?php
+            if (isset($_SESSION["MENSAGEM"])) {
+                ?>
+                <div class="alert alert-danger">
+                    <?php
+                    echo $_SESSION["MENSAGEM"];
+                    unset($_SESSION["MENSAGEM"]);
+                    ?>
+                </div>
+                <?php
+            }
+            ?>
+        </div><!-- /card-container -->
 
 
-		   }
-		
-		   
-		}
-		</script>
-		
-		
-		
-		
-		
-	<title>Parvaim</title>	
-</head>
-	
-		
-		
-		
-					
-<body class="laterais">
-		<div id="externo">
-			<div id="cabecalho">
-			
-						<h1 id="titulo"><span>Parvaim</span></h1>
-			
-			</div>
-			
-			<div id="menu">
-					
-							
-					
-			</div>
-		
-		
-			<div id="centro">
-			
-			
-				<div id="conteudo">
-						
-					
-						
-					<form name ="f1" action="logar.php" method="post">
-					<input id="login" type="text" name="txtlogin" placeholder="Digite seu login" value="" onKeyPress="submitenter(this,event)"/>
-					
-					
-					<input id="senha" type="password" name="txtsenha" placeholder="Digite sua senha" value="" onKeyPress="submitenter(this,event)"/>
-				
-				
-					<div id="botao">
-					<input id="enviar" type="button" value="              " onclick="javascript: validaSenha();"  />
-					</div>
-					
-				
-					</form>
-				</div>
-			</div>
-			<div id="rodape">
-				 
-			</div>
-		</div>
-	</body>
-	
+
+    </body>
 </html>
