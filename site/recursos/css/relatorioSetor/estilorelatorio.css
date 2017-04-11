@@ -1,0 +1,19 @@
+body{
+background-color: black;
+float: left; 
+}
+
+#externo{
+	position: relative;
+	width: 1024px;
+	float:left;
+	background-color: blue;
+
+}
+
+#tabela{
+	background-color: red;
+	width: 100%;
+	font-family: verdana;
+
+}

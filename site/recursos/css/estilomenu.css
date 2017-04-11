@@ -1,0 +1,104 @@
+#menu {
+  width: 1024px;
+  background-color: green;
+}
+
+#menu > ul {
+  list-style: none;
+   background-color: green;
+  width: 1024px;
+  font: 10pt verdana, arial, helvetica;
+  height:25px;
+}
+#menu > ul li {
+  background-color: green;
+  float: left;
+  position: relative;
+  width: 170.66px;
+  height:25px; 
+  font: 11pt verdana, arial, helvetica;
+}
+
+#menu > ul li a:link,
+#menu > ul li a:visited {
+  padding: 2px 0;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  width: 170.66px;
+  height:20px; 
+}
+
+#menu > ul li:hover a,
+#menu > ul li a:hover,
+#menu > ul li a:active {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: #004001;
+  color: #ffffff;
+  width: 170.66px;
+}
+
+#menu > ul li ul {
+  margin-top: 3px;
+  padding: 1px 1px 0;
+  list-style: none;
+  display: none;
+  width: 170.66px;
+  position: absolute;
+  top: 21px;
+  left: -1px;
+}
+
+#menu > ul li:hover ul {
+  display: block;
+}
+
+#menu > ul li ul li {
+  clear: left;
+  width: 170.66px;
+}
+
+#menu > ul li ul li a:link,
+#menu > ul li ul li a:visited {
+  clear: left;
+  background: #9ACD32;
+  width: 170.66px;
+  border: none;
+  position: relative;
+  z-index: 1000;
+}
+
+#menu > ul li ul li:hover a,
+#menu > ul li ul li a:active,
+#menu > ul li ul li a:hover {
+  clear: left;
+  background: green;
+  width: 170.66px;
+  position: relative;
+  z-index: 1000;
+}
+
+#menu > ul li ul li ul.navigation-3 {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  left: 170.66px;
+  top: -2px;
+  padding: 1px 1px 0 1px;
+  background: #ffffff;
+  z-index: 900;
+}
+
+#menu > ul li ul li:hover ul.navigation-3 {
+  display: block;
+}
+
+#menu > ul li ul li ul.navigation-3 li a:link,
+#menu > ul li ul li ul.navigation-3 li a:visited {
+  background: #b9121b;
+}

@@ -1,0 +1,113 @@
+#superior{
+width:90%;
+height: auto;
+float:left;
+margin-left:5%;
+}
+
+#tituloNivel2{
+margin-top:1%;
+margin-left:35%;
+height: 25px;
+float: left;
+}
+
+
+#cadastrados{
+float: left;
+margin-top:3%;
+width:100%;
+height: auto;
+text-align:center;
+}
+
+#tabelas{
+background-color: #F4F4F5;
+height: 400px;
+overflow: auto;
+width: 90%;
+margin-left:5%;
+}
+
+#tabelasLista{
+background-color: #F4F4F5;
+height: 400px;
+overflow: auto;
+width: 100%;
+margin-left:0;
+text-align: center;
+}
+
+#setorH2{
+margin-top:50%;
+}
+
+#conteudo{
+margin-left:10%;
+width:80%;
+}
+
+#direitaBotao{
+margin-left: 0;
+margin-top: 5%;
+float:left;
+}
+
+#esquerdaForm{
+float:left;
+width:700px;
+}
+
+
+/* -- Página CadastroProcesso.php -- */
+#direitaBotaoCadastroProcesso{
+
+float: right;
+width: 150px;
+height: 60px;
+margin-top: 52px;
+}
+
+
+
+/*-- Página manUsuario.php --*/
+
+
+#permissao{
+width:100%;
+float:left;
+background-color: #F3F3F3;
+}
+
+
+
+#perDir{
+width:40%;
+float:left;
+margin-left:5%;
+margin-top:3%;
+}
+
+
+#perEsq{
+margin-top:5%;
+width:40%;
+float:left;
+}
+
+#link {
+text-align:center;
+text-decoration: none;
+}
+
+
+#TITULO{
+width:800px;
+height:90px;
+float:left;
+}
+
+
+#LOGO{
+float:left;
+}

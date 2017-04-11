@@ -1,0 +1,65 @@
+/**
+*Zera a margem e o espa�amento em todos
+*/
+*{
+	margin: 0;
+	padding: 0;
+}
+
+/*Para o layout de 3 colunas*/
+
+.laterais #menu{
+	
+	width: 1024px;
+	height: 20px;
+	float: left;
+}
+
+.laterais #centro1{
+	width: 1024px;
+	height:22px;
+	margin-left: 0px;	
+	background-Color:white;
+	float: left;
+	
+	
+}
+.laterais #centro{
+	width: 1024px;
+	min-height:650px;
+	margin-left: 0px;	
+	background-Color:white;
+	background-repeat: repeat;
+	float: left;
+	
+}
+
+#titulo{
+	background-image: url(../imagens/Site/cabecalhoFundec.png);
+	background-repeat: no-repeat;
+	width:1024px;
+	height:65px;
+}
+
+
+	
+#titulo span{
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	overflow: hidden;
+}
+
+#mostrarInformUsuario{
+	width:800px;
+	float: left;
+	margin-top:50px;
+	margin-left: 16%;
+	
+}
+
+#loginUsuario, #setorUsuario{
+	margin-top:105px;
+	margin-left: 3%;
+	width: 500px;
+	}
