@@ -5,7 +5,7 @@ session_start();
     <div class="row">
         <div class="col-lg-2 col-lg-offset-0 text-center">
             <a href="inicial.php">
-                <img src="<?php echo $_SESSION['CONFIG_CAMINHO_LOGO']; ?>" height="76" width="150" alt="logo cliente" title="logo da prefeitura">
+             <!--   <img src="<?php echo $_SESSION['CONFIG_CAMINHO_LOGO']; ?>" height="76" width="150" alt="logo cliente" title="logo da prefeitura">
                 <!--<img src="recursos/imagens/estrutura/logo.jpg" height="76px" alt="logo cliente" title="logo da prefeitura">-->
             </a>
         </div>
@@ -14,7 +14,7 @@ session_start();
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <div class="navbar-header ">
-                    <a class="navbar-brand" href="inicial.php"><?php echo $_SESSION['CONFIG_NOME_CLIENTE']; ?></a>
+                    <a class="navbar-brand" href="inicial.php"><?php // $_SESSION['CONFIG_NOME_CLIENTE']; ?></a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -52,10 +52,10 @@ session_start();
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTA <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="consulta_numero.php">NÚMERO</a></li>
-                                <li><a href="#">ASSUNTO</a></li>
+                                <li><a href="consulta_assunto.php">ASSUNTO</a></li>
                                 <li><a href="#">ANEXO</a></li>
-                                <li><a href="#">DATA CARGA</a></li>
-                                <li><a href="#">DATA PROCESSO</a></li>
+                                <li><a href="consulta_data_carga.php">DATA CARGA</a></li>
+                                <li><a href="consulta_data_criacao_processo.php">DATA PROCESSO</a></li>
                                 <li><a href="#">DOCUMENTO</a></li>
                                 <li><a href="#">REQUERENTE</a></li>
                                 <li><a href="#">SETOR</a></li>

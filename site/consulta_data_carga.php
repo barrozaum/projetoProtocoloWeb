@@ -22,7 +22,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <script src="recursos/js/estrutura.js"></script>
-        <script src="recursos/js/modal_consulta_numero.js"></script>
+        <script src="recursos/js/modal_consulta_data_carga.js"></script>
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
@@ -32,7 +32,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_consulta_numero.php');
+                $('#formulario').load('recursos/includes/formulario/formulario_consulta_data_carga.php');
                 $('#modal').load('recursos/includes/estrutura/modal.html');
 
             }

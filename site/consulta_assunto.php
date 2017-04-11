@@ -32,7 +32,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_consulta_numero.php');
+                $('#formulario').load('recursos/includes/formulario/formulario_consulta_assunto.php');
                 $('#modal').load('recursos/includes/estrutura/modal.html');
 
             }
