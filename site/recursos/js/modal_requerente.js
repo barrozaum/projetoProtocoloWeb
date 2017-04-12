@@ -7,7 +7,7 @@ $(function () {
         $(".modal-content").html('');
         $(".modal-content").addClass('loader');
         $("#dialog-example").modal('show');
-        $.post('recursos/includes/formulario/formulario_cadastro_documento.php',
+        $.post('recursos/includes/formulario/formulario_cadastro_requerente.php',
                 {id: 1,
                     codigo: $(this).attr('data-id')
                 },
@@ -24,7 +24,7 @@ $(function () {
         $(".modal-content").html('');
         $(".modal-content").addClass('loader');
         $("#dialog-example").modal('show');
-        $.post('recursos/includes/formulario/formulario_cadastro_documento.php',
+        $.post('recursos/includes/formulario/formulario_cadastro_requerente.php',
                 {id: 2,
                     codigo: $(this).attr('data-id')
                 },
@@ -36,8 +36,8 @@ $(function () {
     });
 
 
-// Daqui pra baixo são arqivos para realizar a consulta por documento
-// pagina consulta_documento.php
+// Daqui pra baixo são arqivos para realizar a consulta por requerente
+// pagina consulta_requerente.php
 
 
     $(document).on('click', '#id_consultar_processo', function (e) {
@@ -60,25 +60,25 @@ $(function () {
 //---------------------------------------------------------------------------------------------
 
 
-    $(document).on('click', '#id_buscar_documento', function (e) {
+    $(document).on('click', '#id_buscar_requerente', function (e) {
 //limpo mensagem de erro
         $("#msg_erro").html('');
 
 //        carrego paramtros do formulario
-        var documento = $('#id_documento').val();
-        var numero_documento = $('#id_numero_documento').val();
-        var ano_documento = $('#id_ano_documento').val();
+        var requerente = $('#id_requerente').val();
+        var dt_inicial = $('#id_dt_inicial').val();
+        var dt_final = $('#id_dt_final').val();
 
 
-// valido o documento
-        if (documento.length < 3) {
-            $("#msg_erro").html('<div class="alert alert-danger">POR FAVOR PREENCHA O DOCUMENTO CORRETAMENTE !! </div>');
+// valido o requerente
+        if (requerente.length < 3) {
+            $("#msg_erro").html('<div class="alert alert-danger">POR FAVOR PREENCHA O REQUERENTE CORRETAMENTE !! </div>');
             return false;
         }
 
 //passo o parametro pra onde deve ir buscar
-        var url = 'recursos/includes/consulta/consulta_documento.php'
-        var parametros = {documento: documento, numero_documento: numero_documento, ano_documento: ano_documento};
+        var url = 'recursos/includes/consulta/consulta_requerente.php'
+        var parametros = {requerente: requerente, dt_inicial: dt_inicial, dt_final: dt_final};
 
 // chamo a função que irá pesquisar o valor
         funcao_retorna_pesquisa(url, parametros);
