@@ -28,21 +28,19 @@ function formulario() {
                         <div class="row">
                             <div class="col-sm-6">
                                 <?php
-                                //   INPUT -                              
-                                criar_input_data('Data Inicial', 'data_inicial', 'data_inicial', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                criar_input_data('Data Inicial', 'dt_inicial', 'dt_inicial', array('required' => 'true', 'placeholder' => '00/00/0000'), '', 'somente numeros');
                                 ?>
                             </div>
                             <div class="col-sm-6">
                                 <?php
-                                //   INPUT -                              
-                                criar_input_data('Data Final', 'data_final', 'data_final', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('d/m/Y'));
+                                criar_input_data('Data Final', 'dt_final', 'dt_final', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'), 'somente numeros');
                                 ?>
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <button type="button" class="btn btn-success" id="id_consulta_numero">Consultar</button>
+                                <button type="button" class="btn btn-success" id="id_consulta_data_carga">Consultar</button>
                             </div>
                         </div>
                     </div>

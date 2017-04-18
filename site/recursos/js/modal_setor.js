@@ -48,7 +48,7 @@ $(function () {
         $("#dialog-example").modal('show');
         $.post('recursos/includes/formulario/formulario_modal_consulta_dados_processo.php',
                 {id: 7,
-                codigo: $(this).attr('data-id')
+                    codigo: $(this).attr('data-id')
                 },
         function (html) {
             $(".modal-content").removeClass('loader');

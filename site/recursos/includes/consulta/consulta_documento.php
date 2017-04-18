@@ -35,6 +35,9 @@ $ano_documento = $_POST['ano_documento'];
                         <th>ASSUNTO</th>
                         <th>REQUERENTE</th>
                         <th>DATA</th>
+                        <th>DOCUMENTO</th>
+                        <th>NÚMERO DOCUMENTO</th>
+                        <th>ANO DOCUMENTO</th>
                         <th>CONSULTAR</th>
 
                     </tr>
@@ -46,13 +49,21 @@ $ano_documento = $_POST['ano_documento'];
                     include_once '../estrutura/conexao/conexao.php';
                     // preparo para realizar o comando sql
                     $sql = "SELECT * ";
-//                     $sql = $sql . " FROM  documento a, cadastro_processo c";
-                    $sql = $sql . " FROM  documento a, cadastro_processo c , requerente r ";
-                    $sql = $sql . " WHERE a.descricao_documento LIKE  '%$documento%' ";
+                    $sql = $sql . " FROM  documento d, documento_processo dp, cadastro_processo c , requerente r, assunto a ";
+                    $sql = $sql . " WHERE d.descricao_documento LIKE  '%$documento%' ";
+                    $sql = $sql . " AND d.idDocumento = dp.idDocumento";
+//                    
+                    if ($numero_documento != "") {
+                        $sql = $sql . " AND dp.numeroDocumento = '$numero_documento'";
+                    }
+//                    
+                    if ($ano_documento != "") {
+                        $sql = $sql . " AND dp.anoDocumento = '$ano_documento'";
+                    }
+//                    
                     $sql = $sql . " AND a.idAssunto = c.idAssunto ";
                     $sql = $sql . " AND c.idRequerente = r.idRequerente ";
-                    $sql = $sql . " AND c.dataProcesso >= '$data_inicial' ";
-                    $sql = $sql . " AND c. dataProcesso <= '$data_final' ";
+                    $sql = $sql . " AND dp.idProcesso = c.idProcesso ";
                     $sql = $sql . " ORDER BY  c.idProcesso   ";
                     $query = $pdo->prepare($sql);
                     //executo o comando sql
@@ -70,6 +81,9 @@ $ano_documento = $_POST['ano_documento'];
                             <td><?php echo $dados['descricao_documento']; ?></td>
                             <td><?php echo $dados['requerente']; ?></td>
                             <td><?php echo dataBrasileiro($dados['dataProcesso']); ?></td>
+                            <td><?php echo $dados['descricao_documento']; ?></td>
+                            <td><?php echo $dados['numeroDocumento']; ?></td>
+                            <td><?php echo $dados['anoDocumento']; ?></td>
                             <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
 
                         </tr>

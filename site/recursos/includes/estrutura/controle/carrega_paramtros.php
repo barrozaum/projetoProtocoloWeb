@@ -37,7 +37,7 @@ function fun_carrega_parametros() {
     }
 }
 
-if (fun_carrega_parametros() === FALSE) {
+if (fun_carrega_parametros()) {
     header("Location:../../../../inicial.php");
 } else {
     $_SESSION['MENSAGEM_ERRO_SISTEMA'];

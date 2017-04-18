@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //      execução com comando sql    
         $executa = $pdo->query($sql);
 
+//        pegando ultimo dados inserido
+//         die($pdo->lastInsertId());
 //      Verifico se comando foi realizado      
         if (!$executa) {
 //          Caso tenha errro 
@@ -48,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {
 
+            
+            
 //          die();
 //          salvo alteração no banco de dados
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */

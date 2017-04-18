@@ -21,9 +21,18 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
-        <script src="recursos/js/estrutura.js"></script>
-        <script src="recursos/js/modal_consulta_data_carga.js"></script>
+         <script src="recursos/js/estrutura.js"></script>
+        <script src="recursos/js/funcao_consultas.js"></script>
+        <script src="recursos/js/modal_data_carga.js"></script>
+        <script src="recursos/js/camposNumeros.js"></script>
 
+        <!-- Includes para Colocar o Calendário na data -->
+        <link rel="stylesheet" href="recursos/css/redmond/jquery-ui-1.10.1.custom.css" />
+        <script src="recursos/js/data_calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/mascaraData.js"></script>
+        <!-- fim dos includes para Colocar a Data -->
+        
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
         <script>
@@ -33,7 +42,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_consulta_data_carga.php');
-                $('#modal').load('recursos/includes/estrutura/modal.html');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
 
             }
         </script>

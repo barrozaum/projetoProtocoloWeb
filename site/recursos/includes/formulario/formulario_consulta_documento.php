@@ -30,7 +30,8 @@ function formulario() {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('DOCUMENTO', 'documento', 'documento', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Documento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                criar_input_text_com_lupa('DOCUMENTO', 'documento', 'documento', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Documento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_documento');
+                                criar_input_hidden('codigo_documento', array(), '');
                                 ?>
                             </div>
                         </div>

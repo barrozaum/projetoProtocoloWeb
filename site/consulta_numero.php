@@ -33,7 +33,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_consulta_numero.php');
-                $('#modal').load('recursos/includes/estrutura/modal.html');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
 
             }
         </script>

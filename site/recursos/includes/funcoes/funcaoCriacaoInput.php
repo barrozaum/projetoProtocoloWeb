@@ -107,7 +107,7 @@ function criar_input_select($label, $name, $id, $extras = array(), $value = arra
 }
 
 //  CAMPO TIPO  CEP
-function criar_input_text_cep($label, $name, $id, $extras = array(), $value = '', $span = '') {
+function criar_input_text_cep($label, $name, $id, $extras = array(), $value = '', $span = '', $campos_de_retorno = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
     $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
@@ -116,7 +116,7 @@ function criar_input_text_cep($label, $name, $id, $extras = array(), $value = ''
         $saida = $saida . " $k = \"$v\" ";
     }
 
-    $saida = $saida . "value='" . $value . "'>";
+    $saida = $saida . "value='" . $value . "'  onkeypress='return SomenteNumero(event)'  onblur = 'retornaCep($campos_de_retorno)'>";
     $saida = $saida . '<span class="help-block">' . $span . '</span>';
     $saida = $saida . "</div>";
     print $saida;
@@ -166,6 +166,23 @@ function criar_input_file($label, $name, $id, $extras = array(), $value = '', $s
     }
 
     $saida = $saida . "value='" . $value . "'>";
+    $saida = $saida . '<span class="help-block">' . $span . '</span>';
+    $saida = $saida . "</div>";
+    print $saida;
+}
+
+// tipo telefone (fixo,celular)
+
+function criar_input_text_telefone($label, $name, $id, $extras = array(), $value = '', $span = '') {
+    $saida = "<div class='form-group'>";
+    $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
+    $saida = $saida . "<input class='form-control' type='tel' name='txt_" . $name . "'. id='id_" . $id . "'";
+
+    foreach ($extras as $k => $v) {
+        $saida = $saida . " $k = \"$v\" ";
+    }
+
+    $saida = $saida . "value='" . $value . "' onkeypress='return SomenteNumero(event)' OnKeyUp='return mascaraTelefone(event, this)'>";
     $saida = $saida . '<span class="help-block">' . $span . '</span>';
     $saida = $saida . "</div>";
     print $saida;

@@ -7,7 +7,7 @@ session_start();
 include_once '../conexao/conexao.php';
 
 //biblioteca do setor
-include_once '../../funcoes/func_retorna_descricao_setor.php';
+include_once '../../funcoes/func_retorna_setor.php';
 
 // trato os valores passados pelos usuários
 $login_informado = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['txtlogin']);
