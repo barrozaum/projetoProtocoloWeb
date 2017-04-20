@@ -70,10 +70,10 @@ $data_final = dataAmericano($_POST['dt_final']);
 
                         <tr>
                             <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_tipo_processo_existente($dados['tipoProcesso']); ?></td>
+                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?></td>
                             <td><?php echo $dados['anoProcesso']; ?></td>
                             <td><?php echo $dados['setor']; ?></td>
-                            <td><?php echo $dados['descricao_assunto']; ?></td>
+                            <td><?php echo $dados['descricao_assunto'].' '.  $dados['complemento_assunto']; ?></td>
                             <td><?php echo $dados['requerente']; ?></td>
                             <td><?php echo dataBrasileiro($dados['dataProcesso']); ?></td>
                             <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>

@@ -4,16 +4,19 @@ include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/funcaoCriacaoInput.php';
 //include funcao com os tipos de processos
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
+//inclusao da conexao com o banco de dados
+include_once '../estrutura/conexao/conexao.php';
+
 ?>
 <?php
 if (empty($_POST['id'])) {
-    formulario();
+    formulario($pdo);
 }
 ?>
 
 <?php
 
-function formulario() {
+function formulario($pdo) {
     ?>
 
 
@@ -29,7 +32,7 @@ function formulario() {
                             <div class="col-sm-6">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_select('Tipo Processo', 'tipo_processo', 'tipo_processo', array('required' => 'true'), fun_retorna_tipo_processo_existente('pdo'), '');
+                                criar_input_select('Tipo Processo', 'tipo_processo', 'tipo_processo', array('required' => 'true'), fun_retorna_tipo_processo_existente($pdo), '');
                                 ?>
                             </div>
                         </div> 

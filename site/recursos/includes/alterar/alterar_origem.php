@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      Comando sql a ser executado  
         $sql = "UPDATE origem SET descricao_origem = '{$descricao}', idUsuario = '{$_SESSION['LOGIN_ID_USUARIO']}' WHERE idOrigem = '{$codigo_Letra_Maiscula}'";
-//        print $sql;
+
 //      execução com comando sql    
         $executa = $pdo->query($sql);
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$executa) {
 //          Caso tenha errro 
 //          lanço erro na tela
-            die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_origem.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+            die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_origem.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else if (fun_log_origem($pdo, 'A', $sql) == FALSE) {
             die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_origem.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {

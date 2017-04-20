@@ -13,3 +13,17 @@ function fun_retorna_origem_processo($pdo, $codigo_origem) {
         return FALSE;
     }
 }
+
+
+
+//função retorna descricao origem
+function fun_retorna_descricao_origem($pdo, $codigo_origem) {
+    $sql_origem_processo = "SELECT * FROM origem WHERE idOrigem = '{$codigo_origem}'";
+    $query_origem_processo = $pdo->prepare($sql_origem_processo);
+    $query_origem_processo->execute();
+    if($dados = $query_origem_processo->fetch()){
+        return $dados['descricao_origem'];
+    } else {
+        return "";
+    }
+}

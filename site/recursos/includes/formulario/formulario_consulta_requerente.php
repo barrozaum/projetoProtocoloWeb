@@ -28,10 +28,20 @@ function formulario() {
                         <!-- inicio dados inscrição-->
                         <div class="row">
                             <div class="col-sm-12">
-                               <?php
+                                <?php
                                 //   INPUT -                              
                                 criar_input_text_com_lupa('REQUERENTE', 'requerente', 'requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Requerente'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_requerente');
                                 criar_input_hidden('codigo_requerente', array(), '');
+//                              campos nao utilizaveis
+                                criar_input_hidden('tel_fixo', array(), '');
+                                criar_input_hidden('tel_cel', array(), '');
+                                criar_input_hidden('cep_requerente', array(), '');
+                                criar_input_hidden('logradouro_requerente', array(), '');
+                                criar_input_hidden('bairro_requerente', array(), '');
+                                criar_input_hidden('cidade_requerente', array(), '');
+                                criar_input_hidden('uf_requerente', array(), '');
+                                criar_input_hidden('numero_requerente', array(), '');
+                                criar_input_hidden('complemento_requerente', array(), '');
                                 ?>
                             </div>
                         </div>

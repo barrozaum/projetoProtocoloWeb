@@ -125,3 +125,26 @@ function fun_log_requerente($pdo, $tipo_comando, $comando_sql) {
 }
 
 //----------------------------------------------------------------------
+
+//Log Tipo Processo
+function fun_log_tipo_processo($pdo, $tipo_comando, $comando_sql) {
+//    retiro ' se existir
+    $comando_sql = str_replace("'", '', $comando_sql);
+
+
+//id_usuário ue executa o comando
+    $ID_USUARIO_LOGADO = $_SESSION['LOGIN_ID_USUARIO'];
+    $DATA_ATUAL = date('Y-m-d');
+
+//    comando sql para log
+    $sql_log = "INSERT INTO log_tipo_processo (tipo_comando, comando_sql, data_comando, usuario_comando)";
+    $sql_log = $sql_log . " VALUES ";
+    $sql_log = $sql_log . "('{$tipo_comando}', '{$comando_sql}' , '{$DATA_ATUAL}', '{$ID_USUARIO_LOGADO}')";
+
+    $query_log = $pdo->prepare($sql_log);
+    if ($query_log->execute()) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}

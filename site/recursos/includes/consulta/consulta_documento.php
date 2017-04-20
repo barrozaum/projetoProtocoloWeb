@@ -76,7 +76,7 @@ $ano_documento = $_POST['ano_documento'];
 
                         <tr>
                             <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_tipo_processo_existente($dados['tipoProcesso']); ?></td>
+                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?></td>
                             <td><?php echo $dados['anoProcesso']; ?></td>
                             <td><?php echo $dados['descricao_documento']; ?></td>
                             <td><?php echo $dados['requerente']; ?></td>

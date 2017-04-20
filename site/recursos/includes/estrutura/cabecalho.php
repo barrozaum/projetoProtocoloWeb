@@ -29,8 +29,14 @@ session_start();
                         <li class="root">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="TabelaBanco.php">NOVO</a></li>
-                                <li><a href="TabelaBanco.php">2° VIA ETIQUETA</a></li>
+                             <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cadastro_processo.php">NOVO</a></li>
+                                        <li><a href="alterar_processo.php">ALTERAR</a></li>
+                                        <li><a href="excluir_processo.php">EXCLUIR</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
                                 <li><a href="TabelaMoeda.php">CARGA</a></li>
                                 <li><a href="TabelaValorMoeda.php">RECEBIMENTO</a></li>
                                 <li><a href="ExportarFunesBom.php">APENSAR</a></li>
@@ -44,6 +50,7 @@ session_start();
                                 <li><a href="cadastro_origem.php">ORIGEM</a></li>
                                 <li><a href="cadastro_secretaria.php">SETOR</a></li>
                                 <li><a href="cadastro_requerente.php">REQUERENTE</a></li>
+                                <li><a href="cadastro_tipo_processo.php">TIPO PROCESSO</a></li>
                             </ul>
                         </li>
 

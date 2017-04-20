@@ -87,6 +87,27 @@ function criar_input_text_com_lupa($label, $name, $id, $extras = array(), $value
     print $saida;
 }
 
+//  CAMPO TIPO CONSULTA (COM LUPA DE PESQUISA)
+function criar_input_text_com_lupa_e_com_adicionar($label, $name, $id, $extras = array(), $value = '', $span = '') {
+    $saida = "<div class='form-group'>";
+    $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
+    $saida = $saida . "<div class='input-group'>";
+    $saida = $saida . "<span class='input-group-addon' id='id_lupa_" . $name . "'><i class='glyphicon glyphicon-zoom-in'></i></span>";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+
+    foreach ($extras as $k => $v) {
+        $saida = $saida . " $k = \"$v\" ";
+    }
+
+    $saida = $saida . "value='" . $value . "'>";
+    $saida = $saida . "<span class='input-group-addon' id='id_add_" . $name . "'><i class='glyphicon glyphicon-plus-sign'></i></span>";
+    $saida = $saida . "</div>";
+    $saida = $saida . '<span class="help-block">' . $span . '</span>';
+
+    $saida = $saida . "</div>";
+    print $saida;
+}
+
 //  CAMPO TIPO  SELECT
 function criar_input_select($label, $name, $id, $extras = array(), $value = array(), $span = '') {
     $saida = "<div class='form-group'>";

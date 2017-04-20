@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$executa) {
 //          Caso tenha errro 
 //          lanço erro na tela
-            die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_secretaria.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+            die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_secretaria.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else if (fun_log_setor($pdo, 'A', $sql) == FALSE) {
             die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_secretaria.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {

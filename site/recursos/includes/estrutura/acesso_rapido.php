@@ -20,7 +20,7 @@ and open the template in the editor.
                 <div id="collapse1" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-group">
-                            <a href="TabelaValorMoeda.php" title="Cadastro novo processo"><li class="list-group-item" >NOVO</li></a>
+                            <a href="cadastro_processo.php" title="Cadastro novo processo"><li class="list-group-item" >NOVO</li></a>
                         </ul>
                         <ul class="list-group">
                             <a href="TabelaDividaImob.php" title="Cadastro carga do processo"><li class="list-group-item" >CARGA</li></a>
@@ -50,16 +50,16 @@ and open the template in the editor.
                 <div id="collapse2" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-group">
-                            <a href="Emitir_segunda_via_boleto.php" title="Consulta Número do processo"><li class="list-group-item" >NÚMERO</li></a>
+                            <a href="consulta_numero.php" title="Consulta Número do processo"><li class="list-group-item" >NÚMERO</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a ><li class="list-group-item"  title="Consulta Assunto processo" >ASSUNTO</li></a>
+                            <a  href="consulta_assunto.php"><li class="list-group-item"  title="Consulta Assunto processo" >ASSUNTO</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a ><li class="list-group-item" title="Consulta Requerente processo" >REQUERENTE</li></a>
+                            <a  href="consulta_requerente.php"><li class="list-group-item" title="Consulta Requerente processo" >REQUERENTE</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href=""><li class="list-group-item"  title="Consulta Data criação processo">DATA PROCESSO</li></a>
+                            <a  href="consulta_data_criacao_processo.php"><li class="list-group-item"  title="Consulta Data criação processo">DATA PROCESSO</li></a>
                         </ul>
                     </div>
                     <div class="panel-footer"></div>
