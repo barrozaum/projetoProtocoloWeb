@@ -22,12 +22,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <script src="recursos/js/estrutura.js"></script>
-        <script src="recursos/js/camposNumeros.js"></script>
-        <script src="recursos/js/funcao_consultas.js"></script>
-        <script src="recursos/js/chamada_de_janelas.js"></script>
-        <script src="recursos/js/addCamposTabelaAutomatico.js"></script>
-        <script src="recursos/js/alterar_processo.js"></script>
-
+        <script src="recursos/js/modal_cadastro_cargar_individual.js"></script>
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
@@ -37,7 +32,9 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_processo.php?cmd=excluir');
+                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_cargar_individual.php');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
+
             }
         </script>
 

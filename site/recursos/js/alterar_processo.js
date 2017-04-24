@@ -22,7 +22,7 @@ $(document).on('blur', '#id_ano_processo', function (e) {
     if (msg_erro !== "") {
         $("#msg_erro").html('<div class="alert alert-danger">' + msg_erro + '</div>');
     } else {
-        $("#msg_erro").html('');
+       limpar_formulario();
 
 
 
@@ -43,7 +43,7 @@ $(document).on('blur', '#id_ano_processo', function (e) {
 
 
 
-$(document).on('click', '#id_btn_enviar_processo', function (e) {
+$(document).on('click', '#id_btn_enviar_processo', function(e){
     var tipo_processo = $('#id_tipo_processo').val();
     var numero_processo = $('#id_numero_processo').val();
     var ano_processo = $('#id_ano_processo').val();
@@ -51,37 +51,75 @@ $(document).on('click', '#id_btn_enviar_processo', function (e) {
     var origem_processo = $('#id_codigo_origem').val();
     var requerente_processo = $('#id_codigo_requerente').val();
 //   alert(tipo_processo);
-
+    
     var msg_erro = "";
-
-    if (tipo_processo < 1) {
+    
+    if(tipo_processo < 1){
         msg_erro += "TIPO PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (numero_processo < 1) {
+    
+    if(numero_processo < 1){
         msg_erro += "NÚMERO PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (ano_processo.length < 4) {
+    
+    if(ano_processo.length < 4){
         msg_erro += "ANO PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (assunto_processo < 1) {
+    
+    if(assunto_processo < 1){
         msg_erro += "ASSUNTO PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (origem_processo < 1) {
+    
+    if(origem_processo < 1){
         msg_erro += "ORIGEM PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (requerente_processo < 1) {
+    
+    if(requerente_processo < 1){
         msg_erro += "REQUERENTE PROCESSO INVÁLIDO !!! <BR />";
     }
-
-    if (msg_erro !== "") {
+    
+    if(msg_erro !== ""){
         $("#msg_erro").html('<div class="alert alert-danger">' + msg_erro + '</div>');
-    } else {
-        $('#formulario_processo').submit();
+    }else{
+        $('#id_formulario_processo').submit();
     }
-//      $("#msg_erro").html(msg_erro);
 });
+
+
+
+function limpar_formulario(){
+    $('#msg_erro').html('');
+//codigo_processo
+    $('#id_codigo_processo').val('');
+    
+//    assunto
+    $('#id_assunto').val('');
+    $('#id_codigo_assunto').val('');
+    $('#id_complemento_assunto').val('');
+//    origem
+    $('#id_origem').val('');
+    $('#id_codigo_origem').val('');
+//    requerente
+    $('#id_codigo_requerente').val('');
+    $('#id_requerente').val('');
+    $('#id_tel_fixo').val('');
+    $('#id_tel_cel').val('');
+    $('#id_cep_requerente').val('');
+    $('#id_logradouro_requerente').val('');
+    $('#id_bairro_requerente').val('');
+    $('#id_cidade_requerente').val('');
+    $('#id_uf_requerente').val('');
+    $('#id_numero_requerente').val('');
+    $('#id_complemento_requerente').val('');
+    
+// documentos
+    $('#id_documento').val('');
+    $('#id_codigo_documento').val('');
+    $('#id_numero_documento').val('');
+    $('#id_ano_documento').val('');
+    $('#id_tabela_documentos').html('');
+    
+//    observaçao
+    $('#id_obs_processo').val('');
+
+}

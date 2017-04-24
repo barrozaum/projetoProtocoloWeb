@@ -9,6 +9,7 @@ include_once '../funcoes/func_retorna_assunto.php';
 include_once '../funcoes/func_retorna_origem.php';
 include_once '../funcoes/func_retorna_requerente.php';
 include_once '../funcoes/func_retorna_documento.php';
+include_once '../funcoes/func_retorna_observacao.php';
 
 
 
@@ -34,30 +35,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if ($dados = $query->fetch()) {
-        $id_proceso = $dados['idProcesso'];
+        $id_processo = $dados['idProcesso'];
 //        assunto
-        $id_assunto = $dados['idAssunto'];
-        $descricao_assunto = fun_retorna_descricao_assunto($pdo, $id_assunto) . " " . $dados['complemento_assunto'];
+        $codigo_assunto = $dados['idAssunto'];
+        $descricao_assunto = fun_retorna_descricao_assunto($pdo, $codigo_assunto);
+        $complemento_assunto =  $dados['complemento_assunto'];
 //        origem
-        $id_origem = $dados['idOrigem'];
-        $descricao_origem = fun_retorna_descricao_origem($pdo, $id_origem);
+        $codigo_origem = $dados['idOrigem'];
+        $descricao_origem = fun_retorna_descricao_origem($pdo, $codigo_origem);
 //      requerente
-        $dados_requerente= fun_retorna_dados_requerente($pdo, $dados['idRequerente']);
+        $dados_requerente = fun_retorna_dados_requerente($pdo, $dados['idRequerente']);
 //      documentos
-        $documentos_processo = fun_retorna_documento_presente_processo($pdo, $id_proceso);
+        $documentos_processo = fun_retorna_documento_presente_processo($pdo, $id_processo);
+
+//        observacao
+        $observacao_processo = fun_retorna_descricao_observacao($pdo, $id_processo);
         $var = Array(
-           "achou" => "sim",
-           "id_assunto" => "$id_assunto",
-           "descricao_assunto" => "$descricao_assunto",
-           "id_origem" => "$id_origem",
-           "descricao_origem" => "$descricao_origem",
-           "requerente" => $dados_requerente,
-           "documentos" => $documentos_processo,
-          
+            "achou" => 1,
+            "codigo_processo" => "$id_processo",
+            "codigo_assunto" => "$codigo_assunto",
+            "descricao_assunto" => "$descricao_assunto",
+            "complemento_assunto" => "$complemento_assunto",
+            "codigo_origem" => "$codigo_origem",
+            "descricao_origem" => "$descricao_origem",
+            "requerente" => $dados_requerente,
+            "documentos" => $documentos_processo,
+            "observacao" => $observacao_processo,
         );
     } else {
         $var = Array(
-            "achou" => "nao",
+            "achou" => 0,
             "msg" => "PROCESSO NÃO ENCONTRADO NA BASE DE DADOS",
             "sql" => $sql
         );

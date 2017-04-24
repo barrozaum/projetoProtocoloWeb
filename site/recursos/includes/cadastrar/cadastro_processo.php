@@ -2,7 +2,9 @@
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/fun_log.php';
-include ('../funcoes/function_letraMaiscula.php');
+include_once '../funcoes/func_retorna_documento.php';
+include_once '../funcoes/func_retorna_observacao.php';
+include '../funcoes/function_letraMaiscula.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -14,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numero_processo = (int) letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = (int) letraMaiuscula($_POST['txt_ano_processo']);
     $codigo_assunto_processo = (int) letraMaiuscula($_POST['txt_codigo_assunto']);
-    $complemento_assunto_processo = letraMaiuscula($_POST['txt_complemento_asssuto']);
+    $complemento_assunto_processo = letraMaiuscula($_POST['txt_complemento_assunto']);
     $codigo_origem_processo = (int) letraMaiuscula($_POST['txt_codigo_origem']);
     $codigo_requerente_processo = (int) letraMaiuscula($_POST['txt_codigo_requerente']);
     $observacao_processo = letraMaiuscula($_POST['txt_obs_processo']);
@@ -58,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ?>
     <!-- Dispara mensagem de sucesso -->
     <script>
-        window.alert("<?php echo "Assunto Cadastrado com Sucesso !!!"; ?> ");
+        window.alert("<?php echo "Processo Cadastrado com Sucesso !!!"; ?> ");
         location.href = "../../../cadastro_processo.php";
     </script>
 
@@ -69,43 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     die(header("Location: ../../../logout.php"));
 }
 
-function inserindo_documentos($pdo, $id_proceso) {
-    if (isset($_POST['txt_id_doc'])) {
-        $codigo_documento = (int) $_POST['txt_id_doc'];
-        $nume_documento = (int) $_POST['txt_numero_doc'];
-        $ano_documento = (int) $_POST['txt_ano_doc'];
-
-        $quant_linhas = count($codigo_documento);
-        for ($i = 0; $i < $quant_linhas; $i++) {
-            $codigo_documento[$i];
-            $nume_documento[$i];
-            $ano_documento[$i];
-
-            $sql_doc = "INSERT INTO documento_processo (idProcesso, idDocumento, anoDocumento, numeroDocumento, idUsuario)";
-            $sql_doc = $sql_doc . " VALUES ";
-            $sql_doc = $sql_doc . "({$id_proceso}, {$codigo_documento}, {$ano_documento}, {$nume_documento}, {$_SESSION['LOGIN_ID_USUARIO']})";
-
-            if ($executa = $pdo->query($sql_doc)) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
-        }
-    }
-    return TRUE;
-}
-
-function inserindo_observacao($pdo, $id_processo, $observacao) {
-    $sql_obs = "INSERT INTO obs (idObs, idProcesso, obs)";
-    $sql_obs = $sql_obs . " VALUES ";
-    $sql_obs = $sql_obs . "(null, {$id_processo}, '{$observacao}') ";
-
-    if ($executa = $pdo->query($sql_obs)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
-}
 
 function alterando_proximo_processo($pdo, $tipo_processo, $numero_processo, $numero_processo_banco) {
 

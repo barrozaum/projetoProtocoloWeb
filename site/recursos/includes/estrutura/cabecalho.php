@@ -14,7 +14,7 @@ session_start();
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <div class="navbar-header ">
-                    <a class="navbar-brand" href="inicial.php"><?php print  $_SESSION['CONFIG_NOME_CLIENTE']; ?></a>
+                    <a class="navbar-brand" href="inicial.php"><?php print $_SESSION['CONFIG_NOME_CLIENTE']; ?></a>
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -29,15 +29,21 @@ session_start();
                         <li class="root">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                             <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
+                                <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
                                     <ul class="dropdown-menu">
                                         <li><a href="cadastro_processo.php">NOVO</a></li>
                                         <li><a href="alterar_processo.php">ALTERAR</a></li>
                                         <li><a href="excluir_processo.php">EXCLUIR</a></li>
                                     </ul>
                                 </li>
+                                <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CARGA</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cadastro_carga_individual.php">INDIVIDUAL</a></li>
+                                        <li><a href="cadastro_carga_coletiva.php">COLETIVA</a></li>
+                                        <li><a href="excluir_carga.php">EXCLUIR</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
-                                <li><a href="TabelaMoeda.php">CARGA</a></li>
                                 <li><a href="TabelaValorMoeda.php">RECEBIMENTO</a></li>
                                 <li><a href="ExportarFunesBom.php">APENSAR</a></li>
                             </ul>

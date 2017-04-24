@@ -32,7 +32,7 @@ function fun_retorna_dados_requerente($pdo, $codigo_requerente) {
     $query_requerente_processo = $pdo->prepare($sql_requerente_processo);
     $query_requerente_processo->execute();
     if ($dados = $query_requerente_processo->fetch()) {
-        $id_requerente = $dados['idRequerente'];
+        $codigo_requerente = $dados['idRequerente'];
         $requerente = $dados['requerente'];
         $logradouro = $dados['logradouro'];
         $numero_end = $dados['numeroEnd'];
@@ -59,7 +59,7 @@ function fun_retorna_dados_requerente($pdo, $codigo_requerente) {
     }
 
     $var = Array(
-        "id_requerente" => "$id_requerente",
+        "codigo_requerente" => "$codigo_requerente",
         "requerente" => "$requerente",
         "logradouro" => "$logradouro",
         "numero_end" => "$numero_end",

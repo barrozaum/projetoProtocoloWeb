@@ -6,6 +6,7 @@ include_once '../funcoes/funcaoCriacaoInput.php';
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 //inclusao da conexao com o banco de dados
 include_once '../estrutura/conexao/conexao.php';
+
 ?>
 <?php
 if (empty($_POST['id'])) {
@@ -24,7 +25,7 @@ function formulario($pdo) {
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <div class="panel panel-default">
                     <!-- INICIO Dados do imóvel -->
-                    <div class="panel-heading text-center">EMISSÃO SEGUNDA VIA ETIQUETA</div>
+                    <div class="panel-heading text-center">CADASTRAMENTO DE CARGA NO PROCESSO</div>
                     <div class="panel-body">
                         <!-- inicio dados inscrição-->
                         <div class="row">
@@ -45,14 +46,14 @@ function formulario($pdo) {
                             <div class="col-sm-6">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('Ano', 'ano_processo', 'ano_processo', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
+                                criar_input_text('Ano', 'ano_processo', 'ano_processo', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                 ?>
                             </div>
                         </div> 
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <button type="button" class="btn btn-success" id="id_segunda_via_etiqueta">Consultar</button>
+                                <button type="button" class="btn btn-success" id="id_consulta_numero">Consultar</button>
                             </div>
                         </div>
                     </div>

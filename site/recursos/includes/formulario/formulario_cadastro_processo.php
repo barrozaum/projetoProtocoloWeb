@@ -10,11 +10,11 @@ include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 <?php
 if (isset($_GET['cmd'])) {
     if ($_GET['cmd'] == "alterar") {
-        $titulo_pagina = "ALTERA PROCESSO";
+        $titulo_pagina = "ALTERAR PROCESSO";
         $acao_formulario = "recursos/includes/alterar/alterar_processo.php";
         formulario($pdo, $titulo_pagina, $acao_formulario);
     }
-     if ($_GET['cmd'] == "excluir") {
+    if ($_GET['cmd'] == "excluir") {
         $titulo_pagina = "EXCLUIR PROCESSO";
         $acao_formulario = "recursos/includes/excluir/excluir_processo.php";
         formulario($pdo, $titulo_pagina, $acao_formulario);
@@ -67,6 +67,11 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 <?php
                                                 //   INPUT -                              
                                                 criar_input_select('Tipo Processo', 'tipo_processo', 'tipo_processo', array('required' => 'true'), fun_retorna_tipo_processo_existente($pdo), '');
+//                                              incluo o campo com a id_processo
+//                                              se o formulario não for de cadastro      
+                                                if ($titulo_pagina !== "CADASTRO PROCESSO") {
+                                                    criar_input_hidden('codigo_processo', array('require' => 'true'), '');
+                                                }
                                                 ?>
                                             </div>
 
@@ -76,7 +81,9 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 <?php
                                                 //   INPUT -                              
                                                 criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '3', 'placeholder' => 'xxxxx', 'onkeypress' => 'return SomenteNumero(event)'), '');
-                                                criar_input_hidden('numero_processo_banco', array('require' => 'true'), '');
+                                                if ($titulo_pagina === "CADASTRO PROCESSO") {
+                                                    criar_input_hidden('numero_processo_banco', array('require' => 'true'), '');
+                                                }
                                                 ?>
                                             </div>
                                             <div class="col-sm-6">
@@ -97,7 +104,7 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-6">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('COMPLEMENTO ASSUNTO', 'complemento_asssuto', 'complemento_asssuto', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'COMPLEMENTO ASSUNTO'), '');
+                                                criar_input_text('COMPLEMENTO ASSUNTO', 'complemento_assunto', 'complemento_assunto', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'COMPLEMENTO ASSUNTO'), '');
                                                 ?>
                                             </div>
 
@@ -245,11 +252,11 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                                 ?>
                                                             </th>
                                                             <th>  
-                                                                <button onclick="AddTableRow()" type="button" class="btn btn-large btn-primary">Adicionar</button>
+                                                                <button onclick="btn_AddTableRow()" type="button" class="btn btn-large btn-primary">Adicionar</button>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody> 
+                                                    <tbody id="id_tabela_documentos"> 
                                                         <!-- será preenchido quando o botão adicionar foir clicado -->
                                                     </tbody>
                                                 </table>
