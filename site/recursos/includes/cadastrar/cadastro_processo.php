@@ -4,6 +4,7 @@ include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/fun_log.php';
 include_once '../funcoes/func_retorna_documento.php';
 include_once '../funcoes/func_retorna_observacao.php';
+include_once '../funcoes/func_carga_processo.php';
 include '../funcoes/function_letraMaiscula.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->rollback();
         die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!inserindo_observacao($pdo, $id_proceso, $observacao_processo)) {
+        $pdo->rollback();
+        die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+    } else if (!inserindo_carga($pdo, $id_proceso)) {
         $pdo->rollback();
         die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!alterando_proximo_processo($pdo, $tipo_processo, $numero_processo, $numero_processo_banco)) {

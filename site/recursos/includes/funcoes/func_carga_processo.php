@@ -1,0 +1,160 @@
+<?php
+
+//essa função é executado no momento em que eu cadastro o processo no sistema
+function inserindo_carga($pdo, $id_proceso) {
+    $dia_atual = date('Y-m-d');
+
+    $sql_carga = "INSERT INTO carga_processo ";
+    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada, idSetorPresente, tramite, idUsuarioCarga, dataCarga, idUsuarioRecebimento, dataRecebimento, seq_carga, data_carga_sistema, data_recebimento_sistema)";
+    $sql_carga = $sql_carga . " VALUES ";
+    $sql_carga = $sql_carga . "({$id_proceso},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}')";
+
+
+    if ($executa = $pdo->query($sql_carga)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+//esta função serve para saber se o proceso pode receber carga
+function processo_pode_dar_carga($pdo, $id_processo) {
+    global $id_ultima_carga;
+    global $seq_carga;
+//        validando para saber se o processo pode sofrer carga
+//        seleciono as cargas do processo 
+    $sql_carga = "SELECT * FROM carga_processo ";
+    $sql_carga = $sql_carga . " WHERE idProcesso = '{$id_processo}'";
+    $sql_carga = $sql_carga . " ORDER BY seq_carga DESC";
+    $sql_carga = $sql_carga . " LIMIT 1";
+    $query_carga = $pdo->query($sql_carga);
+    $query_carga->execute();
+    if ($dados = $query_carga->fetch()) {
+        $idSetorEntrada = $dados['idSetorEntrada'];
+        $tramite = $dados['tramite'];
+        $id_ultima_carga = $dados['idCarga'];
+        $seq_carga = $dados['seq_carga'];
+        if ($tramite != 1) {
+            return "PROCESSO ENCONTRA-SE EM MOVIMENTO !!!";
+        } else if ($idSetorEntrada != $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']) {
+            return "PROCESSO NÃO ENCONTRA-SE EM SEU SETOR !!!";
+        } else {
+            return "sim";
+        }
+    } else {
+        return "CARGA PROCESSO NÃO ENCONTRADA !!!";
+    }
+}
+
+//esta função é executada pelo programa cadastro carga
+function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_carga, $codigo_setor_carga, $sequencia_carga) {
+    $data_atual = date('Y-m-d');
+    $sequencia_carga += 1;
+
+    $sql_carga = "INSERT INTO carga_processo ";
+    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer)";
+    $sql_carga = $sql_carga . " VALUES ";
+    $sql_carga = $sql_carga . "({$codigo_processo}, {$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}')";
+
+
+    if ($executa = $pdo->query($sql_carga)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+//esta função é executada pelo programa cadastro carga
+function cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana) {
+    $data_atual = date('Y-m-d');
+    
+    
+    $sql_carga = "UPDATE carga_processo ";
+    $sql_carga = $sql_carga . "SET idUsuarioRecebimento = '{$_SESSION['LOGIN_ID_USUARIO']}' , ";
+    $sql_carga = $sql_carga . " dataRecebimento= '{$data_recebimento_americana}' , ";
+    $sql_carga = $sql_carga . " data_recebimento_sistema = '{$data_atual}' , ";
+    $sql_carga = $sql_carga . " tramite = '1' ";
+    $sql_carga = $sql_carga . " WHERE idCarga = '{$id_carga_processo}' ";
+    
+
+    if ($executa = $pdo->query($sql_carga)) {
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+function listar_cargas_processo($pdo, $id_processo) {
+
+//        validando para saber se o processo pode sofrer carga
+//        seleciono as cargas do processo 
+    $sql_carga = "SELECT * FROM carga_processo cp";
+    $sql_carga = $sql_carga . " WHERE cp.idProcesso = '{$id_processo}'";
+    $sql_carga = $sql_carga . " ORDER BY seq_carga DESC";
+    
+
+    $query_carga = $pdo->query($sql_carga);
+    if ($query_carga->execute()) {
+
+        $array = array();
+        //loop para listar todos os dados encontrados
+        for ($i = 0; $dados_carga = $query_carga->fetch(); $i++) {
+            $idCarga = $dados_carga['idCarga'];
+            $descricao_setor_origem = func_retorna_descricao_setor($pdo, $dados_carga['idSetorOrigem']);
+            $descricao_setor_entrada = func_retorna_descricao_setor($pdo, $dados_carga['idSetorEntrada']);
+            $parecer = $dados_carga['parecer'];
+            $nome_usuario_carga = func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);
+            $data_carga = dataBrasileiro($dados_carga['dataCarga']);
+            $nome_usuario_recebimento = func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);
+            $data_recebimento = dataBrasileiro($dados_carga['dataRecebimento']);
+            $sequencia_carga = $dados_carga['seq_carga'];
+
+
+            $array[$i] = array(
+                "id_carga" => $idCarga,
+                "setor_origem" => $descricao_setor_origem,
+                "setor_entrada" => $descricao_setor_entrada,
+                "parecer" => $parecer,
+                "nome_usuario_carga" => $nome_usuario_carga,
+                "data_carga" => $data_carga,
+                "nome_usuario_recebimento" => $nome_usuario_recebimento,
+                "data_recebimento" => $data_recebimento,
+                "sequencia_carga" => $sequencia_carga,
+            );
+        }
+       return $array;
+    } else {
+        return "CARGA PROCESSO NÃO ENCONTRADA !!!";
+    }
+}
+
+
+// essa função vai verifiar a ultima carga do processo e ver se 
+// está para o setor do usuário que vai receber a o processo
+function fun_posso_receber_processo_por_numero($pdo, $id_proceso){
+    global $id_ultima_carga;
+    global $seq_carga;
+    $sql_carga = " SELECT * FROM carga_processo WHERE idProcesso = " . $id_proceso;
+    $sql_carga = $sql_carga . " ORDER BY seq_carga DESC ";
+    $sql_carga = $sql_carga . " LIMIT 1 ";
+    
+    $query_carga = $pdo->query($sql_carga);
+    $query_carga->execute();
+    if ($dados = $query_carga->fetch()) {
+        $idSetorEntrada = $dados['idSetorEntrada'];
+        $tramite = $dados['tramite'];
+        $id_ultima_carga = $dados['idCarga'];
+        $seq_carga = $dados['seq_carga'];
+       
+        
+        if ($tramite != 0) {
+            return "PROCESSO ENCONTRA-SE EM ALGUM SETOR!!!";
+        } else if ($idSetorEntrada != $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']) {
+            return "PROCESSO NÃO POSSUI CARGA PARA O SEU SETOR !!!";
+        } else {
+            return "sim";
+        }
+    }else{
+        return "CARGA PROCESSO NÃO ENCONTRADA !!!";
+    }
+}

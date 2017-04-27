@@ -23,14 +23,14 @@ and open the template in the editor.
                             <a href="cadastro_processo.php" title="Cadastro novo processo"><li class="list-group-item" >NOVO</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href="TabelaDividaImob.php" title="Cadastro carga do processo"><li class="list-group-item" >CARGA</li></a>
+                            <a href="cadastro_carga_individual.php" title="Cadastro carga do processo"><li class="list-group-item" >CARGA</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href="TabelaValorM2Terreno.php" title="Cadastra recebimento do process"><li class="list-group-item" >RECEBIMENTO</li></a>
+                            <a href="cadastro_recebimento_individual.php" title="Cadastra recebimento do process"><li class="list-group-item" >RECEBIMENTO</li></a>
                         </ul>
-                        <ul class="list-group">
+<!--                        <ul class="list-group">
                             <a href="TabelaValorM2Construcao.php" title="Cadastra anexos em processo"><li class="list-group-item" >APENSAR</li></a>
-                        </ul>
+                        </ul>-->
                     </div>
                     <div class="panel-footer"></div>
                 </div>

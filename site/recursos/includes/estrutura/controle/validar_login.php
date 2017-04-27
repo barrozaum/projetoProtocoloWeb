@@ -37,6 +37,7 @@ if ($query_login->fetchColumn() > 0) {
         } else {
             
             $_SESSION['LOGADO_SISTEMA'] = "OK";
+            $_SESSION['LOGADO_PERFIL_USUARIO'] = $dados['perfil'];
             $_SESSION['LOGIN_ID_USUARIO'] = $dados['idUsuario'];
             $_SESSION['LOGIN_USUARIO'] = $login_informado;
             $_SESSION['LOGIN_CODIGO_SETOR_USUARIO'] = $dados['idSetor'];

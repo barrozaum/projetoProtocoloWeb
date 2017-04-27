@@ -135,3 +135,27 @@ function fun_retorna_dados_processo(url, parametros) {
     });//termina o ajax
 }
    
+   
+   
+// funcão que valida se o procesos ja existe ou não
+function fun_valida_existencia_processo_formulario(url, parametros) {
+
+    $.ajax({
+//        Requisição pelo Method POST
+        method: "POST",
+        // url para o arquivo para validação
+        url: url,
+//        dados passados
+        data: parametros,
+        // função para de sucesso
+        success: function (data) {
+            if (data === "FALSE") {
+                $("#msg_erro").html('<div class="alert alert-danger">PROCESSO NÃO ENCONTRADO !! </div>');
+            } else {
+                $('#id_formulario_processo').submit();
+            }
+        }, error: function (error) {
+            console.log(error.responseText);
+        }
+    });//termina o ajax
+}

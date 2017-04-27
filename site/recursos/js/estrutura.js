@@ -4,6 +4,6 @@ $(document).ready(function () {
 
 function estrutura() {
     $('#cabecalho').load('recursos/includes/estrutura/cabecalho.php');
-    $('#rodape').load('recursos/includes/estrutura/rodape.html');
+    $('#rodape').load('recursos/includes/estrutura/rodape.php');
 }
 

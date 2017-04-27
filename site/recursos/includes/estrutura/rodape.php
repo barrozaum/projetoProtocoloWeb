@@ -1,10 +1,16 @@
+<?php
+session_start();
+?>
 <footer style="color: black; background-color: #e7e7e7">
+   
+    
     <div class="container" >
         <div class="row">
             <div class="col-sm-4">
-                <h3>Sobre o SAM</h3>
+                <h3>Usuário</h3>
                 <hr>
-                <p>SAM (SISTEMA DE ARRECADACAO MUNIICIPAL) tem como objetivo auxiliar o cliente a organizar, emitir e calcular.</p>
+                <p>Login : <?php print strtoupper($_SESSION['LOGIN_USUARIO']);?></p>
+                <p>Setor : <?php print $_SESSION['LOGIN_DESCRICAO_SETOR_USUARIO'];?></p>
             </div>
 
             <div class="col-sm-4">
