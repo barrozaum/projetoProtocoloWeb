@@ -28,7 +28,7 @@ function dataAmericano($data) {
         $ano = $partes_data[2];
 
         //servidor
-        return $ano .'-'. $mes. '-' . $dia;
+        return $ano . '-' . $mes . '-' . $dia;
     }
 }
 
@@ -118,7 +118,12 @@ function compara_data_maior($data1, $data2) {
 }
 
 function validar_estrutura_data($data_brasil) {
-    // DATA Brasil
+
+    if ($data_brasil == "" || $data_brasil == "00/00/0000") {
+        return true;
+    }
+
+// DATA Brasil
     $partes_data = explode("/", $data_brasil);
     $dia = $partes_data[0];
     $mes = $partes_data[1];
@@ -130,4 +135,3 @@ function validar_estrutura_data($data_brasil) {
         return false;
     }
 }
-

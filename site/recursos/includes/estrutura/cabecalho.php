@@ -83,10 +83,12 @@ session_start();
                         <li class="root">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">RELATÓRIO <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">SETOR</a></li>
-                                <li><a href="#">REMESSA</a></li>
-                                <li><a href="#">TRÂMITE</a></li>
-                                <li><a href="relatorio_carga_processo.php">CARGA</a></li>
+                                <li><a href="#">PROCESSO NO SETOR</a></li>
+                                <!--remessa, sai do setor da carga e vai para o setor de destino-->
+                                <li><a href="relatorio_remessa_processo.php">PROCESSO PARA REMESSA</a></li>
+                                <!--tramitação, é os processo enviados para um determinado setor -->
+                                <li><a href="relatorio_tramitacao_processo.php">TRAMITAÇÃO DE PROCESSO NO SETOR</a></li>
+                                <li><a href="relatorio_carga_processo.php">ANDAMENTO DE PROCESSO</a></li>
                             </ul>
                         </li>
 
