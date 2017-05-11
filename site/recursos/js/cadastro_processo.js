@@ -3,10 +3,9 @@
 $(document).on('change', '#id_tipo_processo', function (e) {
     var tipo = $("#id_tipo_processo").val();
     var data = new Date();
-    var ano_atual = data.getYear()
+    var ano_atual = data.getYear();
     if (ano_atual < 1000)
         ano_atual += 1900;
-
 
     if (tipo === '0') {
         $("#id_numero_processo").val('');

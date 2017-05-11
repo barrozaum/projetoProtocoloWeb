@@ -15,7 +15,7 @@ include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
         <meta charset="utf-8" />
-        <title>Arrecadação</title>
+        <title>Protocolo</title>
         <link href="../../css/guias_pagamento.css" rel="stylesheet" />
     </head>
 

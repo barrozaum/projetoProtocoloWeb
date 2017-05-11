@@ -28,9 +28,9 @@ and open the template in the editor.
                         <ul class="list-group">
                             <a href="cadastro_recebimento_individual.php" title="Cadastra recebimento do process"><li class="list-group-item" >RECEBIMENTO</li></a>
                         </ul>
-<!--                        <ul class="list-group">
-                            <a href="TabelaValorM2Construcao.php" title="Cadastra anexos em processo"><li class="list-group-item" >APENSAR</li></a>
-                        </ul>-->
+                        <ul class="list-group">
+                            <a href="segunda_via_etiqueta.php" title="Emitir segunda via da etiqueta do processo"><li class="list-group-item" >EMISSÃO SEGUNDA VIA</li></a>
+                        </ul>
                     </div>
                     <div class="panel-footer"></div>
                 </div>
@@ -82,16 +82,16 @@ and open the template in the editor.
                 <div id="collapse3" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-group">
-                            <a href="Itbi.php" title="Cadastro de Itbi"><li class="list-group-item" style="background-color: #F0F5FF">SETOR</li></a>
+                            <a href="relatorio_setor_presente_processo.php" title="Cadastro de Itbi"><li class="list-group-item" style="background-color: #F0F5FF">SETOR</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href="ConsultaItbi.php" title="Consulta dados ITBI"><li class="list-group-item" style="background-color: #F0F5FF">TRÂMITE</li></a>
+                            <a href="relatorio_remessa_processo.php" title="RELATÓRIO PROCESSO REMESSA"><li class="list-group-item" style="background-color: #F0F5FF">REMESSA</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href="BaixaOnlineItbi.php" title="Baixa Manual do Pagamento do ITBI"><li class="list-group-item" style="background-color: #F0F5FF">REMESSA</li></a>
+                            <a href="relatorio_tramitacao_processo.php" title="RELATÓRIO PROCESSO ENVIADOS PARA O SETOR"><li class="list-group-item" style="background-color: #F0F5FF">TRÂMITE</li></a>
                         </ul>
                         <ul class="list-group">
-                            <a href="CancelamentoItbi.php" title="Cancelamento de Pagamento ITBI"><li class="list-group-item" style="background-color: #F0F5FF">CARGA</li></a>
+                            <a href="relatorio_carga_processo.php" title="RELATÓRIO ANDAMENTO DO PROCESSO"><li class="list-group-item" style="background-color: #F0F5FF">ANDAMENTO DE PROCESSO</li></a>
                         </ul>
                     </div>
                     <div class="panel-footer"></div>
@@ -102,39 +102,5 @@ and open the template in the editor.
         </div>
 
     </div>
-<!--    <div class="col-sm-4">
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#"> 
-                        <h4 class="panel-title" style="color: black">
-                            OUTROS
-                        </h4>
-                    </a>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            <a href="TabelaValorMoeda.php" title="Cadastro novo processo"><li class="list-group-item" >NOVO</li></a>
-                        </ul>
-                        <ul class="list-group">
-                            <a href="TabelaDividaImob.php" title="Cadastro carga do processo"><li class="list-group-item" >CARGA</li></a>
-                        </ul>
-                        <ul class="list-group">
-                            <a href="TabelaValorM2Terreno.php" title="Cadastra recebimento do process"><li class="list-group-item" >RECEBIMENTO</li></a>
-                        </ul>
-                        <ul class="list-group">
-                            <a href="TabelaValorM2Construcao.php" title="Cadastra anexos em processo"><li class="list-group-item" >APENSAR</li></a>
-                        </ul>
-                    </div>
-                    <div class="panel-footer"></div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>-->
-    
 </div>
 

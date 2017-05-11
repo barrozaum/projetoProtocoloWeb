@@ -31,7 +31,7 @@ function formularioCadastro() {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('Descrição-Assunto', 'descricao', 'descricao', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Assunto'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                criar_input_text('Descrição-Assunto', 'descricao', 'descricao', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Assunto'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                 ?>
                             </div>
                         </div> 
@@ -82,7 +82,7 @@ function formularioAlterar() {
                 <div class="col-sm-12">
                     <?php
                     //   INPUT - Codigo Bairro                             
-                    criar_input_text('Descrição-Assunto', 'alterar_descricao', 'alterar_descricao', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                    criar_input_text('Descrição-Assunto', 'alterar_descricao', 'alterar_descricao', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Nome do Assunto'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
                     ?>
                 </div>
             </div> 
@@ -133,7 +133,7 @@ function formularioExcluir() {
                 <div class="col-sm-12">
                     <?php
                     //   INPUT - Descricao Bairro                             
-                    criar_input_text('Descrição-Assunto', 'excluir_descricao', 'excluir_descricao', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                    criar_input_text('Descrição-Assunto', 'excluir_descricao', 'excluir_descricao', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Nome do Assunto'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
                     ?>
                 </div>
             </div> 

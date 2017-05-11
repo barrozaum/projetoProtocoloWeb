@@ -3,7 +3,7 @@
 
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
+
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
@@ -58,10 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-
-
-
-
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
@@ -73,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      Comando sql a ser executado  
         $sql = "INSERT INTO requerente ";
-        $sql = $sql . "(idRequerente, requerente, logradouro, numeroEnd, complemento, bairro, cidade, uf, cep, tel, cel)";
+        $sql = $sql . "(idRequerente, requerente, logradouro, numeroEnd, complemento, bairro, cidade, uf, cep, tel, cel,usuario)";
         $sql = $sql . " VALUES ";
-        $sql = $sql . " (null, '{$requerente}','{$logradouro}','{$numero_endereco}', '{$complemento_Letra_Maiscula}', '{$bairro_Letra_Maiscula}', '{$cidade_Letra_Maiscula}', '{$uf_Letra_Maiscula}', '{$cep}', '{$tel_fixo_Letra_Maiscula}', '{$tel_celular_Letra_Maiscula}')";
+        $sql = $sql . " (null, '{$requerente}','{$logradouro}','{$numero_endereco}', '{$complemento_Letra_Maiscula}', '{$bairro_Letra_Maiscula}', '{$cidade_Letra_Maiscula}', '{$uf_Letra_Maiscula}', '{$cep}', '{$tel_fixo_Letra_Maiscula}', '{$tel_celular_Letra_Maiscula}','{$_SESSION['LOGIN_USUARIO']}')";
 
 //      execução com comando sql    
         $executa = $pdo->query($sql);
@@ -85,8 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //          Caso tenha errro 
 //          lanço erro na tela
             die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else if (fun_log_requerente($pdo, 'I', $sql) == FALSE) {
-            die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {
 
 //          die();

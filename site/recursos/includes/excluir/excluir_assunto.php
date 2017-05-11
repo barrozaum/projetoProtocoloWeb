@@ -1,8 +1,6 @@
 <?php
-
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
 include_once '../funcoes/func_retorna_assunto.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
@@ -42,17 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-            $sql = "DELETE FROM  assunto WHERE idAssunto = '{$codigo_Letra_Maiscula}'";
-//      execução com comando sql    
+            $sql = "UPDATE assunto SET  usuario ='{$_SESSION['LOGIN_USUARIO']}'  WHERE idAssunto = '{$codigo_Letra_Maiscula}'";
             $executa = $pdo->query($sql);
 
+            $sql_1 = "DELETE FROM  assunto WHERE idAssunto = '{$codigo_Letra_Maiscula}'";
+//      execução com comando sql    
+            $executa_1 = $pdo->query($sql_1);
+
 //      Verifico se comando foi realizado      
-            if (!$executa) {
+             if (!$executa || !$executa_1) {
 //          Caso tenha errro 
 //          lanço erro na tela
-                die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else if (fun_log_assunto($pdo, 'E', $sql .'-'. $descricao_Letra_Maiscula ) == FALSE) {
-                die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+                die('<script>window.alert("Erro ao Excluir  !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
             } else {
 
 //          die();
@@ -64,13 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $pdo = null;
         ?>
-  <!-- Dispara mensagem de sucesso -->
+        <!-- Dispara mensagem de sucesso -->
         <script>
             window.alert("<?php echo "Assunto Excluído com Sucesso !!!"; ?> ");
             location.href = "../../../cadastro_assunto.php";
         </script>
         <?php
-
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

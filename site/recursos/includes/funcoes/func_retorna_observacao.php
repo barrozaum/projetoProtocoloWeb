@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //função retorna descricao observacao
 function fun_retorna_descricao_observacao($pdo, $id_processo) {
     $sql_observacao_processo = "SELECT * FROM obs WHERE idProcesso = '{$id_processo}'";

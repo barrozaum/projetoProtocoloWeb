@@ -49,8 +49,8 @@ include_once '../estrutura/controle/validar_secao.php';
                     //loop para listar todos os dados encontrados
                     for ($i = 0; $dados = $query->fetch(); $i++) {
                         $param = $dados['idRequerente'];
-                        $param = $param . "|" . $dados['requerente'] . "|" . $dados['tel'];
-                        $param = $param . "|" . $dados['cel'] . "|" . $dados['cep'];
+                        $param = $param . "|" . $dados['requerente'] . "|" .  "(".substr($dados['tel'], 0,2).")" .substr($dados['tel'], 2,8) ;
+                        $param = $param . "|" . "(".substr($dados['cel'], 0,2).")" .substr($dados['cel'], 2,9). "|" . $dados['cep'];
                         $param = $param . "|" . $dados['logradouro'] . "|" . $dados['bairro'];
                         $param = $param . "|" . $dados['cidade'] . "|" . $dados['uf'];
                         $param = $param . "|" . $dados['numeroEnd'] . "|" . $dados['complemento'];
@@ -67,8 +67,8 @@ include_once '../estrutura/controle/validar_secao.php';
                             <td><?php echo $dados['cidade']; ?></td>
                             <td><?php echo $dados['uf']; ?></td>
                             <td><?php echo $dados['cep']; ?></td>
-                            <td><?php echo $dados['cel']; ?></td>
-                            <td><?php echo $dados['tel']; ?></td>
+                            <td><?php echo "(".substr($dados['tel'], 0,2).")" .substr($dados['tel'], 2,8); ?></td>
+                            <td><?php echo "(".substr($dados['cel'], 0,2).")" .substr($dados['cel'], 2,9); ?></td>
                             <td><a href="#" id="edit-editar" data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/alterar.png" height="20px;" alt="alterar"></a></td>
                             <td><a href="#" id="edit-excluir"  data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/lixeira.png" alt="excluir" height="20px;"></a></td>
 

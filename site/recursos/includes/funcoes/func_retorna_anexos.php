@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //função vai dizer se o processo tem algum anexo 
 function fun_retorna_anexo_processo($pdo, $codigo_processo) {
     

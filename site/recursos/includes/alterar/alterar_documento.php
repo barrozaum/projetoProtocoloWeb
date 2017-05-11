@@ -1,7 +1,7 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // filtro pra validar Nome do Bairro (não ter nenhum sql_injection)
-    if (strlen($descricao_Letra_Maiscula) > 2) {
+    if (strlen($descricao_Letra_Maiscula) > 2 && strlen($descricao_Letra_Maiscula) < 51) {
         $descricao = $descricao_Letra_Maiscula;
     } else {
         $array_erros['txt_descricao'] = 'POR FAVOR ENTRE COM A DESCRIÇÃO VÁLIDA \n';
@@ -28,41 +28,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
+        try {
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-        $pdo->beginTransaction();
+            $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-        $sql = "UPDATE documento SET descricao_documento = '{$descricao}', idUsuario = '{$_SESSION['LOGIN_ID_USUARIO']}' WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
+            $sql = "UPDATE documento SET descricao_documento = '{$descricao}', usuario = '{$_SESSION['LOGIN_USUARIO']}' WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
 
 //      execução com comando sql    
-        $executa = $pdo->query($sql);
+            $executa = $pdo->query($sql);
 
-//      Verifico se comando foi realizado      
-        if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-            die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_documento.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else if (fun_log_documento($pdo, 'A', $sql) == FALSE) {
-            die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_documento.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else {
+//        mensagem de sucesso
+            $msg = "ALTERADO COM SUCESSO !!!";
 
-//          die();
-//          salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
-        }
+//        salvando no banco de dados
+            $pdo->commit();
+        } catch (Exception $ex) {
+
+            $msg = $ex->getMessage();
+        } finally {
 //        fecho conexao
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Documento Alterado com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_documento.php";
-        </script>
+            $pdo = null;
+            echo '<script>window.alert("' . $msg . '");
+               location.href = "../../../cadastro_documento.php";
+        </script>';
+        }
 
-        <?php
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

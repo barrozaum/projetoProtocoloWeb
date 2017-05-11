@@ -2,8 +2,7 @@
 
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
-include_once '../funcoes/func_retorna_assunto.php';
+include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
@@ -34,41 +33,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         include_once '../estrutura/conexao/conexao.php';
 
 //        tenho que verificar se o assunto está presente em algum processo
-        if (fun_retorna_assunto_processo($pdo, $codigo_Letra_Maiscula)) {
+        if (fun_valida_tipo_no_processo($pdo, $codigo_Letra_Maiscula)) {
             die('<script>window.alert("TIPO PROCESSO Não Pode ser Excluido, Pois ja está cadastrado em Processo !!!");location.href = "../../../cadastro_tipo_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {
 
+            try {
 //      Inicio a transação com o banco        
-            $pdo->beginTransaction();
+                $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-            $sql = "DELETE FROM  tipo_processo WHERE id_tipo_processo = '{$codigo_Letra_Maiscula}'";
-//      execução com comando sql    
-            $executa = $pdo->query($sql);
+                $sql = "UPDATE tipo_processo SET usuario = '{$_SESSION['LOGIN_USUARIO']}' WHERE id_tipo_processo = '{$codigo_Letra_Maiscula}'";
+                $executa = $pdo->query($sql);
+                $sql1 = "DELETE FROM  tipo_processo WHERE id_tipo_processo = '{$codigo_Letra_Maiscula}'";
+                $executa1 = $pdo->query($sql1);
 
-//      Verifico se comando foi realizado      
-            if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-                die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_tipo_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else if (fun_log_tipo_processo($pdo, 'E', $sql .'-'. $descricao_Letra_Maiscula ) == FALSE) {
-                die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_tipo_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else {
+                $msg = "EXCLUIDO COM SUCESSO!!!";
 
-//          die();
 //          salvo alteração no banco de dados
                 $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+            } catch (Exception $ex) {
+                $msg = "ERRO AO EXCLUIR !!!";
+            } finally {
+//                FECHO CONEXAO
+                $pdo = null;
+//                EMITO MENSAGEM
+                echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_tipo_processo.php";
+                     </script>';
             }
         }
-
-
-        $pdo = null;
         ?>
-  <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Tipo Processo Excluído com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_tipo_processo.php";
-        </script>
         <?php
 
 //  if (empty($array_erros)) {

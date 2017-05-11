@@ -1,7 +1,6 @@
 <?php
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
 include_once '../funcoes/func_retorna_documento.php';
 include_once '../funcoes/func_retorna_observacao.php';
 include_once '../funcoes/func_carga_processo.php';
@@ -37,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "INSERT INTO cadastro_processo (idProcesso, numeroProcesso, tipoProcesso, anoProcesso, dataProcesso, idAssunto, complemento_assunto, idOrigem, idRequerente, idUsuario)";
     $sql = $sql . " VALUES ";
     $sql = $sql . " (null, {$numero_processo}, {$tipo_processo}, {$ano_processo}, '{$data_atual}', {$codigo_assunto_processo}, '{$complemento_assunto_processo}', {$codigo_origem_processo}, {$codigo_requerente_processo},{$_SESSION['LOGIN_ID_USUARIO']} ) ";
-
+//    die($sql);
     $executa = $pdo->query($sql);
     $id_proceso = $pdo->lastInsertId();
 
@@ -46,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!inserindo_documentos($pdo, $id_proceso)) {
         $pdo->rollback();
-        die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+        die('<script>window.alert("Erro ao Cadastrar DOC !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!inserindo_observacao($pdo, $id_proceso, $observacao_processo)) {
         $pdo->rollback();
-        die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+        die('<script>window.alert("Erro ao Cadastrar OBS !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!inserindo_carga($pdo, $id_proceso)) {
         $pdo->rollback();
-        die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+        die('<script>window.alert("Erro ao Cadastrar CARGA  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
     } else if (!alterando_proximo_processo($pdo, $tipo_processo, $numero_processo, $numero_processo_banco)) {
         $pdo->rollback();
         die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_processo.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Dispara mensagem de sucesso -->
     <script>
         window.alert("<?php echo "Processo Cadastrado com Sucesso !!!"; ?> ");
-        location.href = "../../../cadastro_processo.php";
+       location.href = "../../../cadastro_processo.php";
     </script>
 
 

@@ -1,9 +1,13 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../estrutura/conexao/conexao.php';
-include_once '../funcoes/fun_log.php';
 include_once '../funcoes/function_letraMaiscula.php';
 include_once '../funcoes/func_retorna_assunto.php';
 include_once '../funcoes/func_retorna_origem.php';

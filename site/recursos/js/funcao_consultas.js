@@ -1,4 +1,4 @@
-function funcao_retorna_pesquisa(url, parametros) {
+function funcao_retorna_pesquisa(url, parametros, listar) {
 
     $.ajax({
 //        Requisição pelo Method POST
@@ -11,10 +11,9 @@ function funcao_retorna_pesquisa(url, parametros) {
         dataType: "json",
         // função para de sucesso
         success: function (data) {
-
-            $('#listar').html(data);
+            $('#' + listar).html(data);
         }, error: function (error) {
-            $('#listar').html(error.responseText);
+            $('#' + listar).html(error.responseText);
         }
     });//termina o ajax
 
@@ -30,7 +29,7 @@ function fun_retorna_proximo(url, parametros) {
         data: parametros,
         // função para de sucesso
         success: function (data) {
-
+            console.log(data);
             $("#id_numero_processo").val(data);
             $("#id_numero_processo_banco").val(data);
         }, error: function (error) {
@@ -64,7 +63,7 @@ function fun_retorna_existencia_processo(url, parametros) {
 
 //função que retorna dados do processo 
 function fun_retorna_dados_processo(url, parametros) {
-//alert()
+
 
     $('#msg').html('');
     $.ajax({
@@ -122,10 +121,12 @@ function fun_retorna_dados_processo(url, parametros) {
 
                     AddTableRow(codigo_documento, descricao_documento, numero_documento, ano_documento);
                 }
+                $("#divButonn").html('<button type="button" name="btn_enviar_processo" id="id_btn_enviar_processo" class="btn btn-success">Enviar </button>');
                 return true;
             } else {
                 $('#msg').html("<div class='alert alert-danger'> PROCESSO NÃO ENCONTRADO !!! ");
                 limpar_formulario();
+                $("#divButonn").html('');
                 return false;
             }
 
@@ -134,9 +135,9 @@ function fun_retorna_dados_processo(url, parametros) {
         }
     });//termina o ajax
 }
-   
-   
-   
+
+
+
 // funcão que valida se o procesos ja existe ou não
 function fun_valida_existencia_processo_formulario(url, parametros) {
 
@@ -158,4 +159,34 @@ function fun_valida_existencia_processo_formulario(url, parametros) {
             console.log(error.responseText);
         }
     });//termina o ajax
+}
+
+
+// função para validar se o novo login já existe no sistema
+// caso exista emitir msg de erro 
+// senão liberar campos 
+function funcao_validar_novo_login(url, parametros) {
+
+    $.ajax({
+//        Requisição pelo Method POST
+        method: "POST",
+        // url para o arquivo para validação
+        url: url,
+//        dados passados
+        data: parametros,
+        // dataType json
+        dataType: "json",
+        // função para de sucesso
+        success: function (data) {
+            if (data == 1) {
+                $('#msg_error').html("<div class='alert alert-danger'>Login já cadastrado no sistema</div>");
+                func_bloquear_form();
+            }else{
+                func_liberar_form();
+            }
+        }, error: function (error) {
+            $('#msg_error').html(error.responseText);
+        }
+    });//termina o ajax
+
 }

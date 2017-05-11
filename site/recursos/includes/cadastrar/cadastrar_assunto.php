@@ -1,7 +1,7 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // filtro pra validar Nome do Bairro (não ter nenhum sql_injection)
-    if (strlen($descricao_Letra_Maiscula) > 2) {
+    if (strlen($descricao_Letra_Maiscula) > 2 &&  strlen($descricao_Letra_Maiscula) < 51 ) {
         $descricao = $descricao_Letra_Maiscula;
     } else {
         $array_erros['txt_descricao'] = 'POR FAVOR ENTRE COM A DESCRIÇÃO VÁLIDA \n';
@@ -27,45 +27,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
+        try {
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-        $pdo->beginTransaction();
+            $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-        $sql = "INSERT INTO assunto (idAssunto, descricao_assunto, idUsuario) VALUES (null, '$descricao', {$_SESSION['LOGIN_ID_USUARIO']})";
+            $sql = "INSERT INTO assunto (idAssunto, descricao_assunto, usuario) VALUES (null, '$descricao', '{$_SESSION['LOGIN_USUARIO']}')";
 //        print $sql;
 //      execução com comando sql    
-        $executa = $pdo->query($sql);
+            $executa = $pdo->query($sql);
 
-//        pegando ultimo dados inserido
-//         die($pdo->lastInsertId());
-//      Verifico se comando foi realizado      
-        if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-            die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else if (fun_log_assunto($pdo, 'I', $sql) == FALSE) {
-            die('<script>window.alert("Erro ao Cadastrar Log !!!");location.href = "../../../cadastro_assunto.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else {
-
-            
-            
-//          die();
 //          salvo alteração no banco de dados
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
-        }
+//          mensagem de sucesso
+            $msg = "CADASTRADO COM SUCESSO !!!";
+        } catch (Exception $ex) {
+            $msg = $ex->getMessage();
+        } finally {
+            echo '<script>window.alert("' . $msg . '");
+               location.href = "../../../cadastro_assunto.php";
+             </script>';
 //        fecho conexao
-        $pdo = null;
+            $pdo = null;
+        }
         ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Assunto Cadastrado com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_assunto.php";
-        </script>
 
         <?php
+
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

@@ -4,6 +4,8 @@ include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/funcaoCriacaoInput.php';
 //include funcao com os tipos de processos
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
+//macete para nao aparecer setor do usuario
+$_SESSION['NAO_MOSTRAR_SETOR'] = "";
 ?>
 <?php
 if (empty($_POST['id'])) {

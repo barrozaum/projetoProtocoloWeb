@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 // label = Nome em Cima do campo
 // name = Nome do campo
 // id = Id do campo
@@ -9,7 +14,23 @@
 function criar_input_text($label, $name, $id, $extras = array(), $value = '', $span = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'  id='id_" . $id . "'";
+
+    foreach ($extras as $k => $v) {
+        $saida = $saida . " $k = \"$v\" ";
+    }
+
+    $saida = $saida . "value='" . $value . "'>";
+    $saida = $saida . '<span class="help-block">' . $span . '</span>';
+    $saida = $saida . "</div>";
+    print $saida;
+}
+
+//craindo campo tipo email
+function criar_input_email($label, $name, $id, $extras = array(), $value = '', $span = '') {
+    $saida = "<div class='form-group'>";
+    $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
+    $saida = $saida . "<input class='form-control' type='email' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -23,7 +44,7 @@ function criar_input_text($label, $name, $id, $extras = array(), $value = '', $s
 
 //  CAMPO TIPO TEXTO OCULTO
 function criar_input_hidden($name, $extras = array(), $value = '', $span = '') {
-    $saida = "<input class='form-control' type='hidden' name='txt_" . $name . "'. id='id_" . $name . "'";
+    $saida = "<input class='form-control' type='hidden' name='txt_" . $name . "'  id='id_" . $name . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -38,7 +59,7 @@ function criar_input_data($label, $name, $id, $extras = array(), $value = '', $s
 
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -54,7 +75,7 @@ function criar_input_data($label, $name, $id, $extras = array(), $value = '', $s
 function criar_textarea($label, $name, $id, $value = '', $extras = array()) {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<textarea class='form-control'  name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<textarea class='form-control'  name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -72,8 +93,8 @@ function criar_input_text_com_lupa($label, $name, $id, $extras = array(), $value
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
     $saida = $saida . "<div class='input-group'>";
-    $saida = $saida . "<span class='input-group-addon' id='id_" . $id_lupa . "'><i class='glyphicon glyphicon-zoom-in'></i></span>";
-    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<span class='input-group-addon' id='id_" . $id_lupa . "'><button class='glyphicon glyphicon-zoom-in'></button></span>";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -92,15 +113,15 @@ function criar_input_text_com_lupa_e_com_adicionar($label, $name, $id, $extras =
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
     $saida = $saida . "<div class='input-group'>";
-    $saida = $saida . "<span class='input-group-addon' id='id_lupa_" . $name . "'><i class='glyphicon glyphicon-zoom-in'></i></span>";
-    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<span class='input-group-addon' id='id_lupa_" . $name . "'><button class='glyphicon glyphicon-zoom-in'></button></span>";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
     }
 
     $saida = $saida . "value='" . $value . "'>";
-    $saida = $saida . "<span class='input-group-addon' id='id_add_" . $name . "'><i class='glyphicon glyphicon-plus-sign'></i></span>";
+    $saida = $saida . "<span class='input-group-addon' id='id_add_" . $name . "'><button class='glyphicon glyphicon-plus-sign'></button></span>";
     $saida = $saida . "</div>";
     $saida = $saida . '<span class="help-block">' . $span . '</span>';
 
@@ -112,7 +133,7 @@ function criar_input_text_com_lupa_e_com_adicionar($label, $name, $id, $extras =
 function criar_input_select($label, $name, $id, $extras = array(), $value = array(), $span = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<select class='form-control'  name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<select class='form-control'  name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -131,7 +152,7 @@ function criar_input_select($label, $name, $id, $extras = array(), $value = arra
 function criar_input_text_cep($label, $name, $id, $extras = array(), $value = '', $span = '', $campos_de_retorno = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='text' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -148,7 +169,7 @@ function criar_input_text_cep($label, $name, $id, $extras = array(), $value = ''
 function criar_input_password($label, $name, $id, $extras = array(), $value = '', $span = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='password' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='password' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -163,7 +184,7 @@ function criar_input_password($label, $name, $id, $extras = array(), $value = ''
 // CAMPO TIPO CHECKBOX
 function criar_input_checkbox($label, $name, $id, $extras = array(), $value = '', $span = '') {
     $saida = "<div class='form-group'>";
-    $saida = $saida . "<input class='form-inline' type='checkbox' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-inline' type='checkbox' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -180,7 +201,7 @@ function criar_input_checkbox($label, $name, $id, $extras = array(), $value = ''
 function criar_input_file($label, $name, $id, $extras = array(), $value = '', $span = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='file' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='file' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";
@@ -197,7 +218,7 @@ function criar_input_file($label, $name, $id, $extras = array(), $value = '', $s
 function criar_input_text_telefone($label, $name, $id, $extras = array(), $value = '', $span = '') {
     $saida = "<div class='form-group'>";
     $saida = $saida . "<label for='id_" . $name . "'>" . $label . " :</label>";
-    $saida = $saida . "<input class='form-control' type='tel' name='txt_" . $name . "'. id='id_" . $id . "'";
+    $saida = $saida . "<input class='form-control' type='tel' name='txt_" . $name . "'  id='id_" . $id . "'";
 
     foreach ($extras as $k => $v) {
         $saida = $saida . " $k = \"$v\" ";

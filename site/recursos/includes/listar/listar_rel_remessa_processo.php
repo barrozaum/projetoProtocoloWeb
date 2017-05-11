@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
             </head>
             <body>
                 <form name="form_gerar_rel" id="id_form_gerar_rel" action="recursos/includes/relatorio/relatorio_remessa_processo.php" method="post" target="_blank">
+                    <input type="hidden" value="<?php print $codigo_setor ?>" name="txt_setor_entrada" required="true" >
                     <div style="overflow: auto; max-width: 100%;">
                         <table id="table" class="display" cellspacing="0" width="100%">
                             <thead>
@@ -58,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                     <th>ASSUNTO</th>
                                     <th>REQUERENTE</th>
                                     <th>ORIGEM</th>
+                                    <th>DT_CARGA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,11 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                 $sql = $sql . " WHERE cp.tramite = 0";
                                 $sql = $sql . " AND cp.idSetorOrigem  = '{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}'";
                                 $sql = $sql . " AND cp.idSetorEntrada = '{$codigo_setor}'";
+                                $sql = $sql . " AND cp.dataCarga >= '{$data_inicial}'";
+                                $sql = $sql . " AND cp.dataCarga <= '{$data_final}'";
                                 $sql = $sql . " AND cp.idProcesso= p.idProcesso";
                                 $sql = $sql . " AND p.tipoProcesso= t.id_tipo_processo";
                                 $sql = $sql . " AND p.idAssunto= a.idAssunto";
                                 $sql = $sql . " AND p.idRequerente= r.idRequerente";
                                 $sql = $sql . " AND p.idOrigem= o.idOrigem";
+                                
                                 $query = $pdo->prepare($sql);
 
 //                            print $sql;
@@ -85,17 +90,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
 
                                 //loop para listar todos os dados encontrados
                                 for ($i = 0; $dados = $query->fetch(); $i++) {
+                                 
                                     ?>   	
 
 
                                     <tr>
-                                        <td><input type="checkbox" name="op[]" value="<?php echo $dados['idCarga']; ?>" ></td>
+                                        <td><input type="checkbox" name="txt_op[]" value="<?php echo $dados['idCarga']; ?>" ></td>
                                         <td><?php echo $dados['descricao_tipo_processo']; ?></td>
                                         <td><?php echo $dados['numeroProcesso']; ?></td>
                                         <td><?php echo $dados['anoProcesso']; ?></td>
                                         <td><?php echo $dados['descricao_assunto'] . " " . $dados['complemento_assunto']; ?></td>
                                         <td><?php echo $dados['requerente']; ?></td>
                                         <td><?php echo $dados['descricao_origem']; ?></td>
+                                        <td><?php echo dataBrasileiro($dados['dataCarga']); ?></td>
                                     </tr>
 
 
@@ -107,9 +114,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                         </table>
                     </div>
                     <div class="row">
+                        <?php if(!empty($i)){ ?>
                         <div class="col-sm-2">
                             <button type="button" class="btn btn-info" id="id_gerar_relatorio" >GERAR RELATÓRIO</button>
                         </div>
+                        <?php } ?>
                     </div>
                 </form>
             </body>

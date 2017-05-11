@@ -18,9 +18,9 @@ $(document).on('click', '#id_buscar_processos', function (e) {
 //passo o parametro pra onde deve ir buscar
     var url = 'recursos/includes/listar/listar_rel_remessa_processo.php'
     var parametros = {setor: setor, dt_inicial: dt_inicial, dt_final: dt_final, codigo_setor: codigo_setor};
-
+    var listar = 'listar';
 // chamo a função que irá pesquisar o valor
-    funcao_retorna_pesquisa(url, parametros);
+    funcao_retorna_pesquisa(url, parametros, listar);
 });
 
 
@@ -37,7 +37,7 @@ $(document).on('click', '#id_gerar_relatorio', function (e) {
 });
 
 function valida_checkbox() {
-    var check = document.getElementsByName("op[]");
+    var check = document.getElementsByName("txt_op[]");
 
     for (var i = 0; i < check.length; i++) {
         if (check[i].checked == true) {

@@ -292,7 +292,9 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                 </div><!-- fim da Quarta aba -->
                 <!-- Buttons do formulário -->
                 <div id="divButonn">
+                    <?php if($titulo_pagina === "CADASTRO PROCESSO"){ ?>
                     <button type="button" name="btn_enviar_processo" id="id_btn_enviar_processo" class="btn btn-success">Enviar </button>
+                    <?php } ?>
                 </div>
                 <!-- Fim dos Buttons do formulário -->
             </div><!-- fim da abertura das abas do formulário -->

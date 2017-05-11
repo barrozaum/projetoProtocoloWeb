@@ -26,7 +26,7 @@ function formulario($pdo) {
                 <div id="msg_erro"></div>
                 <div class="panel panel-default">
                     <!-- INICIO Dados do imóvel -->
-                    <div class="panel-heading text-center">RELATÓRIO CARGAS DO PROCESSO</div>
+                    <div class="panel-heading text-center">RELATÓRIO ANDAMENTO DO PROCESSO</div>
                     <div class="panel-body">
                         <!-- inicio dados inscrição-->
                         <div class="row">

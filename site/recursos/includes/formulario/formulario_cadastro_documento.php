@@ -31,7 +31,7 @@ function formularioCadastro() {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('Descrição-Documento', 'descricao', 'descricao', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Documento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                criar_input_text('Descrição-Documento', 'descricao', 'descricao', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Documento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                 ?>
                             </div>
                         </div> 
@@ -82,7 +82,7 @@ function formularioAlterar() {
                 <div class="col-sm-12">
                     <?php
                     //   INPUT - Codigo Bairro                             
-                    criar_input_text('Descrição-Documento', 'alterar_descricao', 'alterar_descricao', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Documento'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                    criar_input_text('Descrição-Documento', 'alterar_descricao', 'alterar_descricao', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Nome do Documento'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
                     ?>
                 </div>
             </div> 
@@ -133,7 +133,7 @@ function formularioExcluir() {
                 <div class="col-sm-12">
                     <?php
                     //   INPUT - Descricao Bairro                             
-                    criar_input_text('Descrição-Documento', 'excluir_descricao', 'excluir_descricao', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Documento'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                    criar_input_text('Descrição-Documento', 'excluir_descricao', 'excluir_descricao', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Nome do Documento'), $campos[1], 'Conter no Minimo 3 caracteres [a-z A-Z]');
                     ?>
                 </div>
             </div> 

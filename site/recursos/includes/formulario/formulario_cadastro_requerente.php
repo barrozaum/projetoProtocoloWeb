@@ -92,7 +92,7 @@ function formularioCadastro() {
                             <div class="col-sm-8">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('Complemento', 'complemento_requerente', 'complemento_requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Complemento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                criar_input_text('Complemento', 'complemento_requerente', 'complemento_requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Complemento'), '', 'caracteres [a-z A-Z]');
                                 ?>
                             </div>
                         </div> 
@@ -208,7 +208,7 @@ function formularioAlterar() {
                 <div class="col-sm-8">
                     <?php
                     //   INPUT -                              
-                    criar_input_text('Complemento', 'alterar_complemento_requerente', 'alterar_complemento_requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Complemento'), $campos[10], 'somente os numeros');
+                    criar_input_text('Complemento', 'alterar_complemento_requerente', 'alterar_complemento_requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Complemento'), $campos[10], 'caracteres [a-z A-Z]');
                     ?>
                 </div>
             </div> 

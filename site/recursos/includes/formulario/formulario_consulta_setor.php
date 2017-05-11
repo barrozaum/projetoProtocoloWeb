@@ -30,7 +30,7 @@ function formulario() {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text_com_lupa('SETOR', 'setor', 'setor', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Setor'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_setor');
+                                criar_input_text_com_lupa('SETOR', 'setor', 'setor', array('readonly' => 'true' , 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Setor'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_setor');
                                 criar_input_hidden('codigo_setor', array(), '');
                                 ?>
                             </div>

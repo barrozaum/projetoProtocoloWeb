@@ -8,7 +8,8 @@ include_once '../funcoes/func_retorna_assunto.php';
 include_once '../funcoes/func_retorna_origem.php';
 include_once '../funcoes/func_retorna_requerente.php';
 include_once '../funcoes/func_carga_processo.php';
-
+//macete para nao aparecer setor do usuario
+$_SESSION['NAO_MOSTRAR_SETOR'] = "";
 
 if ($_POST['id'] === '1') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);

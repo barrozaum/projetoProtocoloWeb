@@ -80,9 +80,10 @@ $(function () {
 //passo o parametro pra onde deve ir buscar
         var url = 'recursos/includes/consulta/consulta_origem.php'
         var parametros = {origem: origem, dt_inicial: dt_inicial, dt_final: dt_final};
+        var listar = "listar";
 
 // chamo a função que irá pesquisar o valor
-        funcao_retorna_pesquisa(url, parametros);
+        funcao_retorna_pesquisa(url, parametros, listar);
     });
 
 });

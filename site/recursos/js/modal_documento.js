@@ -79,9 +79,10 @@ $(function () {
 //passo o parametro pra onde deve ir buscar
         var url = 'recursos/includes/consulta/consulta_documento.php'
         var parametros = {documento: documento, numero_documento: numero_documento, ano_documento: ano_documento};
+        var listar = "listar";
 
 // chamo a função que irá pesquisar o valor
-        funcao_retorna_pesquisa(url, parametros);
+        funcao_retorna_pesquisa(url, parametros, listar);
     });
 
 });

@@ -5,19 +5,16 @@ session_start();
 // 2 - verifico se a senha informada é a mesma do login
 // chamo a conexao com o banco de dados
 include_once '../conexao/conexao.php';
-
 //biblioteca do setor
 include_once '../../funcoes/func_retorna_setor.php';
-
 // trato os valores passados pelos usuários
 $login_informado = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['txtlogin']);
 $senha_informada = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['txtsenha']);
-$senha_criptografada = sha1($senha_informada);
+$senha_criptografada = md5($senha_informada);
 //comando sql para buscar usuario
 $sql_login = "SELECT * FROM usuario WHERE login = '{$login_informado}' LIMIT 1";
 $query_login = $pdo->prepare($sql_login);
 $query_login->execute();
-
 //verifico se encontrou algum resultado
 if ($query_login->fetchColumn() > 0) {
     $sql_login_senha = " SELECT * FROM usuario ";
@@ -28,7 +25,6 @@ if ($query_login->fetchColumn() > 0) {
     if ($query_login_senha->fetchColumn() > 0) {
         $query_login_senha->execute();
         $dados = $query_login_senha->fetch();
-
         if ($dados['status'] == 1) {
             $_SESSION['MENSAGEM'] = "USUÁRIO BLOQUEADO NO SISTEMA !!!";
             $pdo = null;

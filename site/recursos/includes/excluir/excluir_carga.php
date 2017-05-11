@@ -1,7 +1,6 @@
 <?php
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript

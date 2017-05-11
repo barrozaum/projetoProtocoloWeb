@@ -7,7 +7,6 @@ include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 
 
 //parametros enviados pelo formulario de pesquisa
-$setor = $_POST['setor'];
 $data_inicial = dataAmericano($_POST['dt_inicial']);
 $data_final = dataAmericano($_POST['dt_final']);
 ?>
@@ -32,7 +31,6 @@ $data_final = dataAmericano($_POST['dt_final']);
                         <th>NÚMERO</th>
                         <th>TIPO</th>
                         <th>ANO</th>
-                        <th>SETOR</th>
                         <th>ASSUNTO</th>
                         <th>REQUERENTE</th>
                         <th>DATA</th>
@@ -45,43 +43,52 @@ $data_final = dataAmericano($_POST['dt_final']);
                     <?php
                     // chamo a conexao com o banco de dados
                     include_once '../estrutura/conexao/conexao.php';
-                    // preparo para realizar o comando sql
-                    $sql = "SELECT * ";
-                    $sql = $sql . " FROM setor s, carga_processo cp, cadastro_processo c, assunto a, requerente r ";
-                    $sql = $sql . " WHERE s.setor like '%$setor%'";
-                    $sql = $sql . " AND s.idSetor = cp.idSetorOrigem";
-                    $sql = $sql . " AND s.idSetor = cp.idSetorEntrada";
-                    $sql = $sql . " AND cp.tramite = '1'"; // igual a 1 significa recebido e parado
-                    $sql = $sql . " AND cp.idProcesso = c.idProcesso"; // igual a 1 significa recebido e parado
-                    $sql = $sql . " AND c.idAssunto = a.idAssunto ";
-                    $sql = $sql . " AND c.idRequerente = r.idRequerente ";
-                    $sql = $sql . " AND cp.dataRecebimento >= '$data_inicial' ";
-                    $sql = $sql . " AND cp.dataRecebimento <= '$data_final' ";
-                    $sql = $sql . " ORDER BY  cp.dataRecebimento DESC";
-                    $query = $pdo->prepare($sql);
 
-                    //executo o comando sql
+//                    seleciono os processos que não estão em movimento
+                    $sql_carga = "SELECT cp.idProcesso, MAX(cp.seq_carga) AS maior_sequencia ";
+                    $sql_carga = $sql_carga . " FROM carga_processo cp";
+                    $sql_carga = $sql_carga . " WHERE idProcesso NOT IN ("; // select dentro de select
+                    $sql_carga = $sql_carga . "  SELECT idProcesso"; // 
+                    $sql_carga = $sql_carga . "  FROM carga_processo "; // 
+                    $sql_carga = $sql_carga . "  WHERE tramite = 0"; // 
+                    $sql_carga = $sql_carga . "   ORDER BY seq_carga desc) "; // fim do select interno
+                    $sql_carga = $sql_carga . " GROUP by idProcesso "; // fim do select interno
+                    $query = $pdo->prepare($sql_carga);
                     $query->execute();
-
-                    //loop para listar todos os dados encontrados
                     for ($i = 0; $dados = $query->fetch(); $i++) {
+
+                        $sql_processo = "SELECT * FROM carga_processo cp, cadastro_processo c, tipo_processo t, assunto a, requerente r ";
+                        $sql_processo = $sql_processo . " WHERE cp.idProcesso =  '{$dados['idProcesso']}'";
+                        $sql_processo = $sql_processo . " AND cp.seq_carga=  '{$dados['maior_sequencia']}'";
+                        $sql_processo = $sql_processo . " AND cp.idSetorEntrada = '{$_POST['txt_codigo_setor']}'";
+                        $sql_processo = $sql_processo . " AND cp.idProcesso = c.idProcesso";
+                        $sql_processo = $sql_processo . " AND c.tipoProcesso = t.id_tipo_processo";
+                        $sql_processo = $sql_processo . " AND  c.idAssunto = a.idAssunto";
+                        $sql_processo = $sql_processo . " AND  c.idRequerente = r.idRequerente";
+                        $sql_processo = $sql_processo . " AND  cp.dataCarga >= '{$data_inicial}'";
+                        $sql_processo = $sql_processo . " AND  cp.dataCarga <= '{$data_final}'";
+                        $sql_processo = $sql_processo . " LIMIT 1";
+
+                        $query_processo = $pdo->prepare($sql_processo);
+                        $query_processo->execute();
+                         for ($contador = 0; $dados_processo = $query_processo->fetch(); $contador++) {
                         ?>   	
 
 
                         <tr>
-                            <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?></td>
-                            <td><?php echo $dados['anoProcesso']; ?></td>
-                            <td><?php echo $dados['setor']; ?></td>
-                            <td><?php echo $dados['descricao_assunto'].' '.  $dados['complemento_assunto']; ?></td>
-                            <td><?php echo $dados['requerente']; ?></td>
-                            <td><?php echo dataBrasileiro($dados['dataProcesso']); ?></td>
-                            <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
+                            <td><?php echo $dados_processo['numeroProcesso']; ?></td>
+                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados_processo['tipoProcesso']); ?></td>
+                            <td><?php echo $dados_processo['anoProcesso']; ?></td>
+                            <td><?php echo $dados_processo['descricao_assunto'] . ' ' . $dados_processo['complemento_assunto']; ?></td>
+                            <td><?php echo $dados_processo['requerente']; ?></td>
+                            <td><?php echo dataBrasileiro($dados_processo['dataProcesso']); ?></td>
+                            <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados_processo['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
 
                         </tr>
 
 
                         <?php
+                        }
                     }
                     $pdo = null;
                     ?>

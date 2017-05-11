@@ -1,8 +1,6 @@
 <?php
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-include_once '../funcoes/fun_log.php';
-include_once '../funcoes/func_retorna_requerente.php';
 
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
@@ -66,40 +64,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-            $pdo->beginTransaction();
+        $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-             $sql = "UPDATE requerente SET";
-            $sql = $sql  . " requerente = '{$requerente}', ";
-            $sql = $sql  . " logradouro = '{$logradouro}', ";
-            $sql = $sql  . " numeroEnd = '{$numero_endereco}', ";
-            $sql = $sql  . " complemento = '{$complemento_Letra_Maiscula}', ";
-            $sql = $sql  . " bairro = '{$bairro_Letra_Maiscula}', ";
-            $sql = $sql  . " cidade = '{$cidade_Letra_Maiscula}', ";
-            $sql = $sql  . " uf= '{$uf_Letra_Maiscula}', ";
-            $sql = $sql  . " cep = '{$cep}', ";
-            $sql = $sql  . " tel= '{$tel_fixo_Letra_Maiscula}', ";
-            $sql = $sql  . " cel = '{$tel_celular_Letra_Maiscula}' ";
-            $sql = $sql  . " WHERE idRequerente = '{$codigo_Letra_Maiscula}' ";
-            
-            
+        $sql = "UPDATE requerente SET";
+        $sql = $sql . " requerente = '{$requerente}', ";
+        $sql = $sql . " logradouro = '{$logradouro}', ";
+        $sql = $sql . " numeroEnd = '{$numero_endereco}', ";
+        $sql = $sql . " complemento = '{$complemento_Letra_Maiscula}', ";
+        $sql = $sql . " bairro = '{$bairro_Letra_Maiscula}', ";
+        $sql = $sql . " cidade = '{$cidade_Letra_Maiscula}', ";
+        $sql = $sql . " uf= '{$uf_Letra_Maiscula}', ";
+        $sql = $sql . " cep = '{$cep}', ";
+        $sql = $sql . " tel= '{$tel_fixo_Letra_Maiscula}', ";
+        $sql = $sql . " cel = '{$tel_celular_Letra_Maiscula}', ";
+        $sql = $sql . " usuario = '{$_SESSION['LOGIN_USUARIO']}' ";
+        $sql = $sql . " WHERE idRequerente = '{$codigo_Letra_Maiscula}' ";
+
+
 //      execução com comando sql    
-            $executa = $pdo->query($sql);
+        $executa = $pdo->query($sql);
 
 //      Verifico se comando foi realizado      
-            if (!$executa) {
+        if (!$executa) {
 //          Caso tenha errro 
 //          lanço erro na tela
-                die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else if (fun_log_requerente($pdo, 'A', $sql) == FALSE) {
-                die('<script>window.alert("Erro ao Alterado Log !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else {
+            die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
+        } else {
 
 //          die();
 //          salvo alteração no banco de dados
-                $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
-            }
-        
+            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+        }
+
 
 
         $pdo = null;

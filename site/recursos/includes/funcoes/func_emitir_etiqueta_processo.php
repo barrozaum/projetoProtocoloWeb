@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 function fun_montar_etiqueta($param1, $param2, $param3) {
 
     // filtro das variaveis

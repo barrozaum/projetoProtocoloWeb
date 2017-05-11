@@ -1,8 +1,11 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 if (isset($_POST['cmd'])) {
-
-
 
     if ($_POST['cmd'] === 'proximo_valor') {
         include_once '../estrutura/conexao/conexao.php';
@@ -75,5 +78,20 @@ function fun_valida_existencia_processo($pdo, $tipo, $numero, $ano){
         print "TRUE";
     } else {
         print "FALSE";
+    }
+}
+
+
+//função para saber se o tipo_processo encontra-se em alum processo
+// se for encotrado,  vai retornar verdadeiro
+//senão for encontrado vai retornar falso
+function fun_valida_tipo_no_processo($pdo, $tipoProcesso) {
+    $sql_tipo_processo_processo = "SELECT * FROM cadastro_processo WHERE tipoProcesso = '{$tipoProcesso}'";
+    $query_tipo_processo_processo = $pdo->prepare($sql_tipo_processo_processo);
+    $query_tipo_processo_processo->execute();
+    if ($query_tipo_processo_processo->fetchColumn() > 0) {
+        return TRUE;
+    } else {
+        return FALSE;
     }
 }

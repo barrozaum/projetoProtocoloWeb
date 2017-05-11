@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //função para saber se o documento encontra-se em alum processo
 // se for encotrado,  vai retornar verdadeiro
 //senão for encontrado vai retornar falso
@@ -46,6 +51,7 @@ function fun_retorna_documento_presente_processo($pdo, $id_processo) {
 
 /// inserindo documentos no processo
 function inserindo_documentos($pdo, $id_proceso) {
+    
     if (isset($_POST['txt_id_doc'])) {
         $codigo_documento = $_POST['txt_id_doc'];
         $nume_documento = $_POST['txt_numero_doc'];
@@ -65,27 +71,19 @@ function inserindo_documentos($pdo, $id_proceso) {
 
 
 
-            if ($executa = $pdo->query($sql_doc)) {
-                $retorna = 1;
-            } else {
-                $retorna = 0;
+            if (!$executa = $pdo->query($sql_doc)) {
+                 return false;
             }
         }
     }
-    if ($retorna === 1) {
-        return true;
+    return true;
+}
+
+function fun_limpar_documentos_processo($pdo, $id_proceso) {
+    $sql_limpa_doc = "DELETE FROM documento_processo WHERE idProcesso = " . $id_proceso;
+    if ($executa = $pdo->query($sql_limpa_doc)) {
+        return inserindo_documentos($pdo, $id_proceso);
     } else {
         return false;
     }
-    
-}
-
-
-function fun_limpar_documentos_processo($pdo, $id_proceso){
-    $sql_limpa_doc = "DELETE FROM documento_processo WHERE idProcesso = " .$id_proceso;
-       if ($executa = $pdo->query($sql_limpa_doc)) {
-            return inserindo_documentos($pdo, $id_proceso);  
-        } else {
-            return false;
-        }
 }

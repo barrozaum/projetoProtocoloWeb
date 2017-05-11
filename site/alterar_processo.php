@@ -7,7 +7,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
-        <title>Arrecadação</title>
+        <title>Protocolo</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
@@ -27,8 +27,8 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/addCamposTabelaAutomatico.js"></script>
         <script src="recursos/js/alterar_processo.js"></script>
-      
-      
+
+
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
         <script>
@@ -38,6 +38,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_cadastro_processo.php?cmd=alterar');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
             }
         </script>
 
@@ -46,7 +47,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <div id="cabecalho">
             <!-- Não apagar, pois é onde encontra-se o menu do site -->
         </div>
-        
+
         <div class="container text center">
             <div id="formulario"></div>
         </div>

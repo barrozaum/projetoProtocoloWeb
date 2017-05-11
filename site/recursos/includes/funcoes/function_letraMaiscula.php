@@ -1,5 +1,11 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
+
 //Converto a letra para maisculo
 function letraMaiuscula($string) {
     // envio para a função aplicar filtro string

@@ -7,7 +7,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
-        <title>Arrecadação</title>
+        <title>Protocolo</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
@@ -26,8 +26,8 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/buscaCep.js"></script>
         <script src="recursos/js/modal_requerente.js"></script>
         <script src="recursos/js/mascaraTelefone.js"></script>
-       
-        
+
+
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>

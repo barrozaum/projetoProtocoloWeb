@@ -10,7 +10,7 @@ $_SESSION['JANELA_SEGUNDA_VIA'] = "OK";
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
-        <title>Arrecadação</title>
+        <title>Protocolo</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
@@ -36,6 +36,7 @@ $_SESSION['JANELA_SEGUNDA_VIA'] = "OK";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_segunda_via_etiqueta.php');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
             }
         </script>
 
@@ -54,7 +55,8 @@ $_SESSION['JANELA_SEGUNDA_VIA'] = "OK";
         </div>
 
         <hr />
-        <div id="rodape">
+      <div id="modal"></div>
+         <div id="rodape">
             <!-- Não apagar, pois é onde encontra-se o rodape da página -->
         </div>
     </body>

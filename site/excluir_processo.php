@@ -7,7 +7,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
         <meta charset="utf-8">
-        <title>Arrecadação</title>
+        <title>Protocolo</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
@@ -38,6 +38,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_cadastro_processo.php?cmd=excluir');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
             }
         </script>
 

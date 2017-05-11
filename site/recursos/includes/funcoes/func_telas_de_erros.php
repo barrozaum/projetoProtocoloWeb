@@ -1,4 +1,10 @@
 <?php
+
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //cria um modal contendoo titulo e a mensagem de erro
 function criar_modal_erros($titulo, $msg) {
     ?>

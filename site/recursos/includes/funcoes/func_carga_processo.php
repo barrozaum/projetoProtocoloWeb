@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //essa função é executado no momento em que eu cadastro o processo no sistema
 function inserindo_carga($pdo, $id_proceso) {
     $dia_atual = date('Y-m-d');

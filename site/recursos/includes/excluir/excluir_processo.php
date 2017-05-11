@@ -2,7 +2,6 @@
 //die(print_r($_POST));
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
-//include_once '../funcoes/fun_log.php';
 include_once '../funcoes/func_retorna_anexos.php';
 
 //verifico se a página está sendo chamada pelo méthod POST

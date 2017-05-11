@@ -1,5 +1,10 @@
 <?php
 
+if(!isset($_SESSION))
+{
+   session_start();
+}
+
 //função para saber se o origem encontra-se em alum processo
 // se for encotrado,  vai retornar verdadeiro
 //senão for encontrado vai retornar falso

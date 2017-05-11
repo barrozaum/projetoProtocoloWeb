@@ -22,6 +22,11 @@ $(document).on('click', '#id_lupa_setor', function (e) {
     return false;
 });
 
+$(document).on('click', '#id_lupa_setor_usuario', function (e) {
+    var url = "recursos/includes/selecionar/selecionar_setor.php?janela=3";
+    window.open(url, 'galeria', 'width=1024,height=508');
+    return false;
+});
 $(document).on('click', '#id_lupa_origem', function (e) {
     var url = "recursos/includes/selecionar/selecionar_origem.php?janela=1";
     window.open(url, 'galeria', 'width=1024,height=508');

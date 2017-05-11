@@ -65,23 +65,24 @@ $(function () {
         $("#msg_erro").html('');
 
 //        carrego paramtros do formulario
-        var setor = $('#id_setor').val();
+        var setor = $('#id_codigo_setor').val();
         var dt_inicial = $('#id_dt_inicial').val();
         var dt_final = $('#id_dt_final').val();
 
 
 // valido o setor
-        if (setor.length < 3) {
+        if (setor.length < 1) {
             $("#msg_erro").html('<div class="alert alert-danger">POR FAVOR PREENCHA O SETOR CORRETAMENTE !! </div>');
             return false;
         }
 
 //passo o parametro pra onde deve ir buscar
         var url = 'recursos/includes/consulta/consulta_setor.php'
-        var parametros = {setor: setor, dt_inicial: dt_inicial, dt_final: dt_final};
+        var parametros = {txt_codigo_setor: setor, dt_inicial: dt_inicial, dt_final: dt_final};
+        var listar = "listar";
 
 // chamo a função que irá pesquisar o valor
-        funcao_retorna_pesquisa(url, parametros);
+        funcao_retorna_pesquisa(url, parametros, listar);
     });
 
 });
