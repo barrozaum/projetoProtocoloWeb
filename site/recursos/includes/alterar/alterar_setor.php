@@ -96,14 +96,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
         } catch (Exception $ex) {
             $msg = "ERRO AO EXCLUIR !!!";
-        } finally {
+        } 
 //                FECHO CONEXAO
             $pdo = null;
 //                EMITO MENSAGEM
             echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_secretaria.php";
                      </script>';
-        }
+        
 
 //  if (empty($array_erros)) {
     } else {

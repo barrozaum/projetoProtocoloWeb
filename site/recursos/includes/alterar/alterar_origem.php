@@ -48,14 +48,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        } 
 //                FECHO CONEXAO
             $pdo = null;
 //                EMITO MENSAGEM
             echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_origem.php";
                      </script>';
-        }
+        
 
 
 //  if (empty($array_erros)) {

@@ -48,13 +48,11 @@ $data_final = dataAmericano($_POST['dt_final']);
                     // preparo para realizar o comando sql
                     $sql = "SELECT * ";
 //                     $sql = $sql . " FROM  origem a, cadastro_processo c";
-                    $sql = $sql . " FROM  origem o, assunto a, cadastro_processo c , requerente r ";
-                    $sql = $sql . " WHERE o.descricao_origem LIKE  '%$origem%' ";
-                    $sql = $sql . " AND o.idOrigem = c.idOrigem ";
-                    $sql = $sql . " AND a.idAssunto = c.idAssunto ";
-                    $sql = $sql . " AND c.idRequerente = r.idRequerente ";
+                    $sql = $sql . " FROM  cadastro_processo c , tipo_processo t ";
+                    $sql = $sql . " WHERE c.descricao_origem LIKE  '%$origem%' ";
+                    $sql = $sql . " AND c.tipoProcesso = t.id_tipo_processo";
                     $sql = $sql . " AND c.dataProcesso >= '$data_inicial' ";
-                    $sql = $sql . " AND c. dataProcesso <= '$data_final' ";
+                    $sql = $sql . " AND c.dataProcesso <= '$data_final' ";
                     $sql = $sql . " ORDER BY  c.idProcesso   ";
                     $query = $pdo->prepare($sql);
                     //executo o comando sql
@@ -62,11 +60,6 @@ $data_final = dataAmericano($_POST['dt_final']);
 
 
 
-
-//                    $sql1 = "SELECT * 
-//	FROM  origem o, assunto a, cadastroProcesso c , requerente r
-//	WHERE o.nomeOrigem LIKE  '%$decOrigem%' AND o.idOrigem = c.idOrigem AND a.idAssunto = c.idAssunto AND c.idRequerente = r.idRequerente AND c.dataProcesso >= '$dataAmericanaInicial' AND c. dataProcesso <= '$dataAmericanaFinal'ORDER BY a.idAssunto";
-//	
                     //loop para listar todos os dados encontrados
                     for ($i = 0; $dados = $query->fetch(); $i++) {
                         ?>   	
@@ -74,11 +67,11 @@ $data_final = dataAmericano($_POST['dt_final']);
 
                         <tr>
                             <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?></td>
+                            <td><?php echo $dados['descricao_tipo_processo']; ?></td>
                             <td><?php echo $dados['anoProcesso']; ?></td>
                             <td><?php echo $dados['descricao_origem']; ?></td>
-                            <td><?php echo $dados['descricao_assunto'].' '.  $dados['complemento_assunto']; ?></td>
-                            <td><?php echo $dados['requerente']; ?></td>
+                            <td><?php echo $dados['descricao_assunto']; ?></td>
+                            <td><?php echo $dados['descricao_requerente']; ?></td>
                             <td><?php echo dataBrasileiro($dados['dataProcesso']); ?></td>
                             <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
                         </tr>

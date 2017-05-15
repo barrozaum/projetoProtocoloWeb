@@ -47,23 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sql1 = "DELETE FROM  tipo_processo WHERE id_tipo_processo = '{$codigo_Letra_Maiscula}'";
                 $executa1 = $pdo->query($sql1);
 
-                $msg = "EXCLUIDO COM SUCESSO!!!";
+                $msg = "DELETADO COM SUCESSO!!!";
 
 //          salvo alteração no banco de dados
                 $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
             } catch (Exception $ex) {
-                $msg = "ERRO AO EXCLUIR !!!";
-            } finally {
+                $msg = $ex->getMessage();
+            }
 //                FECHO CONEXAO
-                $pdo = null;
+            $pdo = null;
 //                EMITO MENSAGEM
-                echo '<script>window.alert("' . $msg . '");
+            echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_tipo_processo.php";
                      </script>';
-            }
         }
-        ?>
-        <?php
+
 
 //  if (empty($array_erros)) {
     } else {

@@ -63,11 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($colaborador_conf_senha !== $colaborador_senha) {
         $array_erros['txt_senhas_invalidas'] = "SENHAS NÃO CONFEREM ";
-    } else {
-
-        $colaborador_senha = md5($colaborador_conf_senha);
     }
-
 
 // verifico se tem erro na validação
     if (empty($array_erros)) {
@@ -82,7 +78,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      Comando sql a ser executado  
             $sql = "UPDATE usuario SET criado_por = '{$_SESSION['LOGIN_USUARIO']}', ";
-            if ($colaborador_conf_senha !== "informe_sua_senha") {
+            if ($colaborador_conf_senha !== "INFORME_SUA_SENHA") {
+                   $colaborador_senha = md5($colaborador_conf_senha);
+
                 $sql = $sql . "senha = '{$colaborador_senha}',  ";
             }
             $sql = $sql . "nome = '{$colaborador_nome}',  ";
@@ -99,14 +97,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        }
 //                FECHO CONEXAO
             $pdo = null;
 //                EMITO MENSAGEM
             echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../novo_usuario.php";
                      </script>';
-        }
+        
 ?>
         <?php
 

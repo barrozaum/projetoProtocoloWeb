@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
+        try{
 //      Conexao com o banco de dados  
         include_once '../estrutura/conexao/conexao.php';
 
@@ -29,26 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //      execução com comando sql    
             $executa = $pdo->query($sql);
 
-//      Verifico se comando foi realizado      
-            if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-                die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../excluir_carga.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            }else{//          die();
-//          salvo alteração no banco de dados
-                $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+//       persistindo no banco     
+                $pdo->commit();
+                
+                 $msg = "DELETADO COM SUCESSO";
+            }  catch (Exception $e){
+                $msg = $e->getMessage();
             }
-        
-
-
+//      FECHO CONEXAO
         $pdo = null;
-        ?>
-  <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Carga Excluída com Sucesso !!!"; ?> ");
-            location.href = "../../../excluir_carga.php";
-        </script>
-        <?php
+        
+         echo '<script>window.alert("' . $msg . '");
+               location.href = "../../../excluir_carga.php";
+        </script>';
+       
+ 
 
 //  if (empty($array_erros)) {
     } else {

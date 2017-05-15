@@ -1,8 +1,7 @@
 <?php
 
-if(!isset($_SESSION))
-{
-   session_start();
+if (!isset($_SESSION)) {
+    session_start();
 }
 
 //função para saber se o documento encontra-se em alum processo
@@ -39,9 +38,9 @@ function fun_retorna_documento_presente_processo($pdo, $id_processo) {
 
     $linha = array();
     for ($i = 0; $dados = $query_documento_processo->fetch(); $i++) {
-        $desc_doc = fun_retorna_descricao_documento($pdo, $dados['idDocumento']);
+       
 
-        $linha[$i] = array("codigo_documento" => "{$dados['idDocumento']}", "documento" => "{$desc_doc}", "numero" => "{$dados['numeroDocumento']}", "ano" => "{$dados['anoDocumento']}");
+        $linha[$i] = array("codigo_documento" => "{$dados['idDocumento']}", "documento" => "{$dados['descricao_documento']}", "numero" => "{$dados['numeroDocumento']}", "ano" => "{$dados['anoDocumento']}");
     }
 
 
@@ -51,32 +50,33 @@ function fun_retorna_documento_presente_processo($pdo, $id_processo) {
 
 /// inserindo documentos no processo
 function inserindo_documentos($pdo, $id_proceso) {
-    
+
     if (isset($_POST['txt_id_doc'])) {
         $codigo_documento = $_POST['txt_id_doc'];
-        $nume_documento = $_POST['txt_numero_doc'];
+        $numero_documento = $_POST['txt_numero_doc'];
         $ano_documento = $_POST['txt_ano_doc'];
+        $descricao_documento = $_POST['txt_doc'];
 
 
 //      die(print_r($_POST));
         $quant_linhas = count($codigo_documento);
         for ($i = 0; $i < $quant_linhas; $i++) {
             $codigo_documento[$i];
-            $nume_documento[$i];
+            $numero_documento[$i];
+            $descricao_documento[$i];
             $ano_documento[$i];
 
-            $sql_doc = "INSERT INTO documento_processo (idProcesso, idDocumento, anoDocumento, numeroDocumento, idUsuario)";
-            $sql_doc = $sql_doc . " VALUES ";
-            $sql_doc = $sql_doc . "({$id_proceso}, {$codigo_documento[$i]}, {$ano_documento[$i]}, {$nume_documento[$i]}, {$_SESSION['LOGIN_ID_USUARIO']})";
-
-
-
-            if (!$executa = $pdo->query($sql_doc)) {
-                 return false;
+            if(empty($codigo_documento[$i])){
+               $codigo_documento[$i] =  0;
             }
+            $sql_doc = "INSERT INTO documento_processo (idProcesso, idDocumento, anoDocumento, numeroDocumento, descricao_documento, usuario)";
+            $sql_doc = $sql_doc . " VALUES ";
+            $sql_doc = $sql_doc . "('{$id_proceso}', '{$codigo_documento[$i]}', {$ano_documento[$i]}, {$numero_documento[$i]}, '{$descricao_documento[$i]}' , '{$_SESSION['LOGIN_USUARIO']}')";
+           
+            $executa = $pdo->query($sql_doc);
         }
     }
-    return true;
+   
 }
 
 function fun_limpar_documentos_processo($pdo, $id_proceso) {

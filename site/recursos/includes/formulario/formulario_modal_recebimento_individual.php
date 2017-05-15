@@ -31,10 +31,10 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
     $query->execute();
     if (($dados = $query->fetch()) == true) {
         $id_processo = $dados['idProcesso'];
-        $descricao_assunto = fun_retorna_descricao_assunto($pdo, $dados['idAssunto']) . ' ' . $dados['complemento_assunto'];
-        $descricao_origem = fun_retorna_descricao_origem($pdo, $dados['idOrigem']);
-        $requerente = fun_retorna_descricao_requerente($pdo, $dados['idRequerente']);
-        $idAnexado = $dados['idAnexo'];
+        $descricao_assunto = $dados['descricao_assunto'];
+        $descricao_origem = $dados['descricao_origem'];
+        $requerente = $dados['descricao_requerente'];;
+        $idAnexado = 0;
     } else {
         criar_modal_erros("ERROR !!!", "Desculpe, porém não encotramos o processo desejado !!!");
         die();

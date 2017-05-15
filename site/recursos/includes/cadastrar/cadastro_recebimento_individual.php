@@ -1,7 +1,6 @@
 <?php
 
 //die(print_r($_POST));
-
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/func_carga_processo.php';
@@ -21,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigo_processo = letraMaiuscula($_POST['txt_codigo_processo']);
     $id_carga_processo = letraMaiuscula($_POST['txt_carga']);
     $data_recebimento = letraMaiuscula($_POST['txt_data']);
- 
+
     if ($codigo_processo < 1) {
         $array_erros['txt_codigo'] = "POR FAVOR ENTRE COM UM PROCESO VÁLIDO !!! \n";
     }
@@ -35,34 +34,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (empty($array_erros)) {
-        
-        
+        try {
+
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-        $pdo->beginTransaction();
+            $pdo->beginTransaction();
 
-        $data_recebimento_americana = dataAmericano($data_recebimento);
+            $data_recebimento_americana = dataAmericano($data_recebimento);
 //      Comando sql a ser executado  
-       if(!cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana)){
-               die('<script>window.alert("Erro ao Realizar Recebimento  !!!"); location.href = "../../../cadastro_recebimento_individual.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-       }else{
- //          salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+            cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana);
+            //            mensagem de sucesso
+            $msg = "CADASTRADO COM SUCESSO";
+
+//            persistindo no banco de dados
+            $pdo->commit();
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
         }
-//        fecho conexao
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Recebimento Realizado com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_recebimento_individual.php";
-        </script>
 
+//                EMITO MENSAGEM
+        echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_recebimento_individual.php";
+                     </script>';
 
-        <?php
-
+//            fecho conexao
+        $pdo = NULL;
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';
@@ -81,4 +79,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     die(header("Location: ../../../logout.php"));
 }
-        ?>
+?>

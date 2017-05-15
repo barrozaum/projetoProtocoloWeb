@@ -27,8 +27,17 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/addCamposTabelaAutomatico.js"></script>
         <script src="recursos/js/cadastro_processo.js"></script>
-      
-      
+        <script src="recursos/js/mascaraTelefone.js"></script>
+        <script src="recursos/js/buscaCep.js"></script>
+
+
+        <!-- Includes para Colocar o Calendário na data -->
+        <link rel="stylesheet" href="recursos/css/redmond/jquery-ui-1.10.1.custom.css" />
+        <script src="recursos/js/data_calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/mascaraData.js"></script>
+        <!-- fim dos includes para Colocar a Data -->
+
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
         <script>
@@ -38,8 +47,8 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
             function estruturaPagina() {
                 $('#formulario').load('recursos/includes/formulario/formulario_cadastro_processo.php');
-           $('#modal').load('recursos/includes/estrutura/modal_grande.html');
-       }
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
+            }
         </script>
 
     </head>
@@ -47,7 +56,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <div id="cabecalho">
             <!-- Não apagar, pois é onde encontra-se o menu do site -->
         </div>
-        
+
         <div class="container text center">
             <div id="formulario"></div>
         </div>

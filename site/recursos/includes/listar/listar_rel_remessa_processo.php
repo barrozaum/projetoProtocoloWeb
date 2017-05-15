@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                 // chamo a conexao com o banco de dados
                                 include_once '../estrutura/conexao/conexao.php';
                                 // preparo para realizar o comando sql
-                                $sql = "SELECT * FROM carga_processo cp, cadastro_processo p, assunto a, tipo_processo t, requerente r, origem o";
+                                $sql = "SELECT * FROM carga_processo cp, cadastro_processo p, tipo_processo t";
                                 $sql = $sql . " WHERE cp.tramite = 0";
                                 $sql = $sql . " AND cp.idSetorOrigem  = '{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}'";
                                 $sql = $sql . " AND cp.idSetorEntrada = '{$codigo_setor}'";
@@ -76,10 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                 $sql = $sql . " AND cp.dataCarga <= '{$data_final}'";
                                 $sql = $sql . " AND cp.idProcesso= p.idProcesso";
                                 $sql = $sql . " AND p.tipoProcesso= t.id_tipo_processo";
-                                $sql = $sql . " AND p.idAssunto= a.idAssunto";
-                                $sql = $sql . " AND p.idRequerente= r.idRequerente";
-                                $sql = $sql . " AND p.idOrigem= o.idOrigem";
-                                
+
                                 $query = $pdo->prepare($sql);
 
 //                            print $sql;
@@ -90,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
 
                                 //loop para listar todos os dados encontrados
                                 for ($i = 0; $dados = $query->fetch(); $i++) {
-                                 
                                     ?>   	
 
 
@@ -99,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                         <td><?php echo $dados['descricao_tipo_processo']; ?></td>
                                         <td><?php echo $dados['numeroProcesso']; ?></td>
                                         <td><?php echo $dados['anoProcesso']; ?></td>
-                                        <td><?php echo $dados['descricao_assunto'] . " " . $dados['complemento_assunto']; ?></td>
-                                        <td><?php echo $dados['requerente']; ?></td>
+                                        <td><?php echo $dados['descricao_assunto']; ?></td>
+                                        <td><?php echo $dados['descricao_requerente']; ?></td>
                                         <td><?php echo $dados['descricao_origem']; ?></td>
                                         <td><?php echo dataBrasileiro($dados['dataCarga']); ?></td>
                                     </tr>
@@ -114,10 +110,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                         </table>
                     </div>
                     <div class="row">
-                        <?php if(!empty($i)){ ?>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-info" id="id_gerar_relatorio" >GERAR RELATÓRIO</button>
-                        </div>
+                        <?php if (!empty($i)) { ?>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-info" id="id_gerar_relatorio" >GERAR RELATÓRIO</button>
+                            </div>
                         <?php } ?>
                     </div>
                 </form>
@@ -132,12 +128,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
             $msg_erro = $msg_erro . $msg;
         }
 
-        echo '<script>window.alert("' . $msg_erro . '");
-               location.href = "../../../cadastro_assunto.php";
-        </script>';
+        $saida = "<div class='row'>";
+        $saida .= "<div class='col-md-12'>";
+        $saida .= "<div class='alert alert-danger text-center'>";
+        $saida .= $msg;
+        $saida .= "</div>";
+        $saida .= "</div>";
+        $saida .= "</div>";
+
+        print $saida;
     }
-
-
 // if($_SERVER['REQUEST_METHOD'] === 'POST'){ 
 } else {
     die(header("Location: ../../../logout.php"));

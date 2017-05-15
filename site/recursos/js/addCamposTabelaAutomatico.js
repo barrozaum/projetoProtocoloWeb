@@ -9,21 +9,41 @@
 
         return false;
     };
-    
+
     btn_AddTableRow = function () {
+        $('#msg_doc_erro').html('');
+
         var id_codigo_documento = $("#id_codigo_documento").val();
         var id_descricao_documento = $("#id_documento").val();
         var id_numero_documento = $("#id_numero_documento").val();
         var id_ano_documento = $("#id_ano_documento").val();
 
-        inserir_linha_tabela(id_codigo_documento, id_descricao_documento, id_numero_documento, id_ano_documento);
+//        validando campos
+        var msg = "";
+
+        if (id_descricao_documento.length < 3 || id_descricao_documento.length > 50) {
+            msg += "POR FAVOR VERIFIQUE O DOCUMENTO !!! <BR />";
+        }
+
+        if (id_numero_documento.length < 1 || id_numero_documento.length > 11) {
+            msg += "POR FAVOR VERIFIQUE O NÚRMERO DO DOCUMENTO !!! <BR />";
+        }
+        if (id_ano_documento.length !== 4) {
+            msg += "POR FAVOR VERIFIQUE O ANO DO DOCUMENTO !!! <BR />";
+        }
+
+        if (msg !== "") {
+            $('#msg_doc_erro').html('<div class="alert alert-danger">' + msg + '</div>');
+        } else {
+            inserir_linha_tabela(id_codigo_documento, id_descricao_documento, id_numero_documento, id_ano_documento);
+        }
     };
 
 
     AddTableRow = function (id_codigo_documento, id_descricao_documento, id_numero_documento, id_ano_documento) {
-        
-      
-      
+
+
+
         inserir_linha_tabela(id_codigo_documento, id_descricao_documento, id_numero_documento, id_ano_documento);
     };
 

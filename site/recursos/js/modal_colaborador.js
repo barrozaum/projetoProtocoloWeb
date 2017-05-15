@@ -34,6 +34,23 @@ $(function () {
         }
         );
     });
+   
+     $(document).on('click', '#id_desbloqueio', function (e) {
+        e.preventDefault();
+
+        $(".modal-content").html('');
+        $(".modal-content").addClass('loader');
+        $("#dialog-example").modal('show');
+        $.post('recursos/includes/formulario/formulario_novo_colaborador.php',
+                {id: 3,
+                    codigo: $(this).attr('data-id')
+                },
+        function (html) {
+            $(".modal-content").removeClass('loader');
+            $(".modal-content").html(html);
+        }
+        );
+    });
 
 
 
@@ -88,19 +105,36 @@ function func_bloquear_form() {
 }
 
 function valida_form() {
-    if ($("#id_novo_senha").val() == $("#id_novo_conf_senha").val()) {
-        return true;
-    } else {
-        $("#msg_error").html('<div class="alert alert-danger">Senhas não conferem</div>');
+    var erro = "";
+    if ($("#id_novo_senha").val() !== $("#id_novo_conf_senha").val()) {
+        erro += "Senhas não conferem !!! <br />"
+    }
+    if ($("#id_codigo_setor").val() < 1) {
+        erro += "Usuário sem Setor !!! <br />";
+    }
+    if (erro !== "") {
+        $("#msg_error").html('<div class="alert alert-danger">' + erro + '</div>');
         return false;
+    } else {
+        return true;
     }
 }
 
 function valida_form_alterar() {
-    if ($("#id_alterar_novo_senha").val() == $("#id_alterar_novo_conf_senha").val()) {
-        return true;
-    } else {
-        $("#msg_error_alterar").html('<div class="alert alert-danger">Senhas não conferem</div>');
+
+    var erro = "";
+
+    if ($("#id_alterar_novo_senha").val() !== $("#id_alterar_novo_conf_senha").val()) {
+        erro += "Senhas não conferem !!! <br />"
+    }
+
+    if ($("#id_alterar_colaborador_codigo_setor").val() < 1) {
+        erro += "Usuário sem Setor !!! <br />";
+    }
+    if (erro !== "") {
+        $("#msg_error").html('<div class="alert alert-danger">' + erro + '</div>');
         return false;
+    } else {
+        return true;
     }
 }

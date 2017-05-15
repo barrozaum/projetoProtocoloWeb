@@ -1,7 +1,6 @@
 <?php
 
 //die(print_r($_POST));
-
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/func_carga_processo.php';
@@ -41,33 +40,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($array_erros)) {
-        
-        
+
+        try {
+
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-        $pdo->beginTransaction();
+            $pdo->beginTransaction();
 
-        $data_carga_americana = dataAmericano($data_carga);
+            $data_carga_americana = dataAmericano($data_carga);
 //      Comando sql a ser executado  
-       if(!cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga, $codigo_setor_carga, $sequencia_carga)){
-               die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_carga_individual.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-       }else{
- //          salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+
+            cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga, $codigo_setor_carga, $sequencia_carga);
+  
+//            mensagem de sucesso
+            $msg = "CADASTRADO COM SUCESSO !!!";
+            
+            
+//          salvo alteração no banco de dados
+            $pdo->commit();
+            } catch (Exception $e) {
+            $msg = $e->getMessage();
         }
-//        fecho conexao
+//            fecho conexao
         $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Carga Cadastrada com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_carga_individual.php";
-        </script>
+
+        echo '<script>window.alert("' . $msg . '");
+               location.href = "../../../cadastro_carga_individual.php";
+        </script>';
 
 
-        <?php
 
 //  if (empty($array_erros)) {
     } else {
@@ -87,4 +90,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     die(header("Location: ../../../logout.php"));
 }
-        ?>
+?>

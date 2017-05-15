@@ -15,7 +15,9 @@ include_once '../estrutura/controle/validar_secao.php';
     </head>
     <body>
 
-        <div style="overflow: auto; max-width: 100%;">
+        <h3 class="alert text-center">COLABORADORES BLOQUEADOS</h3>
+
+        <div class="well well-lg" style="overflow: auto; max-width: 100%;">
             <table id="table" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -25,10 +27,8 @@ include_once '../estrutura/controle/validar_secao.php';
                         <th>Sobrenome</th>
                         <th>Email</th>
                         <th>Setor</th>
-                        <th>Status</th>
                         <th>Perfil</th>
-                        <th>Alterar</th>
-                        <th>Bloquear</th>
+                        <th>Desbloquear</th>
 
                     </tr>
                 </thead>
@@ -40,7 +40,7 @@ include_once '../estrutura/controle/validar_secao.php';
                     // preparo para realizar o comando sql
                     $sql = "SELECT * FROM usuario u, setor s ";
                     $sql = $sql . " WHERE u.idSetor = s.idSetor ";
-                    $sql = $sql . " AND u.status = 0";
+                    $sql = $sql . " AND u.status = 1";
                     $sql = $sql . " ORDER BY u.login";
 
                     $query = $pdo->prepare($sql);
@@ -50,6 +50,7 @@ include_once '../estrutura/controle/validar_secao.php';
                     //loop para listar todos os dados encontrados
                     for ($i = 0; $dados = $query->fetch(); $i++) {
 //                        validando usuario ativo
+                        //                        validando usuario ativo
                         if ($dados['status'] == 0) {
                             $ativo = "ATIVO";
                         } else {
@@ -82,10 +83,8 @@ include_once '../estrutura/controle/validar_secao.php';
                             <td><?php echo $dados['sobrenome']; ?></td>
                             <td><?php echo $dados['email']; ?></td>
                             <td><?php echo $dados['setor']; ?></td>
-                            <td><?php echo $ativo; ?></td>
                             <td><?php echo $perfil; ?></td>
-                            <td><a href="#" id="edit-editar" data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/alterar.png" height="20px;" alt="alterar"></a></td>
-                            <td><a href="#" id="edit-excluir"  data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/cadeado_fechado.png" alt="excluir" height="25px;"></a></td>
+                            <td align="center"><a href="#" id="id_desbloqueio" data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/cadeado_aberto.png" height="28px;" alt="alterar"></a></td>
 
                         </tr>
 

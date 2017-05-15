@@ -28,6 +28,11 @@ function formulario($pdo) {
                     <div class="panel-heading text-center">CONSULTA NÚMERO PROCESSO</div>
                     <div class="panel-body">
                         <!-- inicio dados inscrição-->
+                         <div class="row">
+                            <div class="col-sm-12">
+                                <div id="msg_erro"></div>
+                            </div>
+                        </div> 
                         <div class="row">
                             <div class="col-sm-6">
                                 <?php

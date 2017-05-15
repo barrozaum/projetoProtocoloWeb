@@ -10,6 +10,8 @@ if (empty($_POST['id'])) {
     formularioAlterar();
 } else if ($_POST['id'] == 2) {
     formularioExcluir();
+} else if ($_POST['id'] == 3) {
+    formularioDesbloquear();
 }
 ?>
 
@@ -119,7 +121,7 @@ function formularioAlterar() {
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">ALTERAR USUÁRIO</h4>
+            <h4 class="modal-title">ALTERAR COLABORADOR</h4>
         </div>
 
         <div class="modal-body">
@@ -146,7 +148,7 @@ function formularioAlterar() {
                 <div class="col-sm-12">
                     <?php
                     //   INPUT -                              
-                    criar_input_email('Email', 'alterar_colaborador_email', 'alterar_colaborador_email', array( 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o E-mail'), $campos[4], '');
+                    criar_input_email('Email', 'alterar_colaborador_email', 'alterar_colaborador_email', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o E-mail'), $campos[4], '');
                     ?>
                 </div>
             </div>
@@ -223,11 +225,11 @@ function formularioExcluir() {
 
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">BLOQUEIO USUÁRIO</h4>
+            <h4 class="modal-title">BLOQUEAR COLABORADOR</h4>
         </div>
 
         <div class="modal-body">
-            <p style="color: red">Deseja Prosseguir com a Bloqueio do Usuário ?</p>
+            <p style="color: red">Deseja Prosseguir com o Bloqueio do Colaborador ?</p>
 
             <div class="modal-body">
                 <div class="row">
@@ -287,7 +289,96 @@ function formularioExcluir() {
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-danger" >Excluir</button>
+            <button type="submit" class="btn btn-danger" >Bloquear</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </form>
+    <?php
+}
+?>
+
+
+<?php
+
+function formularioDesbloquear() {
+//   pega o valor vindo pela url
+//   explode em array 
+//    passa vetor nos campos
+
+    $campos = explode("|", $_POST['codigo']);
+    ?>
+
+
+
+    <form method="post" action="recursos/includes/cadastrar/cadastra_desbloqueio_colaborador.php">    
+
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">DESBLOQUEIO DO COLABORADOR</h4>
+        </div>
+
+        <div class="modal-body">
+            <p style="color: red">Deseja Prosseguir com o Desbloqueio do Colaborador ?</p>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('Codigo', 'excluir_codigo', 'excluir_codigo', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '3', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), $campos[0]);
+                        ?>
+                    </div>
+                    <div class="col-sm-10">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('Login', 'excluir_colaborador_login', 'excluir_colaborador_login', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Login'), $campos[1]);
+                        ?>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-sm-6">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('Nome', 'excluir_colaborador_nome', 'excluir_colaborador_nome', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[2], '');
+                        ?>
+                    </div>
+                    <div class="col-sm-6">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('Sobrenome', 'excluir_colaborador_sobrenome', 'excluir_colaborador_sobrenome', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[3], '');
+                        ?>
+                    </div>
+                </div> 
+                <div class="row">
+                    <div class="col-sm-6">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('E-mail', 'excluir_colaborador_email', 'excluir_colaborador_email', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[4], '');
+                        ?>
+                    </div>
+                    <div class="col-sm-6">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('PERMISSÃO', 'excluir_colaborador_permissao', 'excluir_colaborador_permissao', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[8], '');
+                        ?>
+                    </div>
+                </div> 
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <?php
+                        //   INPUT -                             
+                        criar_input_text('Setor', 'excluir_colaborador_setor', 'excluir_colaborador_setor', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Nome do Assunto'), $campos[6], '');
+                        ?>
+                    </div>
+                </div> 
+
+
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" >Desbloquear</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
     </form>

@@ -107,10 +107,13 @@ function dadosPagina() {
             //loop para listar todos os dados encontrados
             for ($i = 0; $dados = $query->fetch(); $i++) {
                 
+                $telefone_fixo =  "(".substr($dados['tel'], 0,2).")" .substr($dados['tel'], 2,8);
+                $telefone_cel =  "(".substr($dados['cel'], 0,2).")" .substr($dados['cel'], 2,9);
+                
                 $opc_selecionada = "'{$dados['idRequerente']}',";
                 $opc_selecionada = $opc_selecionada . "'{$dados['requerente']}',";
-                $opc_selecionada = $opc_selecionada . "'{$dados['tel']}',";
-                $opc_selecionada = $opc_selecionada . "'{$dados['cel']}',";
+                $opc_selecionada = $opc_selecionada . "'$telefone_fixo',";
+                $opc_selecionada = $opc_selecionada . "'$telefone_cel',";
                 $opc_selecionada = $opc_selecionada . "'{$dados['cep']}',";
                 $opc_selecionada = $opc_selecionada . "'{$dados['logradouro']}',";
                 $opc_selecionada = $opc_selecionada . "'{$dados['bairro']}',";
@@ -127,8 +130,8 @@ function dadosPagina() {
                     <td><?php echo $dados['idRequerente']; ?></td>
                     <td><?php echo $dados['requerente']; ?></td>
                     <td><?php echo $dados['logradouro']; ?></td>
-                    <td><?php echo $dados['tel']; ?></td>
-                    <td><?php echo $dados['cel']; ?></td>
+                    <td><?php echo $telefone_fixo; ?></td>
+                    <td><?php echo $telefone_cel; ?></td>
                 </tr>
                 <?php
             }

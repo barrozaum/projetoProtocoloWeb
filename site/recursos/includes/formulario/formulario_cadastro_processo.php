@@ -74,6 +74,11 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 }
                                                 ?>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <?php
+                                                criar_input_data('Data Processo', 'data', 'data', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'));
+                                                ?>
+                                            </div>
 
                                         </div> 
                                         <div class="row">
@@ -94,26 +99,21 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             </div>
                                         </div> 
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-12">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_com_lupa_e_com_adicionar('ASSUNTO', 'assunto', 'assunto', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Assunto'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text_com_lupa_e_com_adicionar('ASSUNTO', 'assunto', 'assunto', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Assunto'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 criar_input_hidden('codigo_assunto', array(), '');
                                                 ?>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <?php
-                                                //   INPUT -                              
-                                                criar_input_text('COMPLEMENTO ASSUNTO', 'complemento_assunto', 'complemento_assunto', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'COMPLEMENTO ASSUNTO'), '');
-                                                ?>
-                                            </div>
+
 
                                         </div> 
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_com_lupa_e_com_adicionar('ORIGEM', 'origem', 'origem', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe a Origem'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text_com_lupa_e_com_adicionar('ORIGEM', 'origem', 'origem', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe a Origem'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 criar_input_hidden('codigo_origem', array(), '');
                                                 ?>
                                             </div> 
@@ -142,7 +142,7 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-12">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_com_lupa_e_com_adicionar('Requerente', 'requerente', 'requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Requerente'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text_com_lupa_e_com_adicionar('Requerente', 'requerente', 'requerente', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Requerente'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 criar_input_hidden('codigo_requerente', array(), '');
                                                 ?>
                                             </div>
@@ -151,13 +151,13 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-6">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_telefone('Tel(fixo)', 'tel_fixo', 'tel_fixo', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '12', 'placeholder' => '(xx)xxxxxxx'), '', 'somente os numeros');
+                                                criar_input_text_telefone('Tel(fixo)', 'tel_fixo', 'tel_fixo', array('required' => 'true', 'maxlength' => '12', 'placeholder' => '(xx)xxxxxxx'), '', 'somente os numeros');
                                                 ?>
                                             </div>
                                             <div class="col-sm-6">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_telefone('Tel(Celular)', 'tel_cel', 'tel_cel', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '13', 'placeholder' => '(xx)xxxxxxxx'), '', 'somente os numeros');
+                                                criar_input_text_telefone('Tel(Celular)', 'tel_cel', 'tel_cel', array('required' => 'true', 'maxlength' => '13', 'placeholder' => '(xx)xxxxxxxx'), '', 'somente os numeros');
                                                 ?>
                                             </div>
                                         </div>
@@ -165,13 +165,13 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-4">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text_cep('CEP', 'cep_requerente', 'cep_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '8', 'placeholder' => 'xx.xxx-xxx'), '', 'somente os numeros', ' this.id, txt_cep_requerente, txt_logradouro_requerente, txt_bairro_requerente, txt_cidade_requerente, txt_uf_requerente');
+                                                criar_input_text_cep('CEP', 'cep_requerente', 'cep_requerente', array('required' => 'true', 'maxlength' => '8', 'placeholder' => 'xx.xxx-xxx'), '', 'somente os numeros', ' this.id, txt_cep_requerente, txt_logradouro_requerente, txt_bairro_requerente, txt_cidade_requerente, txt_uf_requerente');
                                                 ?>
                                             </div>
                                             <div class="col-sm-8">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Logradouro', 'logradouro_requerente', 'logradouro_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Logradouro'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text('Logradouro', 'logradouro_requerente', 'logradouro_requerente', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Logradouro'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 ?>
                                             </div>
                                         </div> 
@@ -179,19 +179,19 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-5">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Bairro', 'bairro_requerente', 'bairro_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Bairro'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text('Bairro', 'bairro_requerente', 'bairro_requerente', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Bairro'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 ?>
                                             </div>
                                             <div class="col-sm-5">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Cidade', 'cidade_requerente', 'cidade_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe a Cidade'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text('Cidade', 'cidade_requerente', 'cidade_requerente', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe a Cidade'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 ?>
                                             </div>
                                             <div class="col-sm-2">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Uf', 'uf_requerente', 'uf_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '2', 'placeholder' => 'Informe a Uf'), '', 'Conter 2 caracteres [a-z A-Z]');
+                                                criar_input_text('Uf', 'uf_requerente', 'uf_requerente', array('required' => 'true', 'maxlength' => '2', 'placeholder' => 'Informe a Uf'), '', 'Conter 2 caracteres [a-z A-Z]');
                                                 ?>
                                             </div>
                                         </div> 
@@ -199,13 +199,13 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-2">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Número End', 'numero_requerente', 'numero_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '6', 'placeholder' => 'xxxxxx'), '', 'somente os numeros');
+                                                criar_input_text('Número End', 'numero_requerente', 'numero_requerente', array('required' => 'true', 'maxlength' => '6', 'placeholder' => 'xxxxxx'), '', 'somente os numeros');
                                                 ?>
                                             </div>
                                             <div class="col-sm-8">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Complemento', 'complemento_requerente', 'complemento_requerente', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Complemento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
+                                                criar_input_text('Complemento', 'complemento_requerente', 'complemento_requerente', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Complemento'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]');
                                                 ?>
                                             </div>
                                         </div> 
@@ -226,6 +226,11 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in">
                                     <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id="msg_doc_erro"></div>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
                                             <div style='max-height: 450px; overflow: auto;'>
                                                 <table id="tabela-contrato" class="table">
@@ -235,20 +240,20 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
 
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text_com_lupa_e_com_adicionar('DOCUMENTO', 'documento', 'documento', array('readonly' => 'true', 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Documento'), '');
+                                                                criar_input_text_com_lupa_e_com_adicionar('DOCUMENTO', 'documento', 'documento', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
                                                                 criar_input_hidden('codigo_documento', array(), '');
                                                                 ?>
                                                             </th>
                                                             <th>    
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('NÚMERO', 'numero_documento', 'numero_documento', array('maxlength' => '30', 'placeholder' => 'Informe o Documento'), '');
+                                                                criar_input_text('NÚMERO', 'numero_documento', 'numero_documento', array('maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
                                                                 ?>
                                                             </th>
                                                             <th>   
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('ANO', 'ano_documento', 'ano_documento', array('maxlength' => '30', 'placeholder' => 'Informe o Documento'), '');
+                                                                criar_input_text('ANO', 'ano_documento', 'ano_documento', array('maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
                                                                 ?>
                                                             </th>
                                                             <th>  
@@ -292,8 +297,8 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                 </div><!-- fim da Quarta aba -->
                 <!-- Buttons do formulário -->
                 <div id="divButonn">
-                    <?php if($titulo_pagina === "CADASTRO PROCESSO"){ ?>
-                    <button type="button" name="btn_enviar_processo" id="id_btn_enviar_processo" class="btn btn-success">Enviar </button>
+                    <?php if ($titulo_pagina === "CADASTRO PROCESSO") { ?>
+                        <button type="button" name="btn_enviar_processo" id="id_btn_enviar_processo" class="btn btn-success">Enviar </button>
                     <?php } ?>
                 </div>
                 <!-- Fim dos Buttons do formulário -->

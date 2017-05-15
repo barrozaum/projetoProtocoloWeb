@@ -50,14 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $ex) {
 //            mensagem de erro
             $msg = $ex->getMessage();
-        } finally {
+        } 
 //                FECHO CONEXAO
             $pdo = null;
 //                EMITO MENSAGEM
             echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_tipo_processo.php";
                      </script>';
-        }
+        
 
 //  if (empty($array_erros)) {
     } else {

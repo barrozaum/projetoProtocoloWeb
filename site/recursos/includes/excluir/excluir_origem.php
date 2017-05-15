@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die('<script>window.alert("Origem Não Pode ser Excluido, Pois ja está cadastrado em Processo !!!");location.href = "../../../cadastro_origem.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {
 
+            try{
 //      Inicio a transação com o banco        
             $pdo->beginTransaction();
 
@@ -44,31 +45,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $executa = $pdo->query($sql);
 
             $sql_1 = "DELETE FROM  origem WHERE idOrigem = '{$codigo_Letra_Maiscula}'";
-//      execução com comando sql    
             $executa1 = $pdo->query($sql_1);
 
-//      Verifico se comando foi realizado      
-            if (!$executa1 || !$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-                die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_origem.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else {
+//            mensagem de sucesso
+                $msg = "DELETADO COM SUCESSO";
 
-//          die();
-//          salvo alteração no banco de dados
-                $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+//            PERSISTO NO BANCO DE DADOS
+                $pdo->commit();
+            } catch (Exception $e) {
+                $msg = $e->getMessage();
             }
+
+//                FECHO CONEXAO
+            $pdo = null;
+//                EMITO MENSAGEM
+            echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_origem.php";
+                     </script>';
         }
 
-
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Origem Excluída com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_origem.php";
-        </script>
-        <?php
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

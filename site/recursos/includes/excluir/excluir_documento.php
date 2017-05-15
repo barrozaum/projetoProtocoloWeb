@@ -1,4 +1,5 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/func_retorna_documento.php';
@@ -36,39 +37,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die('<script>window.alert("Documento Não Pode ser Excluido, Pois ja está cadastrado em Processo !!!");location.href = "../../../cadastro_documento.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
         } else {
 
+            try {
 //      Inicio a transação com o banco        
-            $pdo->beginTransaction();
+                $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-            $sql = "UPDATE documento SET  usuario = '{$_SESSION['LOGIN_USUARIO']}' WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
-            $executa = $pdo->query($sql);
+                $sql = "UPDATE documento SET  usuario = '{$_SESSION['LOGIN_USUARIO']}' WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
+                $executa = $pdo->query($sql);
 
-            $sql_1 = "DELETE FROM  documento WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
-//      execução com comando sql    
-            $executa_1 = $pdo->query($sql_1);
+                $sql_1 = "DELETE FROM  documento WHERE idDocumento = '{$codigo_Letra_Maiscula}'";
+                $executa_1 = $pdo->query($sql_1);
 
-//      Verifico se comando foi realizado      
-            if (!$executa || !$executa_1) {
-//          Caso tenha errro 
-//          lanço erro na tela
-                die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_documento.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-            } else {
+//            mensagem de sucesso
+                $msg = "DELETADO COM SUCESSO";
 
-//          die();
-//          salvo alteração no banco de dados
-                $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+//            PERSISTO NO BANCO DE DADOS
+                $pdo->commit();
+            } catch (Exception $e) {
+                $msg = $e->getMessage();
             }
+
+//                FECHO CONEXAO
+            $pdo = null;
+//                EMITO MENSAGEM
+            echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_documento.php";
+                     </script>';
         }
 
 
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Documento Excluído com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_documento.php";
-        </script>
-        <?php
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

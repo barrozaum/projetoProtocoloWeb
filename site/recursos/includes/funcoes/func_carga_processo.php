@@ -15,11 +15,7 @@ function inserindo_carga($pdo, $id_proceso) {
     $sql_carga = $sql_carga . "({$id_proceso},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}')";
 
 
-    if ($executa = $pdo->query($sql_carga)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+    $executa = $pdo->query($sql_carga);
 }
 
 //esta função serve para saber se o proceso pode receber carga
@@ -62,11 +58,8 @@ function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_c
     $sql_carga = $sql_carga . "({$codigo_processo}, {$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}')";
 
 
-    if ($executa = $pdo->query($sql_carga)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+   $executa = $pdo->query($sql_carga);
+    
 }
 
 //esta função é executada pelo programa cadastro carga
@@ -82,11 +75,7 @@ function cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimen
     $sql_carga = $sql_carga . " WHERE idCarga = '{$id_carga_processo}' ";
     
 
-    if ($executa = $pdo->query($sql_carga)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+   $executa = $pdo->query($sql_carga);
 }
 
 function listar_cargas_processo($pdo, $id_processo) {

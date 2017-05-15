@@ -33,6 +33,7 @@ $data_final = dataAmericano($_POST['dt_final']);
                         <th>ANO</th>
                         <th>ASSUNTO</th>
                         <th>REQUERENTE</th>
+                        <th>ORIGEM</th>
                         <th>DATA</th>
                         <th>CONSULTAR</th>
                     </tr>
@@ -44,11 +45,10 @@ $data_final = dataAmericano($_POST['dt_final']);
                     include_once '../estrutura/conexao/conexao.php';
                     // preparo para realizar o comando sql
                     $sql = "SELECT * ";
-                    $sql = $sql . " FROM  cadastro_processo c , assunto a, requerente r ";
+                    $sql = $sql . " FROM  cadastro_processo c ,tipo_processo t ";
                     $sql = $sql . " WHERE c.dataProcesso >= '$data_inicial'";
                     $sql = $sql . " AND c.dataProcesso <= '$data_final' ";
-                    $sql = $sql . " AND c.idAssunto = a.idAssunto ";
-                    $sql = $sql . " AND c.idRequerente = r.idRequerente ";
+                    $sql = $sql . " AND c.tipoProcesso = t.id_tipo_processo";
                     $sql = $sql . " ORDER BY  c.dataProcesso DESC   ";
                     $query = $pdo->prepare($sql);
                     //executo o comando sql
@@ -62,10 +62,11 @@ $data_final = dataAmericano($_POST['dt_final']);
 
                         <tr>
                             <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?></td>
+                            <td><?php echo $dados['descricao_tipo_processo']; ?></td>
                             <td><?php echo $dados['anoProcesso']; ?></td>
-                            <td><?php echo $dados['descricao_assunto'].' '.  $dados['complemento_assunto']; ?></td>
-                            <td><?php echo $dados['requerente']; ?></td>
+                            <td><?php echo $dados['descricao_assunto']; ?></td>
+                            <td><?php echo $dados['descricao_requerente']; ?></td>
+                            <td><?php echo $dados['descricao_origem']; ?></td>
                             <td><?php echo dataBrasileiro($dados['dataProcesso']); ?></td>
                             <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
 

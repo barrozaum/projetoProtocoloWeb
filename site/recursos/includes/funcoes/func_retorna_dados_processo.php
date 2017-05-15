@@ -1,17 +1,14 @@
 <?php
 
-if(!isset($_SESSION))
-{
-   session_start();
+if (!isset($_SESSION)) {
+    session_start();
 }
 
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../estrutura/conexao/conexao.php';
 include_once '../funcoes/function_letraMaiscula.php';
-include_once '../funcoes/func_retorna_assunto.php';
-include_once '../funcoes/func_retorna_origem.php';
-include_once '../funcoes/func_retorna_requerente.php';
+include_once '../funcoes/funcao_formata_data.php';
 include_once '../funcoes/func_retorna_documento.php';
 include_once '../funcoes/func_retorna_observacao.php';
 
@@ -40,15 +37,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($dados = $query->fetch()) {
         $id_processo = $dados['idProcesso'];
+        $data_processo = dataBrasileiro($dados['dataProcesso']);
 //        assunto
         $codigo_assunto = $dados['idAssunto'];
-        $descricao_assunto = fun_retorna_descricao_assunto($pdo, $codigo_assunto);
-        $complemento_assunto =  $dados['complemento_assunto'];
+        $descricao_assunto = $dados['descricao_assunto'];
+
 //        origem
         $codigo_origem = $dados['idOrigem'];
-        $descricao_origem = fun_retorna_descricao_origem($pdo, $codigo_origem);
+        $descricao_origem = $dados['descricao_origem'];
 //      requerente
-        $dados_requerente = fun_retorna_dados_requerente($pdo, $dados['idRequerente']);
+        $dados_requerente_id = $dados['idRequerente'];
+        $dados_requerente_nome = $dados['descricao_requerente'];
+        $dados_requerente_logradouro = $dados['logradouro'];
+        $dados_requerente_numero_end = $dados['numero'];
+        $dados_requerente_complemento = $dados['complemento'];
+        $dados_requerente_bairro = $dados['bairro'];
+        $dados_requerente_cidade = $dados['cidade'];
+        $dados_requerente_uf = $dados['uf'];
+        $dados_requerente_cep = $dados['cep'];
+        $dados_requerente_telefone = "(" . substr($dados['telefone'], 0, 2) . ")" . substr($dados['telefone'], 2, 8);
+        $dados_requerente_celular = "(" . substr($dados['celular'], 0, 2) . ")" . substr($dados['telefone'], 2, 9);
 //      documentos
         $documentos_processo = fun_retorna_documento_presente_processo($pdo, $id_processo);
 
@@ -57,12 +65,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $var = Array(
             "achou" => 1,
             "codigo_processo" => "$id_processo",
+            "data_processo" => "$data_processo",
             "codigo_assunto" => "$codigo_assunto",
             "descricao_assunto" => "$descricao_assunto",
-            "complemento_assunto" => "$complemento_assunto",
             "codigo_origem" => "$codigo_origem",
             "descricao_origem" => "$descricao_origem",
-            "requerente" => $dados_requerente,
+            "codigo_requerente" => $dados_requerente_id,
+            "requerente" => $dados_requerente_nome,
+            "requerente_logradouro" => $dados_requerente_logradouro,
+            "requerente_numero_end" => $dados_requerente_numero_end,
+            "requerente_complemento" => $dados_requerente_complemento,
+            "requerente_bairro" => $dados_requerente_bairro,
+            "requerente_cidade" => $dados_requerente_cidade,
+            "requerente_uf" => $dados_requerente_uf,
+            "requerente_cep" => $dados_requerente_cep,
+            "requerente_telefone" => $dados_requerente_telefone,
+            "requerente_celular" => $dados_requerente_celular,
             "documentos" => $documentos_processo,
             "observacao" => $observacao_processo,
         );

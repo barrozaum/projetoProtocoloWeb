@@ -23,11 +23,8 @@ function inserindo_observacao($pdo, $id_processo, $observacao) {
     $sql_obs = $sql_obs . " VALUES ";
     $sql_obs = $sql_obs . "(null, {$id_processo}, '{$observacao}') ";
 
-    if ($executa = $pdo->query($sql_obs)) {
-        return TRUE;
-    } else {
-        return FALSE;
-    }
+    $executa = $pdo->query($sql_obs);
+    
 }
 
 /// inserindo observacao no processo

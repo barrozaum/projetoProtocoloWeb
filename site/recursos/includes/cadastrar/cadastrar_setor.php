@@ -90,17 +90,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "CADASTRADO COM SUCESSO !!!";
 
 //          salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+            $pdo->commit();
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        } 
 //                FECHO CONEXAO
             $pdo = null;
 //                EMITO MENSAGEM
             echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_secretaria.php";
                      </script>';
-        }
+        
 
 
 

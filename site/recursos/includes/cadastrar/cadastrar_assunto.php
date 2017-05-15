@@ -46,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "CADASTRADO COM SUCESSO !!!";
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        } 
             echo '<script>window.alert("' . $msg . '");
                location.href = "../../../cadastro_assunto.php";
              </script>';
 //        fecho conexao
             $pdo = null;
-        }
+        
         ?>
 
         <?php

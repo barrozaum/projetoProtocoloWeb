@@ -15,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // biblioteca para validar string informada    
     include ('../funcoes/function_letraMaiscula.php');
+    
+   
 //    aplica filtro na string enviada (LetraMaiuscula)
     $requerente_Letra_Maiscula = letraMaiuscula($_POST['txt_requerente']);
     $tel_fixo_Letra_Maiscula = letraMaiuscula($_POST['txt_tel_fixo']);
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // filtro pra validar
-    if (strlen($requerente_Letra_Maiscula) > 2) {
+    if (strlen($requerente_Letra_Maiscula) > 2 && strlen($requerente_Letra_Maiscula) < 51) {
         $requerente = $requerente_Letra_Maiscula;
     } else {
         $array_erros['txt_requerente'] = 'POR FAVOR ENTRE COM A REQUERENTE VÁLIDO \n';
@@ -41,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $array_erros['txt_cep'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
     }
 
-    if (strlen($logradouro_Letra_Maiscula) > 2) {
+    if (strlen($logradouro_Letra_Maiscula) > 2 && strlen($logradouro_Letra_Maiscula) < 51) {
         $logradouro = $logradouro_Letra_Maiscula;
     } else {
         $array_erros['txt_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
@@ -53,14 +55,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $array_erros['txt_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
     }
 
-    if (strlen($tel_celular_Letra_Maiscula) < 11 && strlen($tel_fixo_Letra_Maiscula) < 11) {
-        $array_erros['txt_cep'] = 'POR FAVOR ENTRE COM TELEFONE (FIXO/CELULAR) VÁLIDO \n';
+    if (strlen($tel_celular_Letra_Maiscula) != 11 && strlen($tel_fixo_Letra_Maiscula) != 10) {
+        $array_erros['txt_telefon'] = 'POR FAVOR ENTRE COM TELEFONE (FIXO/CELULAR) VÁLIDO \n';
     }
 
 
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
+         try{
 //      Conexao com o banco de dados  
         include_once '../estrutura/conexao/conexao.php';
 
@@ -75,28 +78,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      execução com comando sql    
         $executa = $pdo->query($sql);
-
-//      Verifico se comando foi realizado      
-        if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-            die('<script>window.alert("Erro ao Cadastrar  !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else {
-
-//          die();
+        
+//      mensagem de sucesso
+           $msg = "CADASTRADO COM SUCESSO !!!";
 //          salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
-        }
-//        fecho conexao
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("Requerente Cadastrado com Sucesso !!!");
-            location.href = "../../../cadastro_requerente.php";
-        </script>
+                $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+            } catch (Exception $ex) {
+            
+                 $msg = $ex->getMessage();
+            } 
+//                FECHO CONEXAO
+                $pdo = null;
+//                EMITO MENSAGEM
+                echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_requerente.php";
+                     </script>';
+            
+        
 
-        <?php
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

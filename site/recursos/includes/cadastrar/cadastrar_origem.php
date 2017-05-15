@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->commit();
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        } 
 //        fecho conexao
             $pdo = null;
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<script>window.alert("' . $msg . '");
                location.href = "../../../cadastro_origem.php";
         </script>';
-        }
+        
 
 //  if (empty($array_erros)) {
     } else {

@@ -102,18 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $array_erros['txt_adquirente_complemento'] = 'POR FAVOR ENTRE COM COMPLEMENTO ENDEREÇO VÁLIDO  \n';
     }
 
-//logo do sistema
-    if (isset($_FILES['txt_logo_tipo_cliente'])) {
-        if ($_FILES['txt_logo_tipo_cliente']['error'] == 0) {
-            $logo_name = $_FILES['txt_logo_tipo_cliente']['tmp_name'];
-            $fundo = $_FILES['txt_logo_tipo_cliente']['name'];
-
-            $diretorio = '../../imagens/estrutura/logo.jpg';
-            if (!move_uploaded_file($logo_name, $diretorio)) {
-                
-            }
-        }
-    }
 
 
 
@@ -121,12 +109,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($array_erros)) {
 
         try {
-
-//      Conexao com o banco de dados  
+            //      Conexao com o banco de dados  
             include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
             $pdo->beginTransaction();
+
+
+            //logo do sistema
+            if (isset($_FILES['txt_logo_tipo_cliente'])) {
+                if ($_FILES['txt_logo_tipo_cliente']['error'] == 0) {
+                    $logo_name = $_FILES['txt_logo_tipo_cliente']['tmp_name'];
+                    $fundo = $_FILES['txt_logo_tipo_cliente']['name'];
+
+                    $diretorio = '../../imagens/estrutura/logo.jpg';
+                    if (!move_uploaded_file($logo_name, $diretorio)) {
+                        
+                    }
+                }
+            }
+
 
 //      Comando sql a ser executado  
             $sql = "UPDATE configuracao_sistema SET ";
@@ -144,8 +146,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      execução com comando sql    
             $executa = $pdo->query($sql);
-//            salvo alteração no banco de dados
-            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
 
 //      alterando o valor da configuração do sistema
             $_SESSION['CONFIG_NOME_CLIENTE'] = $nome_empresa_cliente;
@@ -160,19 +160,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['CONFIG_COMPLEMENTO'] = $complemento_end_empresa;
 
             $msg = "ALTERADO COM SUCESSO ";
-           
+
+            //            salvo alteração no banco de dados
+            $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
         } catch (Exception $exc) {
             $msg = $exc->getMessage();
         } finally {
-           $pdo = null;
+            $pdo = null;
             echo '<script>window.alert("' . $msg . '");
                location.href = "../../../Man_Configuracao.php";
         </script>';
         }
         ?>
 
-        <?php
-        ?>
+        <?php ?>
 
 
 

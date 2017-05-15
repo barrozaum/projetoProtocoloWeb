@@ -21,14 +21,13 @@ if ($hora >= 00 AND $hora <= 05) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="recursos/css/login.css">
-
     </head>
     <body>
 
         <div class="card card-container">
             <p align="center"> <?php print $msg; ?> !!!</p>
-            <p align="center">Bem Vindo ao  <strong>SAM</strong> !!!</p>
-            <p align="center"> <strong>SISTEMA DE ARRECADACAO MUNIICIPAL</strong></p>
+            <p align="center">Bem Vindo ao  <strong>SOP</strong> !!!</p>
+            <p align="center"> <strong>SISTEMA ORGANIZADOR DE PROCESSOS</strong></p>
             <img id="profile-img" class="profile-img-card" src="recursos/imagens/estrutura/logo.jpg" />
             <p id="profile-name" class="profile-name-card"></p>
             <!--<form class="form-signin">-->

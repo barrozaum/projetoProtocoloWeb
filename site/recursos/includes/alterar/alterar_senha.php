@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         } catch (Exception $exc) {
             $msg = $exc->getMessage();
-        } finally {
+        } 
 
             print $msg;
             $pdo = null;
-        }
+        
     } else {
         print "<div class='alert alert-danger'>{$msg}</div>";
     }

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $ex) {
 //            MENSAGEM DE ERRO
             $msg = $ex->getMessage();
-        } finally {
+        } 
 //        FECHO CONEXAO
             $pdo = null;
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<script>window.alert("' . $msg . '");
                location.href = "../../../cadastro_documento.php";
         </script>';
-        }
+        
 
 
 

@@ -87,13 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $linha = false;
                 for ($count = 0; $count < $tamanho; $count++) {
 
-                    $sql = "SELECT cg.dataCarga, cg.idSetorEntrada, cp.numeroProcesso, cp.anoProcesso, cp.complemento_assunto, t.descricao_tipo_processo, a.descricao_assunto, r.requerente FROM ";
-                    $sql = $sql . " carga_processo cg, cadastro_processo cp, tipo_processo t, assunto a, requerente r";
+                    $sql = "SELECT cg.dataCarga, cg.idSetorEntrada, cp.numeroProcesso, cp.anoProcesso, cp.descricao_assunto, t.descricao_tipo_processo, cp.descricao_requerente FROM ";
+                    $sql = $sql . " carga_processo cg, cadastro_processo cp, tipo_processo t";
                     $sql = $sql . " WHERE cg.idCarga = '{$id_carga[$count]}'";
                     $sql = $sql . " AND  cg.idProcesso = cp.idProcesso";
                     $sql = $sql . " AND  cp.tipoProcesso = t.id_tipo_processo";
-                    $sql = $sql . " AND  cp.idAssunto = a.idAssunto";
-                    $sql = $sql . " AND  cp.idRequerente = r.idRequerente";
                     $sql = $sql . " LIMIT 1";
 
                     $query = $con_pdo->prepare($sql);
@@ -109,8 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $this->Cell(20, 6, $dados['numeroProcesso'], 1, 0, 'R', $linha);
                         $this->Cell(15, 6, $dados['anoProcesso'], 1, 0, 'R', $linha);
                         $this->Cell(25, 6, dataBrasileiro($dados['dataCarga']), 1, 0, 'C', $linha);
-                        $this->Cell(75, 6, $dados['descricao_assunto'] . ' ' . $dados['complemento_assunto'], 1, 0, 'C', $linha);
-                        $this->Cell(75, 6, $dados['requerente'], 1, 0, 'C', $linha);
+                        $this->Cell(75, 6, $dados['descricao_assunto'] , 1, 0, 'C', $linha);
+                        $this->Cell(75, 6, $dados['descricao_requerente'], 1, 0, 'C', $linha);
                         $this->Cell(75, 6, '', 1, 0, 'C');
                         $this->Ln();
                     }

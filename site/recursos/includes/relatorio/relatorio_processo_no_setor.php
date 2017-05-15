@@ -104,14 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 else
                     $linha = true;
 
-                $sql_processo = "SELECT * FROM carga_processo cp, cadastro_processo c, tipo_processo t, assunto a, requerente r ";
+                $sql_processo = "SELECT * FROM carga_processo cp, cadastro_processo c, tipo_processo t ";
                 $sql_processo = $sql_processo . " WHERE cp.idProcesso =  '{$dados['idProcesso']}'";
                 $sql_processo = $sql_processo . " AND cp.seq_carga=  '{$dados['maior_sequencia']}'";
                 $sql_processo = $sql_processo . " AND cp.idSetorEntrada = '{$_POST['txt_codigo_setor']}'";
                 $sql_processo = $sql_processo . " AND cp.idProcesso = c.idProcesso";
                 $sql_processo = $sql_processo . " AND c.tipoProcesso = t.id_tipo_processo";
-                $sql_processo = $sql_processo . " AND  c.idAssunto = a.idAssunto";
-                $sql_processo = $sql_processo . " AND  c.idRequerente = r.idRequerente";
                 $sql_processo = $sql_processo . " AND  cp.dataCarga >= '{$data_inicial}'";
                 $sql_processo = $sql_processo . " AND  cp.dataCarga <= '{$data_final}'";
                 $sql_processo = $sql_processo . " LIMIT 1";
@@ -122,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $this->Cell(38, 6, $dados_processo['descricao_tipo_processo'], 1, 0, 'L', $linha);
                     $this->Cell(20, 6, $dados_processo['numeroProcesso'], 1, 0, 'R', $linha);
                     $this->Cell(15, 6, $dados_processo['anoProcesso'], 1, 0, 'R', $linha);
-                    $this->Cell(95, 6, $dados_processo['descricao_assunto'] . ' ' . $dados_processo['complemento_assunto'], 1, 0, 'C', $linha);
-                    $this->Cell(95, 6, $dados_processo['requerente'], 1, 0, 'C', $linha);
+                    $this->Cell(95, 6, $dados_processo['descricao_assunto'] , 1, 0, 'C', $linha);
+                    $this->Cell(95, 6, $dados_processo['descricao_requerente'], 1, 0, 'C', $linha);
                     $this->Cell(25, 6, dataBrasileiro($dados_processo['dataCarga']), 1, 0, 'C', $linha);
                     $this->Ln();
                 }

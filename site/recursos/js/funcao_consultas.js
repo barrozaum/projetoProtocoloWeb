@@ -77,10 +77,11 @@ function fun_retorna_dados_processo(url, parametros) {
         dataType: "json",
         // função para de sucesso
         success: function (data) {
-//            console.log(data);
+            console.log(data);
             if (data.achou === 1) {
 //             processo
                 $('#id_codigo_processo').val(data.codigo_processo);
+                $('#id_data').val(data.data_processo);
 //             assunto 
                 $('#id_codigo_assunto').val(data.codigo_assunto);
                 $('#id_assunto').val(data.descricao_assunto);
@@ -91,17 +92,17 @@ function fun_retorna_dados_processo(url, parametros) {
                 $('#id_origem').val(data.descricao_origem);
 
 //           requerente
-                $('#id_codigo_requerente').val(data.requerente.codigo_requerente);
-                $('#id_requerente').val(data.requerente.requerente);
-                $('#id_tel_fixo').val(data.requerente.tel);
-                $('#id_tel_cel').val(data.requerente.cel);
-                $('#id_cep_requerente').val(data.requerente.cep);
-                $('#id_logradouro_requerente').val(data.requerente.logradouro);
-                $('#id_bairro_requerente').val(data.requerente.bairro);
-                $('#id_cidade_requerente').val(data.requerente.cidade);
-                $('#id_uf_requerente').val(data.requerente.uf);
-                $('#id_numero_requerente').val(data.requerente.numero_end);
-                $('#id_complemento_requerente').val(data.requerente.complemento);
+                $('#id_codigo_requerente').val(data.codigo_requerente);
+                $('#id_requerente').val(data.requerente);
+                $('#id_tel_fixo').val(data.requerente_telefone);
+                $('#id_tel_cel').val(data.requerente_celular);
+                $('#id_cep_requerente').val(data.requerente_cep);
+                $('#id_logradouro_requerente').val(data.requerente_logradouro);
+                $('#id_bairro_requerente').val(data.requerente_bairro);
+                $('#id_cidade_requerente').val(data.requerente_cidade);
+                $('#id_uf_requerente').val(data.requerente_uf);
+                $('#id_numero_requerente').val(data.requerente_numero_end);
+                $('#id_complemento_requerente').val(data.requerente_complemento);
 //            observacao 
                 $('#id_obs_processo').val(data.observacao);
 
@@ -181,7 +182,7 @@ function funcao_validar_novo_login(url, parametros) {
             if (data == 1) {
                 $('#msg_error').html("<div class='alert alert-danger'>Login já cadastrado no sistema</div>");
                 func_bloquear_form();
-            }else{
+            } else {
                 func_liberar_form();
             }
         }, error: function (error) {

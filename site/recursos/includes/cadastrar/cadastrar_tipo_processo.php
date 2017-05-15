@@ -49,14 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "CADASTRADO COM SUCESSO !!!";
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } finally {
+        }
 //            fecho conexao
             $pdo = null;
 
             echo '<script>window.alert("' . $msg . '");
                location.href = "../../../cadastro_tipo_processo.php";
         </script>';
-        }
+      
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

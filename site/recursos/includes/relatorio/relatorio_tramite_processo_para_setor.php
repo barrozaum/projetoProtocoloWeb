@@ -79,22 +79,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function parte2() {
 
             global $con_pdo;
-
+    $data_inicial = dataAmericano($_POST['txt_dt_inicial']);
+            $data_final = dataAmericano($_POST['txt_dt_final']);
             $this->SetFont('Arial', '', 8);
 
 
-            $sql = "SELECT cg.dataCarga, cg.idSetorEntrada, cp.numeroProcesso, cp.anoProcesso, cp.complemento_assunto, t.descricao_tipo_processo, a.descricao_assunto, r.requerente FROM ";
-            $sql = $sql . " carga_processo cg, cadastro_processo cp, tipo_processo t, assunto a, requerente r";
+            $sql = "SELECT cg.dataCarga, cg.idSetorEntrada, cp.numeroProcesso, cp.anoProcesso, cp.descricao_assunto, t.descricao_tipo_processo, cp.descricao_requerente FROM ";
+            $sql = $sql . " carga_processo cg, cadastro_processo cp, tipo_processo t";
             $sql = $sql . " WHERE cg.idSetorOrigem = '{$_POST['txt_codigo_setor']}'";
             $sql = $sql . " AND cg.idSetorEntrada = '{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}'";
-            $sql = $sql . " AND  cp.dataCarga >= '{$data_inicial}'";
-            $sql = $sql . " AND  cp.dataCarga <= '{$data_final}'";
+            $sql = $sql . " AND  cg.dataCarga >= '{$data_inicial}'";
+            $sql = $sql . " AND  cg.dataCarga <= '{$data_final}'";
             
             $sql = $sql . " AND  cg.tramite = 0";
             $sql = $sql . " AND  cg.idProcesso = cp.idProcesso";
             $sql = $sql . " AND  cp.tipoProcesso = t.id_tipo_processo";
-            $sql = $sql . " AND  cp.idAssunto = a.idAssunto";
-            $sql = $sql . " AND  cp.idRequerente = r.idRequerente";
             $sql = $sql . " ORDER BY cg.dataCarga DESC";
            
             $query = $con_pdo->prepare($sql);
@@ -109,8 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->Cell(38, 6, $dados['descricao_tipo_processo'], 1, 0, 'L', $linha);
                 $this->Cell(20, 6, $dados['numeroProcesso'], 1, 0, 'R', $linha);
                 $this->Cell(15, 6, $dados['anoProcesso'], 1, 0, 'R', $linha);
-                $this->Cell(95, 6, $dados['descricao_assunto'] . ' ' . $dados['complemento_assunto'], 1, 0, 'C', $linha);
-                $this->Cell(95, 6, $dados['requerente'], 1, 0, 'C', $linha);
+                $this->Cell(95, 6, $dados['descricao_assunto'] , 1, 0, 'C', $linha);
+                $this->Cell(95, 6, $dados['descricao_requerente'], 1, 0, 'C', $linha);
                 $this->Cell(25, 6, dataBrasileiro($dados['dataCarga']), 1, 0, 'C', $linha);
                 $this->Ln();
             }

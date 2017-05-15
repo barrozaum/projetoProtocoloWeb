@@ -57,14 +57,12 @@ $data_final = dataAmericano($_POST['dt_final']);
                     $query->execute();
                     for ($i = 0; $dados = $query->fetch(); $i++) {
 
-                        $sql_processo = "SELECT * FROM carga_processo cp, cadastro_processo c, tipo_processo t, assunto a, requerente r ";
+                        $sql_processo = "SELECT * FROM carga_processo cp, cadastro_processo c, tipo_processo t ";
                         $sql_processo = $sql_processo . " WHERE cp.idProcesso =  '{$dados['idProcesso']}'";
                         $sql_processo = $sql_processo . " AND cp.seq_carga=  '{$dados['maior_sequencia']}'";
                         $sql_processo = $sql_processo . " AND cp.idSetorEntrada = '{$_POST['txt_codigo_setor']}'";
                         $sql_processo = $sql_processo . " AND cp.idProcesso = c.idProcesso";
                         $sql_processo = $sql_processo . " AND c.tipoProcesso = t.id_tipo_processo";
-                        $sql_processo = $sql_processo . " AND  c.idAssunto = a.idAssunto";
-                        $sql_processo = $sql_processo . " AND  c.idRequerente = r.idRequerente";
                         $sql_processo = $sql_processo . " AND  cp.dataCarga >= '{$data_inicial}'";
                         $sql_processo = $sql_processo . " AND  cp.dataCarga <= '{$data_final}'";
                         $sql_processo = $sql_processo . " LIMIT 1";
@@ -77,10 +75,10 @@ $data_final = dataAmericano($_POST['dt_final']);
 
                         <tr>
                             <td><?php echo $dados_processo['numeroProcesso']; ?></td>
-                            <td><?php echo fun_retorna_descricao_tipo_processo($pdo, $dados_processo['tipoProcesso']); ?></td>
+                            <td><?php echo $dados_processo['descricao_tipo_processo']; ?></td>
                             <td><?php echo $dados_processo['anoProcesso']; ?></td>
-                            <td><?php echo $dados_processo['descricao_assunto'] . ' ' . $dados_processo['complemento_assunto']; ?></td>
-                            <td><?php echo $dados_processo['requerente']; ?></td>
+                            <td><?php echo $dados_processo['descricao_assunto']; ?></td>
+                            <td><?php echo $dados_processo['descricao_requerente']; ?></td>
                             <td><?php echo dataBrasileiro($dados_processo['dataProcesso']); ?></td>
                             <td><a href="#" id="id_consultar_processo"  data-id="<?php echo $dados_processo['idProcesso']; ?>"><img src="recursos/imagens/estrutura/lupa.png" alt="consultar" height="20px;"></a></td>
 

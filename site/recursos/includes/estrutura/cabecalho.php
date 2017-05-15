@@ -1,5 +1,5 @@
 <?php
-session_start();
+ include_once './controle/validar_secao.php';
 ?>
 <div class="container">
 
@@ -32,6 +32,7 @@ session_start();
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
+                                         
                                         <ul class="dropdown-menu">
                                             <li><a href="cadastro_processo.php">NOVO</a></li>
                                             <li><a href="alterar_processo.php">ALTERAR</a></li>
@@ -99,9 +100,10 @@ session_start();
                             <li class="root">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">MANUTENÇÃO <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="novo_usuario.php">USUÁRIO</a></li>
+                                    <li><a href="novo_usuario.php">COLABORADOR</a></li>
                                     <li><a href="#" id="btn_alterar_senha">SENHA</a></li>
                                     <li><a href="cadastro_alterar_senha.php">PERMISSÃO</a></li>
+                                    <li><a href="desbloquear_colaborador.php">DESBLOQUEAR</a></li>
                                     <li><a href="Man_Configuracao.php">CONFIGURAÇÃO</a></li>
                                 </ul>
                             </li>

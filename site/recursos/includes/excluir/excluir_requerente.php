@@ -87,20 +87,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //      execução com comando sql    
                 $executa1 = $pdo->query($sql1);
 
-                $msg = "EXCLUIDO COM SUCESSO!!!";
+                $msg = "DELETADO COM SUCESSO!!!";
 
 //          salvo alteração no banco de dados
                 $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
             } catch (Exception $ex) {
-                $msg = "ERRO AO EXCLUIR !!!";
-            } finally {
+                $msg = $ex->getMessage();
+            } 
 //                FECHO CONEXAO
                 $pdo = null;
 //                EMITO MENSAGEM
                 echo '<script>window.alert("' . $msg . '");
                     location.href = "../../../cadastro_requerente.php";
                      </script>';
-            }
+            
         }
 
 //  if (empty($array_erros)) {

@@ -26,9 +26,11 @@ $(document).on('click', '#id_btn_enviar_processo', function(e){
     var tipo_processo = $('#id_tipo_processo').val();
     var numero_processo = $('#id_numero_processo').val();
     var ano_processo = $('#id_ano_processo').val();
-    var assunto_processo = $('#id_codigo_assunto').val();
-    var origem_processo = $('#id_codigo_origem').val();
-    var requerente_processo = $('#id_codigo_requerente').val();
+    var assunto_processo = $('#id_assunto').val();
+    var origem_processo = $('#id_origem').val();
+    var requerente_processo = $('#id_requerente').val();
+    var tel = $('#id_tel_fixo').val();
+    var cel = $('#id_tel_cel').val();
 //   alert(tipo_processo);
     
     var msg_erro = "";
@@ -45,17 +47,22 @@ $(document).on('click', '#id_btn_enviar_processo', function(e){
         msg_erro += "ANO PROCESSO INVÁLIDO !!! <BR />";
     }
     
-    if(assunto_processo < 1){
+    if(assunto_processo.length < 3 || assunto_processo.length > 50){
         msg_erro += "ASSUNTO PROCESSO INVÁLIDO !!! <BR />";
     }
     
-    if(origem_processo < 1){
+    if(origem_processo.length < 3 || origem_processo.length > 50){
         msg_erro += "ORIGEM PROCESSO INVÁLIDO !!! <BR />";
     }
     
-    if(requerente_processo < 1){
+    if(requerente_processo.length < 3 || requerente_processo.length > 50){
         msg_erro += "REQUERENTE PROCESSO INVÁLIDO !!! <BR />";
     }
+    
+    if(tel.length < 12 && cel.length < 13){
+        msg_erro += "POR FAVOR INFORME O TELEFONE DO REQUERENTE !!! <BR />";
+    }
+    
     
     if(msg_erro !== ""){
         $("#msg_erro").html('<div class="alert alert-danger">' + msg_erro + '</div>');

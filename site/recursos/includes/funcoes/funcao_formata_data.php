@@ -123,12 +123,19 @@ function compara_data_maior($data1, $data2) {
     }
 }
 
+//para validar a estrutura da data tem q passar sempre pela função
+// func_Letra_maiuscula
 function validar_estrutura_data($data_brasil) {
 
+   
+    
     if ($data_brasil == "" || $data_brasil == "00/00/0000") {
         return true;
     }
 
+     if(strlen($data_brasil) !== 10){
+        return false;
+    }
 // DATA Brasil
     $partes_data = explode("/", $data_brasil);
     $dia = $partes_data[0];

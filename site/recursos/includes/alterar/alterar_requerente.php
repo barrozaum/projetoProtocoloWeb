@@ -1,4 +1,5 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 
@@ -26,32 +27,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $complemento_Letra_Maiscula = letraMaiuscula($_POST['txt_alterar_complemento_requerente']);
 
 // filtro pra validar
-    if (strlen($requerente_Letra_Maiscula) > 2) {
+    if (strlen($requerente_Letra_Maiscula) > 2 && strlen($requerente_Letra_Maiscula) < 51) {
         $requerente = $requerente_Letra_Maiscula;
     } else {
-        $array_erros['txt_alterar_requerente'] = 'POR FAVOR ENTRE COM A REQUERENTE VÁLIDO \n';
+        $array_erros['txt_requerente'] = 'POR FAVOR ENTRE COM A REQUERENTE VÁLIDO \n';
     }
 
     if (strlen($cep_Letra_Maiscula) === 8) {
         $cep = $cep_Letra_Maiscula;
     } else {
-        $array_erros['txt_alterar_cep'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
+        $array_erros['txt_cep'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
     }
 
-    if (strlen($logradouro_Letra_Maiscula) > 2) {
+    if (strlen($logradouro_Letra_Maiscula) > 2 && strlen($logradouro_Letra_Maiscula) < 51) {
         $logradouro = $logradouro_Letra_Maiscula;
     } else {
-        $array_erros['txt_alterar_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
+        $array_erros['txt_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
     }
 
     if (strlen($numero_endereco_Letra_Maiscula) > 0 && strlen($numero_endereco_Letra_Maiscula) < 11) {
         $numero_endereco = $numero_endereco_Letra_Maiscula;
     } else {
-        $array_erros['txt_alterar_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
+        $array_erros['txt_logradouro'] = 'POR FAVOR ENTRE COM A CEP VÁLIDO \n';
     }
 
     if (strlen($tel_celular_Letra_Maiscula) < 11 && strlen($tel_fixo_Letra_Maiscula) < 11) {
-        $array_erros['txt_alterar_cep'] = 'POR FAVOR ENTRE COM TELEFONE (FIXO/CELULAR) VÁLIDO \n';
+        $array_erros['txt_cep'] = 'POR FAVOR ENTRE COM TELEFONE (FIXO/CELULAR) VÁLIDO \n';
     }
 
 
@@ -60,53 +61,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
+        try {
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
-        $pdo->beginTransaction();
+            $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-        $sql = "UPDATE requerente SET";
-        $sql = $sql . " requerente = '{$requerente}', ";
-        $sql = $sql . " logradouro = '{$logradouro}', ";
-        $sql = $sql . " numeroEnd = '{$numero_endereco}', ";
-        $sql = $sql . " complemento = '{$complemento_Letra_Maiscula}', ";
-        $sql = $sql . " bairro = '{$bairro_Letra_Maiscula}', ";
-        $sql = $sql . " cidade = '{$cidade_Letra_Maiscula}', ";
-        $sql = $sql . " uf= '{$uf_Letra_Maiscula}', ";
-        $sql = $sql . " cep = '{$cep}', ";
-        $sql = $sql . " tel= '{$tel_fixo_Letra_Maiscula}', ";
-        $sql = $sql . " cel = '{$tel_celular_Letra_Maiscula}', ";
-        $sql = $sql . " usuario = '{$_SESSION['LOGIN_USUARIO']}' ";
-        $sql = $sql . " WHERE idRequerente = '{$codigo_Letra_Maiscula}' ";
+            $sql = "UPDATE requerente SET";
+            $sql = $sql . " requerente = '{$requerente}', ";
+            $sql = $sql . " logradouro = '{$logradouro}', ";
+            $sql = $sql . " numeroEnd = '{$numero_endereco}', ";
+            $sql = $sql . " complemento = '{$complemento_Letra_Maiscula}', ";
+            $sql = $sql . " bairro = '{$bairro_Letra_Maiscula}', ";
+            $sql = $sql . " cidade = '{$cidade_Letra_Maiscula}', ";
+            $sql = $sql . " uf= '{$uf_Letra_Maiscula}', ";
+            $sql = $sql . " cep = '{$cep}', ";
+            $sql = $sql . " tel= '{$tel_fixo_Letra_Maiscula}', ";
+            $sql = $sql . " cel = '{$tel_celular_Letra_Maiscula}', ";
+            $sql = $sql . " usuario = '{$_SESSION['LOGIN_USUARIO']}' ";
+            $sql = $sql . " WHERE idRequerente = '{$codigo_Letra_Maiscula}' ";
 
 
 //      execução com comando sql    
-        $executa = $pdo->query($sql);
+            $executa = $pdo->query($sql);
 
-//      Verifico se comando foi realizado      
-        if (!$executa) {
-//          Caso tenha errro 
-//          lanço erro na tela
-            die('<script>window.alert("Erro ao Alterar  !!!");location.href = "../../../cadastro_requerente.php";</script>'); /* É disparado em caso de erro na inserção de movimento */
-        } else {
-
-//          die();
+//      mensagem de sucesso
+            $msg = "ALTERADO COM SUCESSO !!!";
 //          salvo alteração no banco de dados
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
+        } catch (Exception $ex) {
+
+            $msg = $ex->getMessage();
         }
+//                FECHO CONEXAO
+            $pdo = null;
+//                EMITO MENSAGEM
+            echo '<script>window.alert("' . $msg . '");
+                    location.href = "../../../cadastro_requerente.php";
+                     </script>';
+        
 
-
-
-        $pdo = null;
-        ?>
-        <!-- Dispara mensagem de sucesso -->
-        <script>
-            window.alert("<?php echo "Requerente Alterado com Sucesso !!!"; ?> ");
-            location.href = "../../../cadastro_requerente.php";
-        </script>
-        <?php
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';
