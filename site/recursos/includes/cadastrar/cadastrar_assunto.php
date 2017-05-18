@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // filtro pra validar Nome do Bairro (não ter nenhum sql_injection)
-    if (strlen($descricao_Letra_Maiscula) > 2 &&  strlen($descricao_Letra_Maiscula) < 51 ) {
+    if (strlen($descricao_Letra_Maiscula) > 2 && strlen($descricao_Letra_Maiscula) < 51) {
         $descricao = $descricao_Letra_Maiscula;
     } else {
         $array_erros['txt_descricao'] = 'POR FAVOR ENTRE COM A DESCRIÇÃO VÁLIDA \n';
@@ -46,16 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = "CADASTRADO COM SUCESSO !!!";
         } catch (Exception $ex) {
             $msg = $ex->getMessage();
-        } 
-            echo '<script>window.alert("' . $msg . '");
+        }
+//        fecho conexao
+        $pdo = null;
+
+        echo '<script>window.alert("' . $msg . '");
                location.href = "../../../cadastro_assunto.php";
              </script>';
-//        fecho conexao
-            $pdo = null;
-        
-        ?>
-
-        <?php
 
 //  if (empty($array_erros)) {
     } else {

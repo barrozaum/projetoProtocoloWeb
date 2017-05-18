@@ -5,9 +5,11 @@ $(document).on('click', '#id_consulta_numero', function (e) {
     var tipo_processo = $('#id_tipo_processo').val();
     var numero_processo = $('#id_numero_processo').val();
     var ano_processo = $('#id_ano_processo').val();
-//    mensagem de erro
+    var codigo_setor_usuario_carga = $('#id_alterar_colaborador_codigo_setor').val();
+ 
+//     mensagem de erro
     var msg = "";
-
+    
     if (tipo_processo < 1) {
         msg += "POR FAVOR ENTRE COM O TIPO PROCESSO VÁLIDO !!! \n";
     }
@@ -18,6 +20,10 @@ $(document).on('click', '#id_consulta_numero', function (e) {
 
     if (ano_processo.length !== 4) {
         msg += "POR FAVOR ENTRE COM O ANO PROCESSO VÁLIDO !!! \n";
+    }
+    
+    if (codigo_setor_usuario_carga < 1) {
+        msg += "POR FAVOR ENTRE COM O SETOR ORIGEM VÁLIDO !!! \n";
     }
 
     if (msg !== "") {
@@ -33,7 +39,8 @@ $(document).on('click', '#id_consulta_numero', function (e) {
                 id: 1,
                 txt_tipo_processo: tipo_processo,
                 txt_numero_processo: numero_processo,
-                txt_ano_processo: ano_processo
+                txt_ano_processo: ano_processo,
+                codigo_setor_usuario_carga : codigo_setor_usuario_carga
             },
     function (html) {
         $(".modal-content").removeClass('loader');

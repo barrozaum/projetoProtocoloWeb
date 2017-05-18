@@ -18,20 +18,17 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <script src="recursos/js/estrutura.js"></script>
-        <script src="recursos/js/modal_origem.js"></script>
+        <script src="recursos/js/permissao_colaborador.js"></script>
       
-        <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
-        <script src="recursos/js/jquery.dataTables.min.js"></script>
+
         <script>
             $(document).ready(function () {
                 estruturaPagina();
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_origem.php');
-                $('#listar').load('recursos/includes/listar/listar_origems.php');
-              $('#modal').load('recursos/includes/estrutura/modal_grande.html');
-
+                $('#formulario').load('recursos/includes/formulario/formulario_permissao.php');
+                $('#modal').load('recursos/includes/estrutura/modal_grande.html');
             }
         </script>
 
@@ -40,7 +37,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <div id="cabecalho">
             <!-- Não apagar, pois é onde encontra-se o menu do site -->
         </div>
-        
+
         <div class="container text center">
             <div id="formulario"></div>
         </div>
@@ -50,7 +47,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         </div>
 
         <div id="modal"></div>
-        <hr />
         <div id="rodape">
             <!-- Não apagar, pois é onde encontra-se o rodape da página -->
         </div>

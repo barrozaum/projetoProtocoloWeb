@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $codigo_processo = letraMaiuscula($_POST['txt_codigo_processo']);
     $data_carga = letraMaiuscula($_POST['txt_data']);
     $parecer_carga = letraMaiuscula($_POST['txt_parecer']);
+    $codigo_setor_origem_processo = letraMaiuscula($_POST['txt_codigo_setor_origem_processo']);
     $codigo_setor_carga = letraMaiuscula($_POST['txt_codigo_setor']);
     $sequencia_carga = (int) letraMaiuscula($_POST['txt_num_sequencia_carga']);
 
@@ -35,8 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $array_erros['txt_parecer_carga'] = "POR FAVOR INFORME UM PARECER VÁLIDO !!! \n";
     }
 
+    if ($codigo_setor_origem_processo < 1) {
+        $array_erros['txt_setor_carga'] = "POR FAVOR ENTRE COM UM SETOR ORIGEM VÁLIDO !!! \n";
+    }
     if ($codigo_setor_carga < 1) {
-        $array_erros['txt_setor_carga'] = "POR FAVOR ENTRE COM UM SETOR VÁLIDO !!! \n";
+        $array_erros['txt_setor_carga'] = "POR FAVOR ENTRE COM UM SETOR ENTRADA VÁLIDO !!! \n";
     }
 
     if (empty($array_erros)) {
@@ -52,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data_carga_americana = dataAmericano($data_carga);
 //      Comando sql a ser executado  
 
-            cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga, $codigo_setor_carga, $sequencia_carga);
+            cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga,$codigo_setor_origem_processo, $codigo_setor_carga, $sequencia_carga);
   
 //            mensagem de sucesso
             $msg = "CADASTRADO COM SUCESSO !!!";

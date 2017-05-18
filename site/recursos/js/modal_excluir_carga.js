@@ -30,7 +30,7 @@ $(document).on('click', '#id_consulta_numero', function (e) {
     $("#dialog-example").modal('show');
     $.post('recursos/includes/formulario/formulario_modal_excluir_carga.php',
             {
-                id: 1,
+                cod: '01',
                 txt_tipo_processo: tipo_processo,
                 txt_numero_processo: numero_processo,
                 txt_ano_processo: ano_processo

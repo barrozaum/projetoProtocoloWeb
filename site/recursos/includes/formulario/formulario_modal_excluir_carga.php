@@ -10,7 +10,7 @@ include_once '../funcoes/func_retorna_usuario.php';
 include_once '../funcoes/func_carga_processo.php';
 
 
-if ($_POST['id'] === '1') {
+if ($_POST['cod'] === '01') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);
     $numero_processo = letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);

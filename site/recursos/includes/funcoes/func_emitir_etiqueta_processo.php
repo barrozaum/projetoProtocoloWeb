@@ -176,7 +176,7 @@ function fun_buscar_documentos_processo($pdo, $id_processo) {
                     <tr>
                         <td valign="top"><font size="2">TIPO  : &nbsp  <?php print fun_retorna_descricao_documento($pdo, $result[$i]['idDocumento']); ?></font></td>
                         <td valign="top"><font size="2">NÚMERO : &nbsp  <?php print $result[$i]['numeroDocumento']; ?></font></td>
-                        <td valign="top" colspan="2"><font size="1">ANO : &nbsp <?php print $result[$i]['numeroDocumento']; ?></font></td>
+                        <td valign="top" colspan="2"><font size="1">ANO : &nbsp <?php print $result[$i]['anoDocumento']; ?></font></td>
                     </tr>
 
                     <?php

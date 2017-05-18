@@ -1,7 +1,10 @@
 <?php
- include_once './controle/validar_secao.php';
+include_once './controle/validar_secao.php';
+//lembre-se não pode alterar a ordem do menu
+// cada código representa uma parte do menu
 ?>
-<div class="container">
+
+<div class="page-header">
 
     <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
         <div class="row">
@@ -28,85 +31,159 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-ex1-collapse ">
                         <ul class="nav navbar-nav ">
-                            <li class="root">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
-                                         
-                                        <ul class="dropdown-menu">
-                                            <li><a href="cadastro_processo.php">NOVO</a></li>
-                                            <li><a href="alterar_processo.php">ALTERAR</a></li>
-                                            <li><a href="excluir_processo.php">EXCLUIR</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CARGA</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="cadastro_carga_individual.php">INDIVIDUAL</a></li>
-                                            <!--<li><a href="cadastro_carga_coletiva.php">COLETIVA</a></li>-->
-                                            <li><a href="excluir_carga.php">EXCLUIR</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">RECEBIMENTO</a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="cadastro_recebimento_individual.php">INDIVIDUAL</a></li>
-                                            <!--<li><a href="cadastro_carga_coletiva.php">COLETIVO</a></li>-->
-                                        </ul>
-                                    </li>
-                                    <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
-                                    <!--<li><a href="cadastro_anexo.php">ANEXAR</a></li>-->
-                                </ul>
-                            </li>
-                            <li class="root">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">CADASTRO <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="cadastro_assunto.php">ASSUNTO</a></li>
-                                    <li><a href="cadastro_documento.php">DOCUMENTO</a></li>
-                                    <li><a href="cadastro_origem.php">ORIGEM</a></li>
-                                    <li><a href="cadastro_secretaria.php">SETOR</a></li>
-                                    <li><a href="cadastro_requerente.php">REQUERENTE</a></li>
-                                    <li><a href="cadastro_tipo_processo.php">TIPO PROCESSO</a></li>
-                                </ul>
-                            </li>
+                            <?php
+                            if (in_array("1", $_SESSION['PERMISSAO_MENU']) || in_array("2", $_SESSION['PERMISSAO_MENU']) || in_array("3", $_SESSION['PERMISSAO_MENU']) || in_array("4", $_SESSION['PERMISSAO_MENU']) || in_array("5", $_SESSION['PERMISSAO_MENU']) || in_array("6", $_SESSION['PERMISSAO_MENU']) || in_array("7", $_SESSION['PERMISSAO_MENU'])) {
+                                ?>
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php
+                                        if (in_array("1", $_SESSION['PERMISSAO_MENU']) || in_array("2", $_SESSION['PERMISSAO_MENU']) || in_array("3", $_SESSION['PERMISSAO_MENU'])) {
+                                            ?>
+                                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">PROCESSO</a>
+                                                <ul class="dropdown-menu">
+                                                    <?php if (in_array("1", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="cadastro_processo.php">NOVO</a></li>
+                                                    <?php } if (in_array("2", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="alterar_processo.php">ALTERAR</a></li>
+                                                    <?php } if (in_array("3", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="excluir_processo.php">EXCLUIR</a></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                        <?php } ?>
+                                        <?php
+                                        if (in_array("4", $_SESSION['PERMISSAO_MENU']) || in_array("5", $_SESSION['PERMISSAO_MENU'])) {
+                                            ?>
+                                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CARGA</a>
+                                                <ul class="dropdown-menu">
+                                                    <?php if (in_array("4", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="cadastro_carga_individual.php">INCLUIR</a></li>
+                                                    <?php } if (in_array("5", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="excluir_carga.php">EXCLUIR</a></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                        <?php } ?>
+                                        <?php
+                                        if (in_array("6", $_SESSION['PERMISSAO_MENU'])) {
+                                            ?>
+                                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">RECEBIMENTO</a>
+                                                <ul class="dropdown-menu">
+                                                    <?php if (in_array("6", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="cadastro_recebimento_individual.php">INDIVIDUAL</a></li>
+                                                    <?php } ?>
+                                                </ul>
+                                            </li>
+                                        <?php } ?>
+                                        <?php if (in_array("7", $_SESSION['PERMISSAO_MENU'])) { ?>
 
-                            <li class="root">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTA <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="consulta_numero.php">NÚMERO</a></li>
-                                    <li><a href="consulta_assunto.php">ASSUNTO</a></li>
-                                    <!--<li><a href="consulta_anexo_processo.php">ANEXO</a></li>-->
-                                    <li><a href="consulta_data_carga.php">DATA CARGA</a></li>
-                                    <li><a href="consulta_data_criacao_processo.php">DATA PROCESSO</a></li>
-                                    <li><a href="consulta_documento.php">DOCUMENTO</a></li>
-                                    <li><a href="consulta_requerente.php">REQUERENTE</a></li>
-                                    <li><a href="consulta_setor.php">SETOR</a></li>
-                                    <li><a href="consulta_origem.php">ORIGEM</a></li>
-                                </ul>
-                            </li>
+                                            <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?>
 
-                            <li class="root">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">RELATÓRIO <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="relatorio_setor_presente_processo.php">PROCESSO NO SETOR</a></li>
-                                    <!--remessa, sai do setor da carga e vai para o setor de destino-->
-                                    <li><a href="relatorio_remessa_processo.php">PROCESSO PARA REMESSA</a></li>
-                                    <!--tramitação, é os processo enviados para um determinado setor -->
-                                    <li><a href="relatorio_tramitacao_processo.php">TRAMITAÇÃO DE PROCESSO NO SETOR</a></li>
-                                    <li><a href="relatorio_carga_processo.php">ANDAMENTO DE PROCESSO</a></li>
-                                </ul>
-                            </li>
+                            <?php
+                            if (in_array("8", $_SESSION['PERMISSAO_MENU']) || in_array("9", $_SESSION['PERMISSAO_MENU']) || in_array("10", $_SESSION['PERMISSAO_MENU']) || in_array("11", $_SESSION['PERMISSAO_MENU']) || in_array("30", $_SESSION['PERMISSAO_MENU']) || in_array("12", $_SESSION['PERMISSAO_MENU'])) {
+                                ?>
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">CADASTRO <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (in_array("8", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_assunto.php">ASSUNTO</a></li>
+
+                                        <?php } if (in_array("9", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_origem.php">ORIGEM</a></li>
+
+                                        <?php } if (in_array("10", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_documento.php">DOCUMENTO</a></li>
+
+                                        <?php } if (in_array("11", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_secretaria.php">SETOR</a></li>
+
+                                        <?php } if (in_array("30", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_requerente.php">REQUERENTE</a></li>
+
+                                        <?php } if (in_array("12", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_tipo_processo.php">TIPO PROCESSO</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?>
+
+                            <?php
+                            if (in_array("13", $_SESSION['PERMISSAO_MENU']) || in_array("14", $_SESSION['PERMISSAO_MENU']) || in_array("15", $_SESSION['PERMISSAO_MENU']) || in_array("16", $_SESSION['PERMISSAO_MENU']) || in_array("17", $_SESSION['PERMISSAO_MENU']) || in_array("18", $_SESSION['PERMISSAO_MENU']) || in_array("19", $_SESSION['PERMISSAO_MENU']) || in_array("20", $_SESSION['PERMISSAO_MENU'])) {
+                                ?>
+
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">CONSULTA <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (in_array("13", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_numero.php">NÚMERO</a></li>
+                                        <?php } if (in_array("14", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_assunto.php">ASSUNTO</a></li>
+                                        <?php } if (in_array("15", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_data_carga.php">DATA CARGA</a></li>
+                                        <?php } if (in_array("16", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_data_criacao_processo.php">DATA PROCESSO</a></li>
+                                        <?php } if (in_array("17", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_documento.php">DOCUMENTO</a></li>
+                                        <?php } if (in_array("18", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_requerente.php">REQUERENTE</a></li>
+                                        <?php } if (in_array("19", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_setor.php">SETOR</a></li>
+                                        <?php } if (in_array("20", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_origem.php">ORIGEM</a></li>
+                                        <?php } ?>
+                                    </ul>
+
+                                </li>
+
+                            <?php } ?>
+                            <?php if (in_array("21", $_SESSION['PERMISSAO_MENU']) || in_array("22", $_SESSION['PERMISSAO_MENU']) || in_array("23", $_SESSION['PERMISSAO_MENU']) || in_array("24", $_SESSION['PERMISSAO_MENU'])) {
+                                ?>
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">RELATÓRIO <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (in_array("21", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="relatorio_setor_presente_processo.php">PROCESSO NO SETOR</a></li>
+                                        <?php } if (in_array("22", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <!--remessa, sai do setor da carga e vai para o setor de destino-->
+                                            <li><a href="relatorio_remessa_processo.php">PROCESSO PARA REMESSA</a></li>
+                                        <?php } if (in_array("23", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <!--tramitação, é os processo enviados para um determinado setor -->
+                                            <li><a href="relatorio_tramitacao_processo.php">TRAMITAÇÃO DE PROCESSO NO SETOR</a></li>
+                                        <?php } if (in_array("24", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="relatorio_carga_processo.php">ANDAMENTO DE PROCESSO</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?>
 
 
+                            <?php
+                            if (in_array("25", $_SESSION['PERMISSAO_MENU']) || in_array("26", $_SESSION['PERMISSAO_MENU']) || in_array("27", $_SESSION['PERMISSAO_MENU']) || in_array("28", $_SESSION['PERMISSAO_MENU']) || in_array("29", $_SESSION['PERMISSAO_MENU'])) {
+                                ?>
 
-                            <li class="root">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">MANUTENÇÃO <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="novo_usuario.php">COLABORADOR</a></li>
-                                    <li><a href="#" id="btn_alterar_senha">SENHA</a></li>
-                                    <li><a href="cadastro_alterar_senha.php">PERMISSÃO</a></li>
-                                    <li><a href="desbloquear_colaborador.php">DESBLOQUEAR</a></li>
-                                    <li><a href="Man_Configuracao.php">CONFIGURAÇÃO</a></li>
-                                </ul>
-                            </li>
+
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">MANUTENÇÃO <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (in_array("25", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="novo_usuario.php">COLABORADOR</a></li>
+                                        <?php } if (in_array("26", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="#" id="btn_alterar_senha">SENHA</a></li>
+                                        <?php } if (in_array("27", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="man_permissao.php">PERMISSÃO</a></li>
+                                        <?php } if (in_array("28", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="desbloquear_colaborador.php">DESBLOQUEAR</a></li>
+                                        <?php } if (in_array("29", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="man_configuracao.php">CONFIGURAÇÃO</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?>
 
                             <li class="dropdown"><a href="logout.php" >SAIR</a></li>
                         </ul>

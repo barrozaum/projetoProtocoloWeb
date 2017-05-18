@@ -12,12 +12,13 @@ if ($_POST['id'] === '1') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);
     $numero_processo = letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);
+    $codigo_setor_usuario_carga = letraMaiuscula($_POST['codigo_setor_usuario_carga']);
 
-    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo);
+    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga);
     $pdo = null;
 }
 
-function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo) {
+function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga) {
 //   buscando dados do processo
 //    consulta para saber se o processo existe
     $sql = "SELECT * FROM cadastro_processo ";
@@ -49,6 +50,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
             <?php
 //                código do processo
             criar_input_hidden('codigo_processo', array(), $id_processo);
+            criar_input_hidden('codigo_setor_origem_processo', array(), $codigo_setor_usuario_carga);
             ?>
 
 
@@ -89,7 +91,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
             } else {
                 global $id_ultima_carga;
                 global $seq_carga;
-                $processo_pode_dar_carga = processo_pode_dar_carga($pdo, $id_processo, $id_ultima_carga);
+                $processo_pode_dar_carga = processo_pode_dar_carga($pdo, $id_processo, $codigo_setor_usuario_carga);
                 if ($processo_pode_dar_carga !== "sim") {
                     mostrar_mensagem($processo_pode_dar_carga);
                 } else {

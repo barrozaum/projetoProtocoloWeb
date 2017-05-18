@@ -12,10 +12,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
         <link href="recursos/css/menu.css" rel="stylesheet">
-
-        <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <script src="recursos/js/jquery.min.js"></script>
         <script src="recursos/js/bootstrap.min.js"></script>
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
@@ -25,6 +21,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/camposNumeros.js"></script>
         <script src="recursos/js/funcao_consultas.js"></script>
         <script src="recursos/js/chamada_de_janelas.js"></script>
+        <script src="recursos/js/func_botao_adiciona_processo.js"></script>
         <script src="recursos/js/addCamposTabelaAutomatico.js"></script>
         <script src="recursos/js/cadastro_processo.js"></script>
         <script src="recursos/js/mascaraTelefone.js"></script>
@@ -66,7 +63,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         </div>
 
         <div id="modal"></div>
-        <hr />
         <div id="rodape">
             <!-- Não apagar, pois é onde encontra-se o rodape da página -->
         </div>

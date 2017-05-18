@@ -50,6 +50,16 @@ function formulario($pdo) {
                                 ?>
                             </div>
                         </div> 
+                        <?php
+//                        se usuario == adm mostra o setor de origem que ele quer ficar
+                        if ($_SESSION['LOGADO_PERFIL_USUARIO'] == 1) {
+
+                            criar_input_text_com_lupa('SETOR', 'alterar_colaborador_setor', 'alterar_colaborador_setor', array('readonly' => 'true', 'maxlength' => '30', 'placeholder' => 'ADMINISTRADOR INFORME SEU SETOR DE ORIGEM'), '', '', 'lupa_setor_usuario');
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), "");
+                        } else {
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']);
+                        }
+                        ?>
 
                         <div class="row">
                             <div class="col-sm-2">

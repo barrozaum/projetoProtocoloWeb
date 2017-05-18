@@ -13,9 +13,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link href="recursos/css/bootstrap_error.css" rel="stylesheet">
         <link href="recursos/css/menu.css" rel="stylesheet">
 
-        <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
         <script src="recursos/js/jquery.min.js"></script>
         <script src="recursos/js/bootstrap.min.js"></script>
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">

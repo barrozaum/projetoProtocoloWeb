@@ -60,7 +60,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         </div>
 
         <div id="modal"></div>
-        <hr />
         <div id="rodape">
             <!-- Não apagar, pois é onde encontra-se o rodape da página -->
         </div>

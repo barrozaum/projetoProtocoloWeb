@@ -12,6 +12,7 @@ function fun_carrega_parametros() {
         if ($query_parametros->execute()) {
 
             $dados_parametros = $query_parametros->fetch();
+            $_SESSION['VALIDA_PARAMETROS']= "parte2";
             $_SESSION['CONFIG_CAMINHO_LOGO'] = $dados_parametros['caminho_logo'];
             $_SESSION['CONFIG_NOME_CLIENTE'] = $dados_parametros['nome_cliente'];
             $_SESSION['CONFIG_SECRETARIA'] = $dados_parametros['secretaria'];
@@ -32,13 +33,13 @@ function fun_carrega_parametros() {
         $pdo = null;
         return $retorno;
     } catch (Exception $ex) {
-        print $ex->getMessage();
+        $ex->getMessage();
         return FALSE;
     }
 }
 
 if (fun_carrega_parametros()) {
-    header("Location:../../../../inicial.php");
+     header("Location: carrega_permissao.php");
 } else {
     $_SESSION['MENSAGEM_ERRO_SISTEMA'];
     header("Location:../error.php");

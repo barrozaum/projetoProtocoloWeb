@@ -19,7 +19,7 @@ function inserindo_carga($pdo, $id_proceso) {
 }
 
 //esta função serve para saber se o proceso pode receber carga
-function processo_pode_dar_carga($pdo, $id_processo) {
+function processo_pode_dar_carga($pdo, $id_processo, $codigo_setor_usuario_carga) {
     global $id_ultima_carga;
     global $seq_carga;
 //        validando para saber se o processo pode sofrer carga
@@ -37,7 +37,7 @@ function processo_pode_dar_carga($pdo, $id_processo) {
         $seq_carga = $dados['seq_carga'];
         if ($tramite != 1) {
             return "PROCESSO ENCONTRA-SE EM MOVIMENTO !!!";
-        } else if ($idSetorEntrada != $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']) {
+        } else if ($idSetorEntrada != $codigo_setor_usuario_carga) {
             return "PROCESSO NÃO ENCONTRA-SE EM SEU SETOR !!!";
         } else {
             return "sim";
@@ -48,14 +48,14 @@ function processo_pode_dar_carga($pdo, $id_processo) {
 }
 
 //esta função é executada pelo programa cadastro carga
-function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_carga, $codigo_setor_carga, $sequencia_carga) {
+function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_carga, $codigo_setor_origem_processo, $codigo_setor_carga, $sequencia_carga) {
     $data_atual = date('Y-m-d');
     $sequencia_carga += 1;
 
     $sql_carga = "INSERT INTO carga_processo ";
-    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer)";
+    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer,usuario_acao)";
     $sql_carga = $sql_carga . " VALUES ";
-    $sql_carga = $sql_carga . "({$codigo_processo}, {$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}')";
+    $sql_carga = $sql_carga . "({$codigo_processo}, {$codigo_setor_origem_processo},{$codigo_setor_carga},  0,  {$codigo_setor_origem_processo}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}', '{$_SESSION['LOGIN_USUARIO']}')";
 
 
    $executa = $pdo->query($sql_carga);
@@ -125,7 +125,7 @@ function listar_cargas_processo($pdo, $id_processo) {
 
 // essa função vai verifiar a ultima carga do processo e ver se 
 // está para o setor do usuário que vai receber a o processo
-function fun_posso_receber_processo_por_numero($pdo, $id_proceso){
+function fun_posso_receber_processo_por_numero($pdo, $id_proceso,$codigo_setor_usuario_carga){
     global $id_ultima_carga;
     global $seq_carga;
     $sql_carga = " SELECT * FROM carga_processo WHERE idProcesso = " . $id_proceso;
@@ -143,7 +143,8 @@ function fun_posso_receber_processo_por_numero($pdo, $id_proceso){
         
         if ($tramite != 0) {
             return "PROCESSO ENCONTRA-SE EM ALGUM SETOR!!!";
-        } else if ($idSetorEntrada != $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']) {
+            
+        } else if ($idSetorEntrada != $codigo_setor_usuario_carga) {
             return "PROCESSO NÃO POSSUI CARGA PARA O SEU SETOR !!!";
         } else {
             return "sim";

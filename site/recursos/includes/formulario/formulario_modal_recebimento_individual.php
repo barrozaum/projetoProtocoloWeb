@@ -14,12 +14,13 @@ if ($_POST['id'] === '1') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);
     $numero_processo = letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);
+    $codigo_setor_usuario_carga = letraMaiuscula($_POST['codigo_setor_usuario_carga']);
 
-    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo);
+    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga);
     $pdo = null;
 }
 
-function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo) {
+function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga) {
 //   buscando dados do processo
 //    consulta para saber se o processo existe
     $sql = "SELECT * FROM cadastro_processo ";
@@ -87,7 +88,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
 
             <?php
             global $id_ultima_carga;
-            $posso_receber_processo = fun_posso_receber_processo_por_numero($pdo, $id_processo);
+            $posso_receber_processo = fun_posso_receber_processo_por_numero($pdo, $id_processo,$codigo_setor_usuario_carga);
             if ($posso_receber_processo !== "sim") {
                 mostrar_mensagem($posso_receber_processo);
             } else {

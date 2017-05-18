@@ -19,9 +19,9 @@ function fun_retorna_descricao_observacao($pdo, $id_processo) {
 
 /// inserindo observacao no processo
 function inserindo_observacao($pdo, $id_processo, $observacao) {
-    $sql_obs = "INSERT INTO obs (idObs, idProcesso, obs)";
+    $sql_obs = "INSERT INTO obs (idObs, idProcesso, obs, usuario)";
     $sql_obs = $sql_obs . " VALUES ";
-    $sql_obs = $sql_obs . "(null, {$id_processo}, '{$observacao}') ";
+    $sql_obs = $sql_obs . "(null, {$id_processo}, '{$observacao}', '{$_SESSION['LOGIN_USUARIO']}') ";
 
     $executa = $pdo->query($sql_obs);
     
@@ -30,7 +30,7 @@ function inserindo_observacao($pdo, $id_processo, $observacao) {
 /// inserindo observacao no processo
 function fun_alterar_observacao_processo($pdo, $id_proceso, $observacao_processo) {
     $sql_obs = "UPDATE obs ";
-    $sql_obs = $sql_obs . " SET obs = '{$observacao_processo}' ";
+    $sql_obs = $sql_obs . " SET obs = '{$observacao_processo}', usuario = '{$_SESSION['LOGIN_USUARIO']}' ";
     $sql_obs = $sql_obs . " WHERE idProcesso = " . $id_proceso;
 
     if ($executa = $pdo->query($sql_obs)) {

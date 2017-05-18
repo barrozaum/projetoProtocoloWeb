@@ -1,4 +1,5 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 
@@ -14,37 +15,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include ('../funcoes/function_letraMaiscula.php');
 //    aplica filtro na string enviada (LetraMaiuscula)
     $codigo_carga = letraMaiuscula($_POST['txt_carga']);
-   
+
 // verifico se tem erro na validação
     if (empty($array_erros)) {
 
-        try{
+        try {
 //      Conexao com o banco de dados  
-        include_once '../estrutura/conexao/conexao.php';
+            include_once '../estrutura/conexao/conexao.php';
 
 //      Inicio a transação com o banco        
             $pdo->beginTransaction();
 
-//      Comando sql a ser executado  
+//          comando sql            
+            $sql_u = "UPDATE carga_processo SET usuario_acao = '{$_SESSION['LOGIN_USUARIO']}' WHERE idCarga = '{$codigo_carga}'";
+            $executa_u = $pdo->query($sql_u);
             $sql = "DELETE FROM carga_processo WHERE idCarga = '{$codigo_carga}'";
-//      execução com comando sql    
             $executa = $pdo->query($sql);
 
 //       persistindo no banco     
-                $pdo->commit();
-                
-                 $msg = "DELETADO COM SUCESSO";
-            }  catch (Exception $e){
-                $msg = $e->getMessage();
-            }
+            $pdo->commit();
+
+            $msg = "DELETADO COM SUCESSO";
+        } catch (Exception $e) {
+            $msg = $e->getMessage();
+        }
 //      FECHO CONEXAO
         $pdo = null;
-        
-         echo '<script>window.alert("' . $msg . '");
+
+        echo '<script>window.alert("' . $msg . '");
                location.href = "../../../excluir_carga.php";
         </script>';
-       
- 
+
+
 
 //  if (empty($array_erros)) {
     } else {

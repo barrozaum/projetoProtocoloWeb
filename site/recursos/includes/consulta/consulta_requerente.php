@@ -69,7 +69,7 @@ $data_final = dataAmericano($_POST['dt_final']);
 
                         <tr>
                             <td><?php echo $dados['numeroProcesso']; ?></td>
-                            <td><?php echo  $dados['id_tipo_processo']; ?></td>
+                            <td><?php echo  $dados['descricao_tipo_processo']; ?></td>
                             <td><?php echo $dados['anoProcesso']; ?></td>
                             <td><?php echo $dados['descricao_requerente']; ?></td>
                             <td><?php echo $dados['descricao_assunto']; ?></td>

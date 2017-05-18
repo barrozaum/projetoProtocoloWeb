@@ -6,7 +6,6 @@ include_once '../funcoes/funcaoCriacaoInput.php';
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 //inclusao da conexao com o banco de dados
 include_once '../estrutura/conexao/conexao.php';
-
 ?>
 <?php
 if (empty($_POST['id'])) {
@@ -50,7 +49,16 @@ function formulario($pdo) {
                                 ?>
                             </div>
                         </div> 
+                        <?php
+//                        se usuario == adm mostra o setor de origem que ele quer ficar
+                        if ($_SESSION['LOGADO_PERFIL_USUARIO'] == 1) {
 
+                            criar_input_text_com_lupa('SETOR', 'alterar_colaborador_setor', 'alterar_colaborador_setor', array('readonly' => 'true', 'maxlength' => '30', 'placeholder' => 'ADMINISTRADOR INFORME SEU SETOR DE ORIGEM'), '', '', 'lupa_setor_usuario');
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), "");
+                        } else {
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']);
+                        }
+                        ?>
                         <div class="row">
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-success" id="id_consulta_numero">Consultar</button>

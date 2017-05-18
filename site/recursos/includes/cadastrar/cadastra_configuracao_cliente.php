@@ -165,21 +165,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
         } catch (Exception $exc) {
             $msg = $exc->getMessage();
-        } finally {
+        } 
             $pdo = null;
             echo '<script>window.alert("' . $msg . '");
-               location.href = "../../../Man_Configuracao.php";
+               location.href = "../../../man_configuracao.php";
         </script>';
-        }
-        ?>
-
-        <?php ?>
-
-
-
-
-
-        <?php
+       
+       
 
 //  if (empty($array_erros)) {
     } else {
@@ -189,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         echo '<script>window.alert("' . $msg_erro . '");
-               location.href = "../../../Man_Configuracao.php";
+               location.href = "../../../man_configuracao.php";
         </script>';
     }
 

@@ -31,7 +31,7 @@ if ($query_login->fetchColumn() > 0) {
             header("Location: ../../../../");
             exit();
         } else {
-            
+            $_SESSION['VALIDA_LOGIN']= "parte1";
             $_SESSION['LOGADO_SISTEMA'] = "OK";
             $_SESSION['LOGADO_PERFIL_USUARIO'] = $dados['perfil'];
             $_SESSION['LOGIN_ID_USUARIO'] = $dados['idUsuario'];
