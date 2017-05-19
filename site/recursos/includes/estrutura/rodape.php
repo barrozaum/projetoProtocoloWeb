@@ -12,9 +12,10 @@ session_start();
             </div>
 
             <div class="col-sm-4">
-                <h3>Institucional</h3>
+                <h3>Sobre o Sop</h3>
                 <hr>
-                <p><a href="#">Ajuda (Manual)</a></p>
+                <p><a href="../manual/Manual_Sistema_Protocolo.pdf" target="_blank">Manual</a></p>
+                <p>Versão 1.0</p>
               </div>
             <div class="col-sm-4">
                 <h3>FALE CONSOCO</h3>

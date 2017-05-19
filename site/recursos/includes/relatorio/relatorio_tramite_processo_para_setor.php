@@ -67,11 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             global $con_pdo;
             $this->SetFont('Arial', '', 11);
             $descricao_setor_origem_processo = func_retorna_descricao_setor($con_pdo, $_POST['txt_codigo_setor']);
+            $descricao_setor_destino_processo = func_retorna_descricao_setor($con_pdo, $_POST['txt_alterar_colaborador_codigo_setor']);
             $this->Cell(60, 0, utf8_decode("SETOR ORIGEM: "), 0, 0, 'L');
             $this->Cell(40, 0, $descricao_setor_origem_processo, 0, 0, 'L');
             $this->Ln(5);
             $this->Cell(60, 0, utf8_decode("SETOR ENTRADA: "), 0, 0, 'L');
-            $this->Cell(40, 0, $_SESSION['LOGIN_DESCRICAO_SETOR_USUARIO'], 0, 0, 'L');
+            $this->Cell(40, 0, $descricao_setor_destino_processo, 0, 0, 'L');
             $this->Ln(5);
         }
 
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "SELECT cg.dataCarga, cg.idSetorEntrada, cp.numeroProcesso, cp.anoProcesso, cp.descricao_assunto, t.descricao_tipo_processo, cp.descricao_requerente FROM ";
             $sql = $sql . " carga_processo cg, cadastro_processo cp, tipo_processo t";
             $sql = $sql . " WHERE cg.idSetorOrigem = '{$_POST['txt_codigo_setor']}'";
-            $sql = $sql . " AND cg.idSetorEntrada = '{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}'";
+            $sql = $sql . " AND cg.idSetorEntrada = '{$_POST['txt_alterar_colaborador_codigo_setor']}'";
             $sql = $sql . " AND  cg.dataCarga >= '{$data_inicial}'";
             $sql = $sql . " AND  cg.dataCarga <= '{$data_final}'";
             

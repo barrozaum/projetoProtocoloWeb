@@ -66,9 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function parte1() {
             global $con_pdo;
             $this->SetFont('Arial', '', 11);
+            $descricao_setor_origem_processo = func_retorna_descricao_setor($con_pdo, $_POST['txt_setor_origem']);
             $descricao_setor_entrada_processo = func_retorna_descricao_setor($con_pdo, $_POST['txt_setor_entrada']);
             $this->Cell(60, 0, utf8_decode("SETOR ORIGEM: "), 0, 0, 'L');
-            $this->Cell(40, 0, $_SESSION['LOGIN_DESCRICAO_SETOR_USUARIO'], 0, 0, 'L');
+            $this->Cell(40, 0, $descricao_setor_origem_processo, 0, 0, 'L');
             $this->Ln(5);
             $this->Cell(60, 0, utf8_decode("SETOR ENTRADA: "), 0, 0, 'L');
             $this->Cell(40, 0, $descricao_setor_entrada_processo, 0, 0, 'L');

@@ -13,7 +13,12 @@ $(document).on('click', '#id_buscar_processos', function (e) {
     if (setor.length < 3) {
         $("#msg_erro").html('<div class="alert alert-danger">POR FAVOR PREENCHA O SETOR CORRETAMENTE !! </div>');
         return false;
-    } else {
+    }
+   
+
+
+
+    else {
         $('#id_formulario_processo').submit();
     }
 

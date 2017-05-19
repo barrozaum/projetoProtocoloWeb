@@ -33,7 +33,7 @@ function formulario() {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text_com_lupa('SETOR', 'setor', 'setor', array('readonly' => 'true' , 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Setor de Tramite'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_setor');
+                                criar_input_text_com_lupa('SETOR', 'setor', 'setor', array('readonly' => 'true' , 'required' => 'true', 'maxlength' => '30', 'placeholder' => 'INFORME O SETOR DA ORIGEM DA CARGA'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_setor');
                                 criar_input_hidden('codigo_setor', array(), '');
                                 ?>
                             </div>
@@ -50,6 +50,16 @@ function formulario() {
                                 ?>
                             </div>
                         </div>
+                         <?php
+//                        se usuario == adm mostra o setor de origem que ele quer ficar
+                        if ($_SESSION['LOGADO_PERFIL_USUARIO'] == 1) {
+
+                            criar_input_text_com_lupa('SETOR', 'alterar_colaborador_setor', 'alterar_colaborador_setor', array('readonly' => 'true', 'maxlength' => '30', 'placeholder' => 'ADMINISTRADOR INFORME SEU SETOR DE DESTINO'), '', '', 'lupa_setor_usuario');
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), "");
+                        } else {
+                            criar_input_hidden('alterar_colaborador_codigo_setor', array(), $_SESSION['LOGIN_CODIGO_SETOR_USUARIO']);
+                        }
+                        ?>
                         <div class="row">
                             <div class="col-sm-2">
                                 <button type="button" class="btn btn-success" id="id_buscar_processos">Procurar</button>

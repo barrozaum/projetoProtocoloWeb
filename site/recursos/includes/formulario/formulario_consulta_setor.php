@@ -16,7 +16,6 @@ if (empty($_POST['id'])) {
 function formulario() {
     ?>
 
-
     <form  method="post" action="#">    
         <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
             <div class="well"><!-- div que coloca a cor no formulário -->
