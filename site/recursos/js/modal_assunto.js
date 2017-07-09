@@ -60,7 +60,7 @@ $(function () {
 //---------------------------------------------------------------------------------------------
 
 
-    $(document).on('click', '#id_buscar_assunto', function (e) {
+    $(document).on('click', '#id_buscar_assunto', function (e) {  
 //limpo mensagem de erro
         $("#msg_erro").html('');
 
@@ -80,6 +80,7 @@ $(function () {
         var url = 'recursos/includes/consulta/consulta_assunto.php'
         var parametros = {assunto: assunto, dt_inicial: dt_inicial, dt_final: dt_final};
         var listar = "listar";
+        $("#"+listar).html('<div style="margin-top:50px; margin-left:50%"><img src="recursos/imagens/ajax-loader.gif" alt="carregando" title="carregando" width="20px"></div>');
 
 // chamo a função que irá pesquisar o valor
         funcao_retorna_pesquisa(url, parametros, listar);

@@ -81,6 +81,7 @@ $(function () {
         var url = 'recursos/includes/consulta/consulta_origem.php'
         var parametros = {origem: origem, dt_inicial: dt_inicial, dt_final: dt_final};
         var listar = "listar";
+        $("#"+listar).html('<div style="margin-top:50px; margin-left:50%"><img src="recursos/imagens/ajax-loader.gif" alt="carregando" title="carregando" width="20px"></div>');
 
 // chamo a função que irá pesquisar o valor
         funcao_retorna_pesquisa(url, parametros, listar);

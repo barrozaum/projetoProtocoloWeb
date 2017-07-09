@@ -144,11 +144,11 @@ function dadosPagina() {
 
 
                 <tr>
-                    <td height="5" align ="center"><input type="radio" name="op" onclick="opcao_selecionada('<?php echo $dados['idSetor']; ?>', '<?php echo $dados['secretaria']; ?>');"> </td>  
+                    <td height="5" align ="center"><input type="radio" name="op" onclick="opcao_selecionada('<?php echo $dados['idSetor']; ?>', '<?php echo $dados['descDepartamento']; ?>');"> </td>  
                     <td><?php echo $dados['idSetor']; ?></td>
                     <td><?php echo $dados['secretaria']; ?></td>
                     <td><?php echo $dados['coordenadoria']; ?></td>
-                    <td><?php echo $dados['departamento']; ?></td>
+                    <td><?php echo $dados['descDepartamento']; ?></td>
                 </tr>
                 <?php
             }

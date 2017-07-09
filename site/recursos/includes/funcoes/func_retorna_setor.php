@@ -28,7 +28,7 @@ function func_retorna_descricao_setor($pdo, $codigo_setor) {
     $query_desc_setor = $pdo->prepare($sql_desc_setor);
     if ($query_desc_setor->execute()) {
         $dados = $query_desc_setor->fetch();
-        return $dados['setor'];
+        return $dados['descDepartamento'];
     } else {
         return "";
     }

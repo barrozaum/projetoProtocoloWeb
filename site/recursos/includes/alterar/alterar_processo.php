@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cad_numero_end_requerente = letraMaiuscula($_POST['txt_numero_requerente']);
     $cad_complemento_requerente = letraMaiuscula($_POST['txt_complemento_requerente']);
     $observacao_processo = letraMaiuscula($_POST['txt_obs_processo']);
+    // campo solicitado para implementação, pois os colaboradores gostam de saber o valor do processo
+    $valor_processo = letraMaiuscula($_POST['txt_valor_processo']); 
+ 
 //    VALIDACAO
     if (strlen($codigo_processo) < 1 && strlen($codigo_processo) > 11) {
         $array_erros['txt_tipo_processo'] = "POR FAVOR ENTRE COM O CODIGO PROCESSO VÁLIDO \n";
@@ -100,11 +103,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = $sql . " cep = '{$cad_cep_requerente}',";
             $sql = $sql . " telefone = '{$cad_tel_fixo}',";
             $sql = $sql . " celular = '{$cad_tel_cel}',";
-            $sql = $sql . " usuario = '{$_SESSION['LOGIN_USUARIO']}'";
+            $sql = $sql . " usuario = '{$_SESSION['LOGIN_USUARIO']}',";
+            $sql = $sql . " valor = '{$valor_processo}'";
             $sql = $sql . " WHERE idProcesso = " . $codigo_processo;
 
             $executa = $pdo->query($sql);
-
 
 //          inserindo observacao
             fun_limpar_documentos_processo($pdo, $codigo_processo);

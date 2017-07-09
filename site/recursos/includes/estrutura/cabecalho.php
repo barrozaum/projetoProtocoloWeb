@@ -5,7 +5,6 @@ include_once './controle/validar_secao.php';
 ?>
 
 <div class="page-header">
-
     <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
         <div class="row">
             <div class="col-lg-2 col-lg-offset-0 text-center">
@@ -72,6 +71,9 @@ include_once './controle/validar_secao.php';
                                                 <ul class="dropdown-menu">
                                                     <?php if (in_array("6", $_SESSION['PERMISSAO_MENU'])) { ?>
                                                         <li><a href="cadastro_recebimento_individual.php">INDIVIDUAL</a></li>
+                                                    <?php } ?>
+                                                    <?php if (in_array("31", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="cadastro_recebimento_coletivo.php">COLETIVO</a></li>
                                                     <?php } ?>
                                                 </ul>
                                             </li>

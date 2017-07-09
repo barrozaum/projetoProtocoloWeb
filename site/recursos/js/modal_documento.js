@@ -80,6 +80,7 @@ $(function () {
         var url = 'recursos/includes/consulta/consulta_documento.php'
         var parametros = {documento: documento, numero_documento: numero_documento, ano_documento: ano_documento};
         var listar = "listar";
+        $("#"+listar).html('<div style="margin-top:50px; margin-left:50%"><img src="recursos/imagens/ajax-loader.gif" alt="carregando" title="carregando" width="20px"></div>');
 
 // chamo a função que irá pesquisar o valor
         funcao_retorna_pesquisa(url, parametros, listar);

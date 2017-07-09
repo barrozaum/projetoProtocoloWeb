@@ -103,6 +103,7 @@ function limpar_formulario() {
     $('#msg_erro').html('');
 //codigo_processo
     $('#id_codigo_processo').val('');
+    $('#id_valor_processo').val('');
 
 //    assunto
     $('#id_assunto').val('');

@@ -77,10 +77,11 @@ function fun_retorna_dados_processo(url, parametros) {
         dataType: "json",
         // função para de sucesso
         success: function (data) {
-            console.log(data);
+            console.log(data.valor_processo);
             if (data.achou === 1) {
 //             processo
                 $('#id_codigo_processo').val(data.codigo_processo);
+                $('#id_valor_processo').val(data.valor_processo);
                 $('#id_data').val(data.data_processo);
 //             assunto 
                 $('#id_codigo_assunto').val(data.codigo_assunto);

@@ -563,7 +563,7 @@ a.bg-danger:hover {
 }
 .page-header {
     padding-bottom: 70px;
-    background-image: url(../imagens/estrutura/cabecalho.png);
+   
     background-position: center;
     background-repeat: no-repeat; 
 }

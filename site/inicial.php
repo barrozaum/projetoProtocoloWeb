@@ -32,7 +32,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <div id="cabecalho">
             <!-- Não apagar, pois é onde encontra-se o menu do site -->
         </div>
-
         <div id="acessoRapido">
 
         </div>

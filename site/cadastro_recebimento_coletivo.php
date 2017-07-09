@@ -12,22 +12,18 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="recursos/css/bootstrap.css" rel="stylesheet">
         <link href="recursos/css/menu.css" rel="stylesheet">
+
         <script src="recursos/js/jquery.min.js"></script>
         <script src="recursos/js/bootstrap.min.js"></script>
         <link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <script src="recursos/js/estrutura.js"></script>
-        <script src="recursos/js/camposNumeros.js"></script>
         <script src="recursos/js/funcao_consultas.js"></script>
         <script src="recursos/js/chamada_de_janelas.js"></script>
-        <script src="recursos/js/addCamposTabelaAutomatico.js"></script>
-        <script src="recursos/js/alterar_processo.js"></script>
-        <script src="recursos/js/mascaraTelefone.js"></script>
-        <script src="recursos/js/buscaCep.js"></script>
-        <script src="recursos/js/mascaraValor.js"></script>
+        <script src="recursos/js/cadastro_recebimento_coletivo.js"></script>
 
-
+        <script src="recursos/js/camposNumeros.js"></script>
 
         <!-- Includes para Colocar o Calendário na data -->
         <link rel="stylesheet" href="recursos/css/redmond/jquery-ui-1.10.1.custom.css" />
@@ -35,7 +31,6 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/calendario.js" type="text/javascript"></script>
         <script src="recursos/js/mascaraData.js"></script>
         <!-- fim dos includes para Colocar a Data -->
-
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
@@ -45,8 +40,9 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_processo.php?cmd=alterar');
+                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_recebimento_coletivo.php');
                 $('#modal').load('recursos/includes/estrutura/modal_grande.html');
+
             }
         </script>
 
@@ -64,10 +60,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             <div id="listar"></div>
         </div>
 
-        <div id="modal">
-            <!-- Modal da pagina -->
-        </div>
-        
+        <div id="modal"></div>
         <div id="rodape">
             <!-- Não apagar, pois é onde encontra-se o rodape da página -->
         </div>

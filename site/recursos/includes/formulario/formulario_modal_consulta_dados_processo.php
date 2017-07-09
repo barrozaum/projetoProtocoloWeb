@@ -133,7 +133,13 @@ function mostrar_dados_processo($pdo, $dados) {
                                 <div class="col-sm-6">
                                     <?php
                                     //   INPUT -                              
-                                    criar_input_text('Tipo Processo', 'tipo_processo', 'tipo_processo', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), fun_retorna_descricao_tipo_processo($pdo, 1));
+                                    criar_input_text('Tipo Processo', 'tipo_processo', 'tipo_processo', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']));
+                                    ?>
+                                </div>
+                                <div class="col-sm-6">
+                                    <?php
+                                    //   INPUT -                              
+                                    criar_input_text('Valor R$', 'valor_processo', 'valor_processo', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), $dados['valor']);
                                     ?>
                                 </div>
                             </div>

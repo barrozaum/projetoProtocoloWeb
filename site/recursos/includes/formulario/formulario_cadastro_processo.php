@@ -74,9 +74,14 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 }
                                                 ?>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-3">
                                                 <?php
                                                 criar_input_data('Data Processo', 'data', 'data', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'));
+                                                ?>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <?php
+                                                criar_input_text('Valor R$', 'valor_processo', 'valor_processo', array('required' => 'true', 'maxlength' => '11', 'placeholder' => 'R$000.00', 'onKeyPress' => "return formatarValor(this, '.', ',', event)"), '', 'Somente números');
                                                 ?>
                                             </div>
 
@@ -85,7 +90,7 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <div class="col-sm-6">
                                                 <?php
                                                 //   INPUT -                              
-                                                criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '3', 'placeholder' => 'xxxxx', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                                criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '6', 'placeholder' => 'xxxxxx', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                                 if ($titulo_pagina === "CADASTRO PROCESSO") {
                                                     criar_input_hidden('numero_processo_banco', array('require' => 'true'), '');
                                                 }

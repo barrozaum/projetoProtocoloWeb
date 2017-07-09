@@ -34,6 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cad_numero_end_requerente = letraMaiuscula($_POST['txt_numero_requerente']);
     $cad_complemento_requerente = letraMaiuscula($_POST['txt_complemento_requerente']);
     $observacao_processo = letraMaiuscula($_POST['txt_obs_processo']);
+    // campo solicitado para implementação, pois os colaboradores gostam de saber o valor do processo
+    $valor_processo = letraMaiuscula($_POST['txt_valor_processo']); 
+    
 //    VALIDACAO
     if (strlen($cad_tipo_processo) < 1 && strlen($cad_tipo_processo) > 11) {
         $array_erros['txt_tipo_processo'] = "POR FAVOR ENTRE COM O TIPO PROCESSO VÁLIDO \n";
@@ -80,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //      Comando sql a ser executado  
 //            inserindo dados no cadastro de processo
-            $sql = "INSERT INTO cadastro_processo (idProcesso, numeroProcesso, tipoProcesso, anoProcesso, dataProcesso, idAssunto, descricao_assunto, idOrigem, descricao_origem, idRequerente,  descricao_requerente,logradouro, numero,complemento, bairro, cidade, uf, cep,telefone,celular, usuario)";
+            $sql = "INSERT INTO cadastro_processo (idProcesso, numeroProcesso, tipoProcesso, anoProcesso, dataProcesso, idAssunto, descricao_assunto, idOrigem, descricao_origem, idRequerente,  descricao_requerente,logradouro, numero,complemento, bairro, cidade, uf, cep,telefone,celular, usuario, valor)";
             $sql = $sql . " VALUES ";
-            $sql = $sql . " (null, {$cad_numero_processo}, {$cad_tipo_processo}, {$cad_ano_processo}, '{$cad_data_processo}', '{$cad_codigo_assunto}', '{$cad_assunto}','{$cad_codigo_origem}', '{$cad_origem}', '{$cad_codigo_requerente}','{$cad_requerente}','{$cad_logradouro_requerente}','{$cad_numero_end_requerente}','{$cad_complemento_requerente}','{$cad_bairro_requerente}','{$cad_cidade_requerente}','{$cad_uf_requerente}','{$cad_cep_requerente}','{$cad_tel_fixo}','{$cad_tel_cel}','{$_SESSION['LOGIN_USUARIO']}') ";
+            $sql = $sql . " (null, {$cad_numero_processo}, {$cad_tipo_processo}, {$cad_ano_processo}, '{$cad_data_processo}', '{$cad_codigo_assunto}', '{$cad_assunto}','{$cad_codigo_origem}', '{$cad_origem}', '{$cad_codigo_requerente}','{$cad_requerente}','{$cad_logradouro_requerente}','{$cad_numero_end_requerente}','{$cad_complemento_requerente}','{$cad_bairro_requerente}','{$cad_cidade_requerente}','{$cad_uf_requerente}','{$cad_cep_requerente}','{$cad_tel_fixo}','{$cad_tel_cel}','{$_SESSION['LOGIN_USUARIO']}', '{$valor_processo}') ";
 
             $executa = $pdo->query($sql);
 //          retorna ultmia id inserida

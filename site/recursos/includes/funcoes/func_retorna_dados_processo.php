@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($dados = $query->fetch()) {
         $id_processo = $dados['idProcesso'];
+        $valor_processo = $dados['valor'];
         $data_processo = dataBrasileiro($dados['dataProcesso']);
 //        assunto
         $codigo_assunto = $dados['idAssunto'];
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $var = Array(
             "achou" => 1,
             "codigo_processo" => "$id_processo",
+            "valor_processo" => "$valor_processo",
             "data_processo" => "$data_processo",
             "codigo_assunto" => "$codigo_assunto",
             "descricao_assunto" => "$descricao_assunto",

@@ -26,6 +26,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/cadastro_processo.js"></script>
         <script src="recursos/js/mascaraTelefone.js"></script>
         <script src="recursos/js/buscaCep.js"></script>
+        <script src="recursos/js/mascaraValor.js"></script>
 
 
         <!-- Includes para Colocar o Calendário na data -->

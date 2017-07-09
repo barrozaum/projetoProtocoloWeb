@@ -55,7 +55,7 @@ function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_c
     $sql_carga = "INSERT INTO carga_processo ";
     $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer,usuario_acao)";
     $sql_carga = $sql_carga . " VALUES ";
-    $sql_carga = $sql_carga . "({$codigo_processo}, {$codigo_setor_origem_processo},{$codigo_setor_carga},  0,  {$codigo_setor_origem_processo}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}', '{$_SESSION['LOGIN_USUARIO']}')";
+    $sql_carga = $sql_carga . "({$codigo_processo}, {$codigo_setor_origem_processo},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}', '{$_SESSION['LOGIN_USUARIO']}')";
 
 
    $executa = $pdo->query($sql_carga);

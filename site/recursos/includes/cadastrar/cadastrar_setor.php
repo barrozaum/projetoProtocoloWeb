@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO setor ";
             $sql = $sql . "(idSetor, setor, secretaria, descSecretaria, coordenadoria, descCoordenadoria, departamento, descDepartamento, usuario)";
             $sql = $sql . " VALUES ";
-            $sql = $sql . " (null, '{$secretaria}','{$secretaria}','{$descricao_secretaria}', '{$coordenadoria}', '{$descricao_coordenadoria}', '{$departamento}', '{$descricao_departamento}','{$_SESSION['LOGIN_USUARIO']}')";
+            $sql = $sql . " (null, '{$secretaria}','{$descricao_departamento}','{$descricao_secretaria}', '{$coordenadoria}', '{$descricao_coordenadoria}', '{$departamento}', '{$descricao_departamento}','{$_SESSION['LOGIN_USUARIO']}')";
 //        print $sql;
 //      execução com comando sql    
             $executa = $pdo->query($sql);
