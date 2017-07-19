@@ -8,11 +8,12 @@ if(!isset($_SESSION))
 //essa função é executado no momento em que eu cadastro o processo no sistema
 function inserindo_carga($pdo, $id_proceso) {
     $dia_atual = date('Y-m-d');
+    $hora_carga = date('H:i:s');
 
     $sql_carga = "INSERT INTO carga_processo ";
-    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada, idSetorPresente, tramite, idUsuarioCarga, dataCarga, idUsuarioRecebimento, dataRecebimento, seq_carga, data_carga_sistema, data_recebimento_sistema)";
+    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada, idSetorPresente, tramite, idUsuarioCarga, dataCarga, idUsuarioRecebimento, dataRecebimento, seq_carga, data_carga_sistema, data_recebimento_sistema, hora_carga, hora_recebimento)";
     $sql_carga = $sql_carga . " VALUES ";
-    $sql_carga = $sql_carga . "({$id_proceso},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}')";
+    $sql_carga = $sql_carga . "({$id_proceso},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}', '{$hora_carga}', '{$hora_carga}')";
 
 
     $executa = $pdo->query($sql_carga);
@@ -50,12 +51,13 @@ function processo_pode_dar_carga($pdo, $id_processo, $codigo_setor_usuario_carga
 //esta função é executada pelo programa cadastro carga
 function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_carga, $codigo_setor_origem_processo, $codigo_setor_carga, $sequencia_carga) {
     $data_atual = date('Y-m-d');
+    $hora_carga = date('H:i:s');
     $sequencia_carga += 1;
 
     $sql_carga = "INSERT INTO carga_processo ";
-    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer,usuario_acao)";
+    $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada,  tramite, idUsuarioCarga, dataCarga, seq_carga, data_carga_sistema, parecer,usuario_acao, hora_carga)";
     $sql_carga = $sql_carga . " VALUES ";
-    $sql_carga = $sql_carga . "({$codigo_processo}, {$codigo_setor_origem_processo},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}', '{$_SESSION['LOGIN_USUARIO']}')";
+    $sql_carga = $sql_carga . "({$codigo_processo}, {$codigo_setor_origem_processo},{$codigo_setor_carga},  0,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$data_carga}',  {$sequencia_carga}, '{$data_atual}', '{$parecer_carga}', '{$_SESSION['LOGIN_USUARIO']}','{$hora_carga}')";
 
 
    $executa = $pdo->query($sql_carga);
@@ -65,12 +67,14 @@ function cadastro_carga_processo($pdo, $codigo_processo, $data_carga, $parecer_c
 //esta função é executada pelo programa cadastro carga
 function cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana) {
     $data_atual = date('Y-m-d');
-    
+    $hora_recebimento = date('H:i:s');
+
     
     $sql_carga = "UPDATE carga_processo ";
     $sql_carga = $sql_carga . "SET idUsuarioRecebimento = '{$_SESSION['LOGIN_ID_USUARIO']}' , ";
     $sql_carga = $sql_carga . " dataRecebimento= '{$data_recebimento_americana}' , ";
     $sql_carga = $sql_carga . " data_recebimento_sistema = '{$data_atual}' , ";
+    $sql_carga = $sql_carga . " hora_recebimento = '{$hora_recebimento}' , ";
     $sql_carga = $sql_carga . " tramite = '1' ";
     $sql_carga = $sql_carga . " WHERE idCarga = '{$id_carga_processo}' ";
     
@@ -127,6 +131,7 @@ function listar_cargas_processo($pdo, $id_processo) {
 // está para o setor do usuário que vai receber a o processo
 function fun_posso_receber_processo_por_numero($pdo, $id_proceso,$codigo_setor_usuario_carga){
     global $id_ultima_carga;
+    global $id_ultimo_parecer;
     global $seq_carga;
     $sql_carga = " SELECT * FROM carga_processo WHERE idProcesso = " . $id_proceso;
     $sql_carga = $sql_carga . " ORDER BY seq_carga DESC ";
@@ -137,6 +142,7 @@ function fun_posso_receber_processo_por_numero($pdo, $id_proceso,$codigo_setor_u
     if ($dados = $query_carga->fetch()) {
         $idSetorEntrada = $dados['idSetorEntrada'];
         $tramite = $dados['tramite'];
+        $id_ultimo_parecer = $dados['parecer'];
         $id_ultima_carga = $dados['idCarga'];
         $seq_carga = $dados['seq_carga'];
        

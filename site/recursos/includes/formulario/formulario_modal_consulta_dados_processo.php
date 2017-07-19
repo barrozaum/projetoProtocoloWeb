@@ -336,9 +336,11 @@ function mostrar_dados_processo($pdo, $dados) {
                                     <thead>
                                         <tr>
                                             <th>Data Carga</th>
+                                            <th>Hora Carga</th>
                                             <th>Setor Carga</th>
                                             <th>Usuario Carga</th>
                                             <th>Data Recebimento</th>
+                                            <th>Hora Recebimento</th>
                                             <th>Setor Recebimento</th>
                                             <th>Usuario Recebimento</th>
                                             <th>Parecer Carga</th>
@@ -355,9 +357,11 @@ function mostrar_dados_processo($pdo, $dados) {
 
                                             <tr>
                                                 <td><?php echo dataBrasileiro($dados_carga['dataCarga']); ?></td>
+                                                <td><?php echo $dados_carga['hora_carga']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorOrigem']); ?></td>
                                                 <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);; ?></td>
                                                 <td><?php echo dataBrasileiro($dados_carga['dataRecebimento']); ?></td>
+                                                <td><?php echo $dados_carga['hora_recebimento']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorEntrada']); ?></td>
                                                 <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);; ?></td>
                                                 <td><?php echo $dados_carga['parecer']; ?></td>

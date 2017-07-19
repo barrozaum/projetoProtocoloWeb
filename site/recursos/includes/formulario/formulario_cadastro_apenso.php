@@ -5,12 +5,12 @@ include_once '../funcoes/funcaoCriacaoInput.php';
 //include funcao com os tipos de processos
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 //inclusao da conexao com o banco de dados
-include_once '../estrutura/conexao/conexao.php'
+include_once '../estrutura/conexao/conexao.php';
+
 ?>
 <?php
 if (empty($_POST['id'])) {
     formulario($pdo);
-    $pdo=null;
 }
 ?>
 
@@ -20,14 +20,19 @@ function formulario($pdo) {
     ?>
 
 
-    <form  method="post" action="recursos/includes/relatorio/relatorio_processos_criados.php" target="_blank">
+    <form  method="post" action="#">    
         <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <div class="panel panel-default">
                     <!-- INICIO Dados do imóvel -->
-                    <div class="panel-heading text-center">RELAÇÃO DE PROCESSOS CRIADOS</div>
+                    <div class="panel-heading text-center">CADASTRO APENSO PROCESSO </div>
                     <div class="panel-body">
                         <!-- inicio dados inscrição-->
+                         <div class="row">
+                            <div class="col-sm-12">
+                                <div id="msg_erro"></div>
+                            </div>
+                        </div> 
                         <div class="row">
                             <div class="col-sm-6">
                                 <?php
@@ -36,22 +41,24 @@ function formulario($pdo) {
                                 ?>
                             </div>
                         </div> 
-                         <div class="row">
+                        <div class="row">
                             <div class="col-sm-6">
                                 <?php
-                                criar_input_data('Data Inicial', 'dt_inicial', 'dt_inicial', array('required' => 'true', 'placeholder' => '00/00/0000'), '', 'somente numeros');
+                                //   INPUT -                              
+                                criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '6', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                 ?>
                             </div>
                             <div class="col-sm-6">
                                 <?php
-                                criar_input_data('Data Final', 'dt_final', 'dt_final', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'), 'somente numeros');
+                                //   INPUT -                              
+                                criar_input_text('Ano', 'ano_processo', 'ano_processo', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
                                 ?>
                             </div>
-                        </div>
+                        </div> 
 
                         <div class="row">
                             <div class="col-sm-2">
-                                <button type="submit" class="btn btn-success" id="">Consultar</button>
+                                <button type="button" class="btn btn-success" id="id_consulta_numero">Consultar</button>
                             </div>
                         </div>
                     </div>

@@ -16,11 +16,11 @@ if ($_POST['id'] === '1') {
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);
     $codigo_setor_usuario_carga = letraMaiuscula($_POST['codigo_setor_usuario_carga']);
 
-    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga);
+    mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo, $codigo_setor_usuario_carga);
     $pdo = null;
 }
 
-function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo,$codigo_setor_usuario_carga) {
+function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo, $codigo_setor_usuario_carga) {
 //   buscando dados do processo
 //    consulta para saber se o processo existe
     $sql = "SELECT * FROM cadastro_processo ";
@@ -34,7 +34,8 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
         $id_processo = $dados['idProcesso'];
         $descricao_assunto = $dados['descricao_assunto'];
         $descricao_origem = $dados['descricao_origem'];
-        $requerente = $dados['descricao_requerente'];;
+        $requerente = $dados['descricao_requerente'];
+        ;
         $idAnexado = 0;
     } else {
         criar_modal_erros("ERROR !!!", "Desculpe, porém não encotramos o processo desejado !!!");
@@ -85,17 +86,22 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
                     ?>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <?php
+                    global $id_ultima_carga;
+                    global $id_ultimo_parecer;
+                    $posso_receber_processo = fun_posso_receber_processo_por_numero($pdo, $id_processo, $codigo_setor_usuario_carga);
+                    if ($posso_receber_processo !== "sim") {
+                        mostrar_mensagem($posso_receber_processo);
+                    } else {
+                        criar_input_hidden('carga', array('required' => 'true'), $id_ultima_carga);
 
-            <?php
-            global $id_ultima_carga;
-            $posso_receber_processo = fun_posso_receber_processo_por_numero($pdo, $id_processo,$codigo_setor_usuario_carga);
-            if ($posso_receber_processo !== "sim") {
-                mostrar_mensagem($posso_receber_processo);
-            } else {
-                criar_input_hidden('carga', array('required' => 'true'), $id_ultima_carga);
-            }
-            ?>
-
+                        criar_textarea('Parecer ', 'parecer_processo', 'parecer_processo',$id_ultimo_parecer , array('required' => 'true', 'maxlength' => '254', 'rows' => '9'));
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
 
         <div class="modal-footer">
@@ -103,7 +109,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
             if ($posso_receber_processo !== "sim") {
                 print '<button type="button" class="btn btn-default"  data-dismiss="modal" >SAIR </button>';
             } else {
-                print '<button type="button" class="btn btn-success" id="id_btn_enviar_carga">ENVIAR </button>';
+                print '<button type="button" class="btn btn-success" id="id_btn_enviar_carga">RECEBER </button>';
             }
             ?>
         </div>

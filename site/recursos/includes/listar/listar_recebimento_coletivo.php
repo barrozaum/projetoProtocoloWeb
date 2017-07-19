@@ -71,6 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                         <th>REQUERENTE</th>
                                         <th>ORIGEM</th>
                                         <th>DT_CARGA</th>
+                                        <th>HORA_CARGA</th>
+                                        <th>PARECER</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -110,6 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                             <td><?php echo $dados['descricao_requerente']; ?></td>
                                             <td><?php echo $dados['descricao_origem']; ?></td>
                                             <td><?php echo dataBrasileiro($dados['dataCarga']); ?></td>
+                                            <td><?php echo $dados['hora_carga']; ?></td>
+                                            <td><?php echo $dados['parecer']; ?></td>
                                         </tr>
 
 

@@ -4,6 +4,7 @@ include_once '../estrutura/controle/validar_secao.php';
 include_once '../estrutura/conexao/conexao.php';
 include_once '../funcoes/funcao_formata_data.php';
 include_once '../funcoes/func_retorna_setor.php';
+include_once '../funcoes/func_retorna_observacao.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //massete para passar a conexao entre os médodos em problema
@@ -53,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->SetLineWidth(.1);
             $this->SetFont('Arial', '', 10);
 
-            $headertabela = array('TIPO', 'NÚMERO', 'ANO', 'ASSUNTO', 'REQUERENTE', 'VALOR');
+            $headertabela = array('TIPO', 'NÚMERO', 'ANO', 'DATA', 'VALOR', 'ASSUNTO');
             // ALIMENTO O CABECALHO DA PAGINA
-            $w = array(35, 20, 15, 95, 95, 25);
+            $w = array(35, 20, 15, 20, 20, 90);
 
             for ($i = 0; $i < count($headertabela); $i++)
                 $this->Cell($w[$i], 7, utf8_decode($headertabela[$i]), 1, 0, 'L', true);
@@ -67,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data_inicial = dataAmericano($_POST['txt_dt_inicial']);
             $data_final = dataAmericano($_POST['txt_dt_final']);
             global $con_pdo;
-            $this->SetFont('Arial', '', 11);
+            $this->SetFont('Arial', '', 12);
             $this->Cell(60, 0, utf8_decode("Periodo Pesquisa: " . $_POST['txt_dt_inicial'] . " - " . $_POST['txt_dt_final']), 0, 0, 'L');
             $this->Ln(5);
         }
@@ -85,29 +86,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->SetFont('Arial', '', 8);
 
 
-            $sql = "SELECT * ";
-            $sql = $sql . " FROM  cadastro_processo c,tipo_processo t ";
-            $sql = $sql . " WHERE c.dataProcesso >= '$data_inicial'";
-            $sql = $sql . " AND c.dataProcesso <= '$data_final' ";
-            $sql = $sql . " AND c.tipoProcesso = t.id_tipo_processo";
-            $sql = $sql . " ORDER BY  c.dataProcesso DESC   ";
+            if ($_POST['txt_tipo_processo'] == 0) {
+                $sql = "SELECT * ";
+                $sql = $sql . " FROM  cadastro_processo c,tipo_processo t ";
+                $sql = $sql . " WHERE c.dataProcesso >= '$data_inicial'";
+                $sql = $sql . " AND c.dataProcesso <= '$data_final' ";
+                $sql = $sql . " AND c.tipoProcesso = t.id_tipo_processo";
+                $sql = $sql . " ORDER BY c.numeroProcesso, c.dataProcesso DESC   ";
+            } else {
+
+                $sql = "SELECT * ";
+                $sql = $sql . " FROM  cadastro_processo c";
+                $sql = $sql . " WHERE c.dataProcesso >= '$data_inicial'";
+                $sql = $sql . " AND c.dataProcesso <= '$data_final'";
+                $sql = $sql . " AND c.tipoProcesso = {$_POST['txt_tipo_processo']}";
+                $sql = $sql . " ORDER BY  c.numeroProcesso,  c.dataProcesso DESC   ";
+            }
+
             $query = $con_pdo->prepare($sql);
             $query->execute();
 
             $linha = false;
             for ($i = 0; $dados = $query->fetch(); $i++) {
-                if ($linha == true)
+                if ($linha == true){
                     $linha = false;
-                else
+                    $this->SetFillColor(100, 0, 0);
+                }else{
+                    $this->SetFillColor(205,205,205);
                     $linha = true;
+                }
+                if ($_POST['txt_tipo_processo'] == 1) {
+                    $dados['descricao_tipo_processo'] = "PROCESSO INTERNO";
+                } else if ($_POST['txt_tipo_processo'] == 2) {
+                    $dados['descricao_tipo_processo'] = "PROCESSO EXTERNO";
+                }
 
+                
+                
+                $this->SetDrawColor(100, 1, 2);
+                $this->SetLineWidth(.1);
                 $this->Cell(35, 6, $dados['descricao_tipo_processo'], 1, 0, 'L', $linha);
                 $this->Cell(20, 6, $dados['numeroProcesso'], 1, 0, 'R', $linha);
                 $this->Cell(15, 6, $dados['anoProcesso'], 1, 0, 'R', $linha);
-                $this->Cell(95, 6, $dados['descricao_assunto'], 1, 0, 'R', $linha);
-                $this->Cell(95, 6, $dados['descricao_requerente'], 1, 0, 'R', $linha);
-                $this->Cell(25, 6, $dados['valor'], 1, 0, 'R', $linha);
+                $this->Cell(20, 6, dataBrasileiro($dados['dataProcesso']), 1, 0, 'R', $linha);
+                $this->Cell(20, 6, $dados['valor'], 1, 0, 'R', $linha);
+                $this->Cell(90, 6, $dados['descricao_assunto'], 1, 0, 'C', $linha);
                 $this->Ln();
+                $this->MultiCell(0, 5, utf8_decode("OBSERVAÇÃO: \n" . fun_retorna_descricao_observacao($con_pdo, $dados['idProcesso'])), 1, 'J', $linha);
             }
         }
 
@@ -126,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 // ADICIONO A PAGINA EM BRANCO
-    $pdf->AddPage('L', 'A4');
+    $pdf->AddPage('P', 'A4');
 
 
 // PREENCHO A PAGINA EM BRANCO COM O MÉTODO QUE EU CRIE ACIMA
