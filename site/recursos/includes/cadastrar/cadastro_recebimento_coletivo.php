@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
           
             //            mensagem de sucesso
-            $msg = "CADASTRADO COM SUCESSO";
+            $msg = "PROCESSOS RECEBIDOS COM SUCESSO";
 
 //            persistindo no banco de dados
             $pdo->commit();
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 //                EMITO MENSAGEM
         echo '<script>window.alert("' . $msg . '");
-                    location.href = "../../../cadastro_recebimento_individual.php";
+                    location.href = "../../../cadastro_recebimento_coletivo.php";
                      </script>';
 
 //            fecho conexao
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         echo '<script>window.alert("' . $msg_erro . '");
-               location.href = "../../../cadastro_recebimento_individual.php";
+               location.href = "../../../cadastro_recebimento_coletivo.php";
         </script>';
     }
 

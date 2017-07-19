@@ -18,6 +18,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">
         <script src="recursos/js/estrutura.js"></script>
+        <script src="recursos/js/adiciona_zero.js"></script>
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/modal_cadastro_cargar_individual.js"></script>
 

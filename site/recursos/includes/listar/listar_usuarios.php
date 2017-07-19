@@ -63,13 +63,13 @@ include_once '../estrutura/controle/validar_secao.php';
                             $perfil = "USUARIO";
                         }
 
-                        $param = $dados['idUsuario'] . "|";
+                        $param =  $dados['idUsuario'] . "|";
                         $param .= $dados['login'] . "|";
                         $param .= $dados['nome'] . "|";
                         $param .= $dados['sobrenome'] . "|";
                         $param .= $dados['email'] . "|";
                         $param .= $dados['idSetor'] . "|";
-                        $param .= $dados['setor'] . "|";
+                        $param .= $dados['secretaria'] . " / " . $dados['coordenadoria']. " / " . $dados['departamento'] . "|";
                         $param .= $ativo . "|";
                         $param .= $perfil;
                         ?>   	
@@ -81,7 +81,7 @@ include_once '../estrutura/controle/validar_secao.php';
                             <td><?php echo $dados['nome']; ?></td>
                             <td><?php echo $dados['sobrenome']; ?></td>
                             <td><?php echo $dados['email']; ?></td>
-                            <td><?php echo $dados['setor']; ?></td>
+                            <td><?php echo $dados['secretaria'] . " / " . $dados['coordenadoria']. " / " . $dados['departamento']; ?></td>
                             <td><?php echo $ativo; ?></td>
                             <td><?php echo $perfil; ?></td>
                             <td><a href="#" id="edit-editar" data-id="<?php echo $param; ?>"><img src="recursos/imagens/estrutura/alterar.png" height="20px;" alt="alterar"></a></td>

@@ -1,3 +1,42 @@
+// quando o campo código sofrer alteração executo
+$(document).on('blur', "#id_numero_processo", function (e) {
+    
+// pego o valor informado no campo
+// coloco no formato correto 
+// atribuo o valor formatado na variavel valor
+    var valor = preencheZeros(this.value, 6);
+//    comparo se o valor é menor que
+    if (valor < '000001') {
+//        zero o campo cdigo
+        $(this).val('000000');
+
+    } else {
+//        atribuo o valor informado pelo usario no campo
+        $(this).val(valor);
+
+    }
+
+});
+
+// quando o campo código sofrer alteração executo
+$(document).on('blur', "#id_ano_processo", function (e) {
+// pego o valor informado no campo
+// coloco no formato correto 
+// atribuo o valor formatado na variavel valor
+    var valor = preencheZeros(this.value, 4);
+//    comparo se o valor é menor que
+    if (valor < '2000') {
+//        zero o campo cdigo
+        $(this).val('2000');
+
+    } else {
+//        atribuo o valor informado pelo usario no campo
+        $(this).val(valor);
+
+    }
+
+});
+
 //troca o numero do processo de acordo com o tipo do processo
 $(document).on('blur', '#id_ano_processo', function (e) {
 

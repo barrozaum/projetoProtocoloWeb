@@ -85,7 +85,18 @@ include_once './controle/validar_secao.php';
                                     </ul>
                                 </li>
                             <?php } ?>
-
+                            <?php
+                            if (in_array("8", $_SESSION['PERMISSAO_MENU'])){
+                                ?>
+                                <li class="root">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">OFÍCIO <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <?php if (in_array("8", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="cadastro_oficio.php">NOVO</a></li>
+                                        <?php } ?>
+                                    </ul>
+                                </li>
+                            <?php } ?>
                             <?php
                             if (in_array("8", $_SESSION['PERMISSAO_MENU']) || in_array("9", $_SESSION['PERMISSAO_MENU']) || in_array("10", $_SESSION['PERMISSAO_MENU']) || in_array("11", $_SESSION['PERMISSAO_MENU']) || in_array("30", $_SESSION['PERMISSAO_MENU']) || in_array("12", $_SESSION['PERMISSAO_MENU'])) {
                                 ?>
@@ -157,6 +168,8 @@ include_once './controle/validar_secao.php';
                                             <!--tramitação, é os processo enviados para um determinado setor -->
                                             <li><a href="relatorio_tramitacao_processo.php">TRAMITAÇÃO DE PROCESSO NO SETOR</a></li>
                                         <?php } if (in_array("24", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="relatorio_criacao_processo.php">PROCESSOS CRIADOS</a></li>
+                                        <?php } if (in_array("33", $_SESSION['PERMISSAO_MENU'])) { ?>
                                             <li><a href="relatorio_carga_processo.php">ANDAMENTO DE PROCESSO</a></li>
                                         <?php } ?>
                                     </ul>

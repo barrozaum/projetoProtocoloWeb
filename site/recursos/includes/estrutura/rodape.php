@@ -15,7 +15,7 @@ session_start();
                 <h3>Sobre o Sop</h3>
                 <hr>
                 <p><a href="../manual/Manual_Sistema_Protocolo.pdf" target="_blank">Manual</a></p>
-                <p>Versão 1.0</p>
+                <p>Versão 1.1</p>
               </div>
             <div class="col-sm-4">
                 <h3>FALE CONSOCO</h3>

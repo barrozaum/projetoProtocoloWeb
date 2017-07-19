@@ -111,8 +111,6 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 criar_input_hidden('codigo_assunto', array(), '');
                                                 ?>
                                             </div>
-
-
                                         </div> 
                                         <div class="row">
                                             <div class="col-sm-12">
@@ -122,10 +120,7 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 criar_input_hidden('codigo_origem', array(), '');
                                                 ?>
                                             </div> 
-
                                         </div> 
-
-
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +237,6 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                     <thead>
                                                         <tr>
                                                             <th>    
-
                                                                 <?php
                                                                 //   INPUT -                              
                                                                 criar_input_text_com_lupa_e_com_adicionar('DOCUMENTO', 'documento', 'documento', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
@@ -252,13 +246,13 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                             <th>    
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('NÚMERO', 'numero_documento', 'numero_documento', array('maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
+                                                                criar_input_text('NÚMERO', 'numero_documento', 'numero_documento', array('maxlength' => '6', 'placeholder' => 'Informe o Documento','onkeypress' => 'return SomenteNumero(event)'), '');
                                                                 ?>
                                                             </th>
                                                             <th>   
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('ANO', 'ano_documento', 'ano_documento', array('maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
+                                                                criar_input_text('ANO', 'ano_documento', 'ano_documento', array('maxlength' => '4', 'placeholder' => 'Informe o Documento','onkeypress' => 'return SomenteNumero(event)'), '');
                                                                 ?>
                                                             </th>
                                                             <th>  
@@ -292,7 +286,6 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                             <?php
                                             criar_textarea('OBSERVAÇÃO', 'obs_processo', 'obs_processo', '', array('required' => 'true', 'maxlength' => '254', 'rows' => '9'));
                                             ?>
-
                                         </div>
                                     </div>
                                 </div>

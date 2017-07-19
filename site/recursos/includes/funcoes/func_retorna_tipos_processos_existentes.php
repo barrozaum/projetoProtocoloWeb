@@ -60,7 +60,7 @@ function fun_retorna_proximo_numero_processo($pdo, $codigo_tipo_processo) {
     $query_tipo_processo_processo = $pdo->prepare($sql_tipo_processo_processo);
     $query_tipo_processo_processo->execute();
     if ($dados = $query_tipo_processo_processo->fetch()) {
-        print $dados['numero_proximo_processo'];
+        print str_pad( $dados['numero_proximo_processo'], 6, "0", STR_PAD_LEFT);
     }
 }
 

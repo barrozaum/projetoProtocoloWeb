@@ -8,8 +8,9 @@ include_once '../conexao/conexao.php';
 //biblioteca do setor
 include_once '../../funcoes/func_retorna_setor.php';
 // trato os valores passados pelos usuários
-$login_informado = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['txtlogin']);
-$senha_informada = preg_replace("/[^a-zA-Z0-9]/", "", $_POST['txtsenha']);
+include_once '../../funcoes/function_letraMaiscula.php';
+$login_informado = letraMaiuscula($_POST['txtlogin']);
+$senha_informada = letraMaiuscula($_POST['txtsenha']);
 $senha_criptografada = md5($senha_informada);
 //comando sql para buscar usuario
 $sql_login = "SELECT * FROM usuario WHERE login = '{$login_informado}' LIMIT 1";

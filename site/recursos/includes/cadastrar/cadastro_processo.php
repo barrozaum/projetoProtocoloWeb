@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //            inserindo dados no cadastro de processo
             $sql = "INSERT INTO cadastro_processo (idProcesso, numeroProcesso, tipoProcesso, anoProcesso, dataProcesso, idAssunto, descricao_assunto, idOrigem, descricao_origem, idRequerente,  descricao_requerente,logradouro, numero,complemento, bairro, cidade, uf, cep,telefone,celular, usuario, valor)";
             $sql = $sql . " VALUES ";
-            $sql = $sql . " (null, {$cad_numero_processo}, {$cad_tipo_processo}, {$cad_ano_processo}, '{$cad_data_processo}', '{$cad_codigo_assunto}', '{$cad_assunto}','{$cad_codigo_origem}', '{$cad_origem}', '{$cad_codigo_requerente}','{$cad_requerente}','{$cad_logradouro_requerente}','{$cad_numero_end_requerente}','{$cad_complemento_requerente}','{$cad_bairro_requerente}','{$cad_cidade_requerente}','{$cad_uf_requerente}','{$cad_cep_requerente}','{$cad_tel_fixo}','{$cad_tel_cel}','{$_SESSION['LOGIN_USUARIO']}', '{$valor_processo}') ";
+            $sql = $sql . " (null, '{$cad_numero_processo}', {$cad_tipo_processo}, {$cad_ano_processo}, '{$cad_data_processo}', '{$cad_codigo_assunto}', '{$cad_assunto}','{$cad_codigo_origem}', '{$cad_origem}', '{$cad_codigo_requerente}','{$cad_requerente}','{$cad_logradouro_requerente}','{$cad_numero_end_requerente}','{$cad_complemento_requerente}','{$cad_bairro_requerente}','{$cad_cidade_requerente}','{$cad_uf_requerente}','{$cad_cep_requerente}','{$cad_tel_fixo}','{$cad_tel_cel}','{$_SESSION['LOGIN_USUARIO']}', '{$valor_processo}') ";
 
             $executa = $pdo->query($sql);
 //          retorna ultmia id inserida

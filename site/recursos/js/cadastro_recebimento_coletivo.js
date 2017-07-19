@@ -28,6 +28,8 @@ $(document).on('click', '#id_buscar_processos', function (e) {
     var url = 'recursos/includes/listar/listar_recebimento_coletivo.php'
     var parametros = {setor: setor, setor_origem: setor_origem, dt_inicial: dt_inicial, dt_final: dt_final, codigo_setor: codigo_setor};
     var listar = 'listar';
+    $("#"+listar).html('<div style="margin-top:50px; margin-left:50%"><img src="recursos/imagens/ajax-loader.gif" alt="carregando" title="carregando" width="20px"></div>');
+
 // chamo a função que irá pesquisar o valor
     funcao_retorna_pesquisa(url, parametros, listar);
 });

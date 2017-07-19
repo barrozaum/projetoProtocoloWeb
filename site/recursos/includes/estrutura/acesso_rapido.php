@@ -31,11 +31,11 @@ include_once './controle/validar_secao.php';
          
                             <?php } if (in_array("6", $_SESSION['PERMISSAO_MENU'])) { ?>
                                 <ul class="list-group">
-                                    <a href="cadastro_recebimento_individual.php" title="Cadastra recebimento do process"><li class="list-group-item" >RECEBIMENTO</li></a>
+                                    <a href="cadastro_recebimento_individual.php" title="Cadastra recebimento do processo Individual"><li class="list-group-item" >RECEBIMENTO INDIVIDUAL</li></a>
                                 </ul>
-                            <?php } if (in_array("7", $_SESSION['PERMISSAO_MENU'])) { ?>
+                            <?php } if (in_array("31", $_SESSION['PERMISSAO_MENU'])) { ?>
                                 <ul class="list-group">
-                                    <a href="segunda_via_etiqueta.php" title="Emitir segunda via da etiqueta do processo"><li class="list-group-item" >EMISSÃO SEGUNDA VIA</li></a>
+                                    <a href="cadastro_recebimento_coletivo.php" title="Cadastra recebimento do processo Individual"><li class="list-group-item" >RECEBIMENTO COLETIVO</li></a>
                                 </ul>
                             <?php } ?>
                         </div>
