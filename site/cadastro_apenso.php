@@ -22,6 +22,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/adiciona_zero.js"></script>
         <script src="recursos/js/camposNumeros.js"></script>
         <script src="recursos/js/funcao_consultas.js"></script>
+        <script src="recursos/js/Selecionar_Dentro_Select.js"></script>
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
@@ -43,14 +44,18 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             <!-- Não apagar, pois é onde encontra-se o menu do site -->
         </div>
 
-        <div class="container text center">
-            <div id="formulario"></div>
-        </div>
-        <hr />
-        <div class="container bg-4 text center">
-            <div id="listar"></div>
-        </div>
 
+        <div class="container text center">
+            <div id="prosseguindo">
+                <div class="container text center">
+                    <div id="formulario"></div>
+                </div>
+                <hr />
+                <div class="container bg-4 text center">
+                    <div id="listar"></div>
+                </div>
+            </div>
+        </div>
         <div id="modal"></div>
         <hr />
         <div id="rodape">

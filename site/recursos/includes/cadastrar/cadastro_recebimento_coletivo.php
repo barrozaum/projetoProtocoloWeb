@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data_recebimento_americana = dataAmericano(date('d/m/Y'));
 //      Comando sql a ser executado 
             foreach ($_POST['txt_op'] as $key => $id_carga_processo) {
-                  cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana);
+                cadastro_recebimento_apenso_processo($pdo, $id_carga_processo, $data_recebimento_americana);
+                cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana);
             }
           
             //            mensagem de sucesso

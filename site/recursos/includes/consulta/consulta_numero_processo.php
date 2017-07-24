@@ -1,6 +1,6 @@
 <?php
 
-print $_POST['txt_tipo_processo'];
-print $_POST['txt_numero_processo'];
-print $_POST['txt_ano_processo'];
+print $_POST['numero'];
+print $_POST['tipo'];
+print $_POST['ano'];
 

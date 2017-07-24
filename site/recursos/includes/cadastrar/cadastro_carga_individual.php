@@ -56,8 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data_carga_americana = dataAmericano($data_carga);
 //      Comando sql a ser executado  
 
-            cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga,$codigo_setor_origem_processo, $codigo_setor_carga, $sequencia_carga);
+            cadastro_carga_processo($pdo, $codigo_processo, $data_carga_americana, $parecer_carga,$codigo_setor_origem_processo, $codigo_setor_carga, $sequencia_carga, 0);
   
+            cadastro_carga_apensos($pdo, $codigo_processo, $data_carga_americana, $parecer_carga, $codigo_setor_origem_processo, $codigo_setor_carga, 1);
 //            mensagem de sucesso
             $msg = "CADASTRADO COM SUCESSO !!!";
             

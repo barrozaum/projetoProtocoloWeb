@@ -3,6 +3,9 @@
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 
+//biblioteca de cargas
+include_once '../funcoes/func_carga_processo.php';
+
 //verifico se a página está sendo chamada pelo méthod POST
 // Se sim executa escript
 // Senao dispara Erro
@@ -27,10 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->beginTransaction();
 
 //          comando sql            
-            $sql_u = "UPDATE carga_processo SET usuario_acao = '{$_SESSION['LOGIN_USUARIO']}' WHERE idCarga = '{$codigo_carga}'";
-            $executa_u = $pdo->query($sql_u);
-            $sql = "DELETE FROM carga_processo WHERE idCarga = '{$codigo_carga}'";
-            $executa = $pdo->query($sql);
+            fun_excluir_carga_apenso($pdo, $codigo_carga);
+            fun_excluir_carga_processo($pdo, $codigo_carga);
+           
 
 //       persistindo no banco     
             $pdo->commit();

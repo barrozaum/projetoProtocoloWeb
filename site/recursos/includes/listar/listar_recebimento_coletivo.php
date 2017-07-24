@@ -83,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {// dados formulario
                                     // preparo para realizar o comando sql
                                     $sql = "SELECT * FROM carga_processo cp, cadastro_processo p, tipo_processo t";
                                     $sql = $sql . " WHERE cp.tramite = 0";
+                                    $sql = $sql . " AND cp.apenso = 0";
                                     $sql = $sql . " AND cp.idSetorEntrada  = '{$codigo_setor_origem_usuario_logado}'";
                                     $sql = $sql . " AND cp.idSetorOrigem = '{$codigo_setor}'";
                                     $sql = $sql . " AND cp.dataCarga >= '{$data_inicial}'";

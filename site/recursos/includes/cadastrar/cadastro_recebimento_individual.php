@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $data_recebimento_americana = dataAmericano($data_recebimento);
 //      Comando sql a ser executado  
+            cadastro_recebimento_apenso_processo($pdo, $id_carga_processo, $data_recebimento_americana);
+            
             cadastro_recebimento_processo($pdo, $id_carga_processo, $data_recebimento_americana);
             //            mensagem de sucesso
             $msg = "CADASTRADO COM SUCESSO";

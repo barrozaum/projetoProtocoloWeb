@@ -79,28 +79,28 @@ include_once './controle/validar_secao.php';
                                             </li>
                                         <?php } ?>
                                         <?php
-                                        if (in_array("6", $_SESSION['PERMISSAO_MENU'])) {
+                                        if (in_array("34", $_SESSION['PERMISSAO_MENU']) || in_array("35", $_SESSION['PERMISSAO_MENU'])) {
                                             ?>
                                             <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">APENSO PROCESSO</a>
                                                 <ul class="dropdown-menu">
-                                                    <?php if (in_array("6", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                    <?php if (in_array("34", $_SESSION['PERMISSAO_MENU'])) { ?>
                                                         <li><a href="cadastro_apenso.php">INCLUIR</a></li>
                                                     <?php } ?>
-                                                    <?php if (in_array("31", $_SESSION['PERMISSAO_MENU'])) { ?>
-                                                        <li><a href="excluir_apenso.php">EXCLUIR</a></li>
+                                                    <?php if (in_array("35", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="excluir_apenso.php">EXCLUI</a></li>
                                                     <?php } ?>
                                                 </ul>
                                             </li>
                                         <?php } ?>
-                                            <?php if (in_array("7", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                        <?php if (in_array("7", $_SESSION['PERMISSAO_MENU'])) { ?>
                                             <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
                                         <?php } ?>
-                                        
+
                                     </ul>
                                 </li>
                             <?php } ?>
                             <?php
-                            if (in_array("8", $_SESSION['PERMISSAO_MENU'])){
+                            if (in_array("32", $_SESSION['PERMISSAO_MENU'])) {
                                 ?>
                                 <li class="root">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">OFÍCIO <b class="caret"></b></a>

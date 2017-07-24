@@ -13,7 +13,7 @@ function fun_retorna_setor_processo($pdo, $codigo_setor) {
     $sql_setor_processo = "SELECT * FROM carga_processo WHERE idSetorEntrada = '{$codigo_setor}' or  idSetorOrigem = '{$codigo_setor}'";
     $query_setor_processo = $pdo->prepare($sql_setor_processo);
     $query_setor_processo->execute();
-     $resultado = $query_setor_processo->fetchColumn();
+    $resultado = $query_setor_processo->fetchColumn();
   
     if ($resultado > 0) {
         return TRUE;

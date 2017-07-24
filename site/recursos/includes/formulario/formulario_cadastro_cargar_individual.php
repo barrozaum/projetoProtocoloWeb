@@ -39,7 +39,7 @@ function formulario($pdo) {
                             <div class="col-sm-6">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '3', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                criar_input_text('Número', 'numero_processo', 'numero_processo', array('required' => 'true', 'maxlength' => '6', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                 ?>
                             </div>
                             <div class="col-sm-6">

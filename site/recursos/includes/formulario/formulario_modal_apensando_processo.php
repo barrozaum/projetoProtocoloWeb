@@ -13,7 +13,7 @@ if ($_POST['id'] === '1') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);
     $numero_processo = letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);
-    $codigo_setor_usuario_carga = letraMaiuscula($_POST['codigo_setor_usuario_carga']);
+    $codigo_setor_usuario_carga = 1; // só quem pode apensar processo é o protocolo
 
     mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo, $codigo_setor_usuario_carga);
     $pdo = null;
@@ -24,7 +24,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
 //    consulta para saber se o processo existe
     $sql = "SELECT * FROM cadastro_processo ";
     $sql = $sql . " WHERE tipoProcesso = '{$tipo_processo}'";
-    $sql = $sql . " AND numeroProcesso = '{$numero_processo}'";
+    $sql = $sql . " AND numeroProcesso = {$numero_processo}";
     $sql = $sql . " AND anoProcesso = '{$ano_processo}'";
     $sql = $sql . " LIMIT 1";
     $query = $pdo->query($sql);
@@ -44,16 +44,18 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
     <form name="formulario_carga" id="id_formulario_carga" action="recursos/includes/cadastrar/cadastro_carga_individual.php" method="POST">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"> <p class="text-info">CARGA PROCESSO !!!</p></h4>
+            <h4 class="modal-title"> <p class="text-info">APENSO PROCESSO !!!</p></h4>
             <div id="error_modal"></div>
         </div>
         <div class="modal-body">
-            <?php
-//                código do processo
-            criar_input_hidden('codigo_processo', array(), $id_processo);
-            criar_input_hidden('codigo_setor_origem_processo', array(), $codigo_setor_usuario_carga);
-            ?>
-
+           <?php 
+                criar_input_hidden("conf_id_anexo", array(), $id_processo);
+                criar_input_hidden("conf_numero_anexo", array(), $numero_processo);
+                criar_input_hidden("conf_ano_anexo", array(), $ano_processo);
+                criar_input_hidden("conf_tipo_anexo", array(), $tipo_processo);
+                criar_input_hidden("conf_apenso_anexo", array(), $apensado);
+           
+           ?>
 
             <div class="row">
                 <div class="col-sm-8">
@@ -64,7 +66,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
                 </div>
                 <div class="col-sm-4">
                     <?php
-                    criar_input_data('Data Carga', 'data', 'data', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'));
+                    criar_input_data('Data Apenso', 'data', 'data', array('readonly' => 'true', 'required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'));
                     ?>
                 </div>
 
@@ -87,17 +89,15 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
             </div>
 
             <?php
-            $processo_pode_dar_carga = "nao";
-            if ($apensado != 0) {
-                mostrar_mensagem("PROCESSO NÃO PODE RECEBER CARGA, O MESMO ENCONTRA-SE APENSADO !!!");
+            $processo_pode_apensar = "nao";
+            if ($apensado == 1) { // 1 processo filho, 3 processo que é pai e filho 
+                mostrar_mensagem("PROCESSO NÃO PODE SER APENSADO, O MESMO ENCONTRA-SE APENSADO !!!");
             } else {
                 global $id_ultima_carga;
                 global $seq_carga;
-                $processo_pode_dar_carga = processo_pode_dar_carga($pdo, $id_processo, $codigo_setor_usuario_carga);
-                if ($processo_pode_dar_carga !== "sim") {
-                    mostrar_mensagem($processo_pode_dar_carga);
-                } else {
-                    mostrar_parecer($id_ultima_carga, $seq_carga);
+                $processo_pode_apensar = processo_pode_dar_carga($pdo, $id_processo, $codigo_setor_usuario_carga);
+                if ($processo_pode_apensar !== "sim") {
+                    mostrar_mensagem($processo_pode_apensar);
                 }
             }
             ?>
@@ -107,10 +107,11 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
 
         <div class="modal-footer">
             <?php
-            if ($processo_pode_dar_carga !== "sim") {
+            
+            if ($processo_pode_apensar !== "sim") {
                 print '<button type="button" class="btn btn-default"  data-dismiss="modal" >SAIR </button>';
             } else {
-                print '<button type="button" class="btn btn-success" id="id_btn_enviar_carga">ENVIAR </button>';
+                print '<button type="button" class="btn btn-success" id="id_btn_enviar_apenso" data-dismiss="modal">APENSAR </button>';
             }
             ?>
         </div>
@@ -120,32 +121,6 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
 ?>
 
 
-<?php
-
-function mostrar_parecer($id_ultima_carga, $seq_carga) {
-    ?>
-    <div class="row">
-        <div class="col-sm-12">
-            <?php
-            //   INPUT -                              
-            criar_textarea('PARECER', 'parecer', 'parecer', '', array('required' => 'true', 'maxlength' => '240', 'placeholder' => 'Informe o Parecer do Processo'));
-            ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <?php
-            //   INPUT -                              
-            criar_input_text_com_lupa('SETOR', 'setor', 'setor', array('required' => 'true', 'readonly' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Setor'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_setor');
-            criar_input_hidden('codigo_setor', array(), '');
-            criar_input_hidden('ultima_carga_processo', array(), $id_ultima_carga);
-            criar_input_hidden('num_sequencia_carga', array(), $seq_carga);
-            ?>
-        </div>
-    </div>
-    <?php
-}
-?>
 <?php
 
 function mostrar_mensagem($msg) {

@@ -41,7 +41,7 @@ function estruraPagina() {
             <div id="carregamento">
                 <script>
                     $(document).ready(function () {
-                        var carrega = '<div style="margin-top:50px; margin-left:50%"><img src="../../imagens/ajax-loader.gif" alt="Atender" width="20px"></div>';
+                        var carrega = '<div style="margin-top:50px; margin-left:50%"><img src="../../imagens/ajax-loader.gif" alt="carregando ..." width="20px"></div>';
                         $('#carregamento').html(carrega);
                         $('#carregamento').load('selecionar_assunto.php?janela=2');
                     });
