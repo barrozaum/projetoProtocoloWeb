@@ -162,6 +162,8 @@ include_once './controle/validar_secao.php';
                                             <li><a href="consulta_setor.php">SETOR</a></li>
                                         <?php } if (in_array("20", $_SESSION['PERMISSAO_MENU'])) { ?>
                                             <li><a href="consulta_origem.php">ORIGEM</a></li>
+                                        <?php } if (in_array("36", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_observacao.php">OBSERVAÇÃO</a></li>
                                         <?php } ?>
                                     </ul>
 
