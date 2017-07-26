@@ -24,6 +24,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/camposNumeros.js"></script>
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/mascaraValor.js"></script>
+        <script src="recursos/js/func_botao_adiciona_processo.js"></script>
 
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>

@@ -50,7 +50,7 @@ function formularioCadastro($pdo) {
                             <div class="col-sm-12">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text_com_lupa('REQUERENTE', 'requerente', 'requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Requerente'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_requerente');
+                                criar_input_text_com_lupa_e_com_adicionar('REQUERENTE', 'requerente', 'requerente', array('required' => 'true', 'maxlength' => '30', 'placeholder' => 'Informe o Requerente'), '', 'Conter no Minimo 3 caracteres [a-z A-Z]', 'lupa_requerente');
                                 criar_input_hidden('codigo_requerente', array(), '');
 //                              campos nao utilizaveis
                                 criar_input_hidden('tel_fixo', array(), '');

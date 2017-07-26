@@ -81,7 +81,7 @@ include_once './controle/validar_secao.php';
                                         <?php
                                         if (in_array("34", $_SESSION['PERMISSAO_MENU']) || in_array("35", $_SESSION['PERMISSAO_MENU'])) {
                                             ?>
-                                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">APENSO PROCESSO</a>
+                                            <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">APENSO</a>
                                                 <ul class="dropdown-menu">
                                                     <?php if (in_array("34", $_SESSION['PERMISSAO_MENU'])) { ?>
                                                         <li><a href="cadastro_apenso.php">INCLUIR</a></li>

@@ -10,13 +10,14 @@ include_once '../estrutura/conexao/conexao.php';
 ?>
 <?php
 if (empty($_POST['id'])) {
-    formulario($pdo);
+    
+    formulario($pdo, validar_titulo_pagina());
 }
 ?>
 
 <?php
 
-function formulario($pdo) {
+function formulario($pdo,$titulo) {
     ?>
 
 
@@ -25,7 +26,8 @@ function formulario($pdo) {
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <div class="panel panel-default">
                     <!-- INICIO Dados do imóvel -->
-                    <div class="panel-heading text-center">CADASTRO APENSO PROCESSO </div>
+                    
+                    <div class="panel-heading text-center"><?php echo $titulo; ?> </div>
                     <div class="panel-body">
                         <!-- inicio dados inscrição-->
                          <div class="row">
@@ -68,4 +70,12 @@ function formulario($pdo) {
     </form>
     <?php
 }
-?>
+
+
+function validar_titulo_pagina(){
+    if(isset($_REQUEST['title']) == 1){
+        return "APENSANDO PROCESSO !!! ";
+    }else{
+        return "DESAPENSANDO PROCESSSO !!!";
+    }
+}

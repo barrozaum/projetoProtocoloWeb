@@ -32,7 +32,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_apenso.php');
+                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_apenso.php?title=1');
                 $('#modal').load('recursos/includes/estrutura/modal_grande.html');
 
             }
@@ -46,6 +46,8 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
 
 
         <div class="container text center">
+            <input type="hidden" name="insere_exclui" id="id_insere_exclui" value="incluir" />
+
             <div id="prosseguindo">
                 <div class="container text center">
                     <div id="formulario"></div>

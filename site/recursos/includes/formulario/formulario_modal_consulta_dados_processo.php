@@ -23,9 +23,10 @@ if ($_POST['id'] === '7') {
 
 
 <?php
-function consulta_id_processo($pdo){
+
+function consulta_id_processo($pdo) {
     $codigo = letraMaiuscula($_POST['codigo']);
-    
+
     $sql_conulta_codigo = "SELECT * FROM cadastro_processo ";
     $sql_conulta_codigo = $sql_conulta_codigo . " WHERE idProcesso = '$codigo'";
     $sql_conulta_codigo = $sql_conulta_codigo . " Limit 1";
@@ -39,8 +40,8 @@ function consulta_id_processo($pdo){
     } else {
         mostrar_pagina_de_erro("Desculpe, porém não encotramos o processo desejado !!!");
     }
-    
 }
+
 function consulta_numero_ano_processo($pdo) {
 
 
@@ -109,13 +110,17 @@ function mostrar_dados_processo($pdo, $dados) {
     </div>
 
     <div class = "modal-body ">
+        <div class="row">
+            <?php echo fun_verificar_apensado($pdo, $dados['idProcesso']); ?>
+
+        </div>
+
         <div class = "row">
-
-
             <ul class = "nav nav-tabs"> <!--menu das abas -->
                 <li class = "active"><a data-toggle = "tab" href = "#home">Processo</a></li>
                 <li><a data-toggle = "tab" href = "#menu1">Requerente</a></li>
                 <li><a data-toggle = "tab" href = "#menu2">Documentos</a></li>
+                <li><a data-toggle = "tab" href = "#menu3">Apensos</a></li>
                 <li><a data-toggle = "tab" href = "#menu4">Observações</a></li>
                 <li><a data-toggle = "tab" href = "#menu5">Cargas</a></li>
             </ul> <!--fim dos menu das abas -->
@@ -129,6 +134,8 @@ function mostrar_dados_processo($pdo, $dados) {
                         <div class = "panel-heading text-center">PROCESSO</div>
                         <div class = "panel-body">
                             <!--inicio dados inscrição-->
+
+
                             <div class = "row">
                                 <div class="col-sm-6">
                                     <?php
@@ -293,7 +300,52 @@ function mostrar_dados_processo($pdo, $dados) {
                                                 <td><?php echo $dados_doc['descricao_documento']; ?></td>
                                                 <td><?php echo $dados_doc['numeroDocumento']; ?></td>
                                                 <td><?php echo $dados_doc['anoDocumento']; ?></td>
-                                           
+
+                                            </tr>
+
+
+                                            <?php
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- Fim segunda aba -->
+                <div id="menu3" class="tab-pane"> <!-- segunda aba -->
+                    <div class="panel panel-default">
+                        <!-- INICIO Dados do imóvel -->
+                        <div class="panel-heading text-center" >APENSOS </div>
+                        <div class="panel-body">
+                            <div style='max-height: 200px; overflow: auto;'>
+                                <table class='table table-bordered table-hover'>
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo Apenso</th>
+                                            <th>Número Apenso</th>
+                                            <th>Ano Apenso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $sql_apenso = "SELECT cp.numeroProcesso, cp.anoProcesso, t.descricao_tipo_processo FROM apenso a, cadastro_processo cp, tipo_processo t ";
+                                        $sql_apenso = $sql_apenso . " WHERE a.id_processo_pai ='{$dados['idProcesso']}' ";
+                                        $sql_apenso = $sql_apenso . " AND a.id_processo_filho = cp.idProcesso ";
+                                        $sql_apenso = $sql_apenso . " AND cp.tipoProcesso = t.id_tipo_processo ";
+                                        $query_apenso = $pdo->prepare($sql_apenso);
+                                        $query_apenso->execute();
+                                        for ($i = 0; $dados_apenso = $query_apenso->fetch(); $i++) {
+                                            ?>   	
+
+
+                                            <tr>
+                                                <td><?php echo $dados_apenso['descricao_tipo_processo']; ?></td>
+                                                <td><?php echo $dados_apenso['numeroProcesso']; ?></td>
+                                                <td><?php echo $dados_apenso['anoProcesso']; ?></td>
+
                                             </tr>
 
 
@@ -319,7 +371,7 @@ function mostrar_dados_processo($pdo, $dados) {
                                 <div class="col-sm-12">
                                     <?php
                                     //   INPUT -                              
-                                    criar_textarea('Observação ', 'observacao_processo', 'observacao_processo', fun_retorna_descricao_observacao($pdo, $dados['idProcesso']), array('required' => 'true',  'maxlength' => '254', 'rows' => '9'));
+                                    criar_textarea('Observação ', 'observacao_processo', 'observacao_processo', fun_retorna_descricao_observacao($pdo, $dados['idProcesso']), array('required' => 'true', 'maxlength' => '254', 'rows' => '9'));
                                     ?>
                                 </div>
                             </div>
@@ -349,7 +401,7 @@ function mostrar_dados_processo($pdo, $dados) {
                                     <tbody>
                                         <?php
                                         $sql_carga = "SELECT * FROM carga_processo WHERE idProcesso ='{$dados['idProcesso']}' ORDER BY seq_carga DESC ";
-                                        $query_carga= $pdo->prepare($sql_carga);
+                                        $query_carga = $pdo->prepare($sql_carga);
                                         $query_carga->execute();
                                         for ($i = 0; $dados_carga = $query_carga->fetch(); $i++) {
                                             ?>   	
@@ -359,19 +411,21 @@ function mostrar_dados_processo($pdo, $dados) {
                                                 <td><?php echo dataBrasileiro($dados_carga['dataCarga']); ?></td>
                                                 <td><?php echo $dados_carga['hora_carga']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorOrigem']); ?></td>
-                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);; ?></td>
+                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);
+                                            ; ?></td>
                                                 <td><?php echo dataBrasileiro($dados_carga['dataRecebimento']); ?></td>
                                                 <td><?php echo $dados_carga['hora_recebimento']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorEntrada']); ?></td>
-                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);; ?></td>
+                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);
+                                            ; ?></td>
                                                 <td><?php echo $dados_carga['parecer']; ?></td>
-                                                
+
                                             </tr>
 
 
-                                            <?php
-                                        }
-                                        ?>
+        <?php
+    }
+    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -395,4 +449,22 @@ function mostrar_dados_processo($pdo, $dados) {
     </div>
     <?php
 }
-?>
+
+function fun_verificar_apensado($pdo, $id_processo_filho){
+    $sql_filho = "SELECT cp.numeroProcesso, cp.anoProcesso, t.descricao_tipo_processo FROM apenso a, cadastro_processo cp, tipo_processo t";
+    $sql_filho = $sql_filho . " WHERE $id_processo_filho = a.id_processo_filho";
+    $sql_filho = $sql_filho . " AND $id_processo_filho = cp.idProcesso";
+    $sql_filho = $sql_filho . " AND cp.tipoProcesso = t.id_tipo_processo";
+    $query_filho = $pdo->prepare($sql_filho);
+    $query_filho->execute();
+    if($dados_filho = $query_filho->fetch()){
+        $msg = "<div class='alert alert-danger text-center'>";
+        $msg = $msg ." PROCESSO APENSADO !!!";
+        $msg = $msg ." <hr />";
+        $msg = $msg ." DADOS APENSADOR -> TIPO :". $dados_filho['descricao_tipo_processo'] ." - NÚMERO :" . $dados_filho['numeroProcesso'] . " - ANO :" . $dados_filho['anoProcesso'] ;
+        $msg = $msg ."</DIV>";
+        return $msg;
+    }else{
+        return "";
+    }
+}

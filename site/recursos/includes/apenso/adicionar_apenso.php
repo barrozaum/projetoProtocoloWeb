@@ -13,9 +13,14 @@ if ($_POST['id_programa'] == "1") {
 $pdo = null;
 
 function func_prosseguir_anexo($pdo) {
+    if ($_POST['id_insere_exclui'] === "incluir") {
+        $action_form = 'recursos/includes/cadastrar/cadastro_apenso.php';
+    } else {
+        $action_form = 'recursos/includes/excluir/excluir_apenso.php';
+    }
     ?>
 
-    <form  method="post" id="id_fomr_apenso" action="recursos/includes/cadastrar/cadastro_apenso.php">    
+    <form  method="post" id="id_fomr_apenso" action="<?php echo $action_form; ?>">    
         <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <div class="panel panel-default">
@@ -31,6 +36,7 @@ function func_prosseguir_anexo($pdo) {
                                 criar_input_hidden('tipo_processo', array(), $_POST['tipo']);
                                 criar_input_hidden('codigo_processo', array(), $_POST['codigo']);
                                 criar_input_hidden('apensado', array(), $_POST['apensado']);
+                                criar_input_hidden('insere_exclui', array(), $_POST['id_insere_exclui']);
                                 ?>
                             </div>
                             <div class="col-sm-4">
@@ -47,34 +53,41 @@ function func_prosseguir_anexo($pdo) {
                             </div>
                         </div> 
                     </div>
+
                     <div class="panel-heading text-center">DADOS PROCESSO APENSO</div>
                     <div class="panel-body">
                         <table id="tabela-contrato" class="table">
-                            <thead>
-                                <tr>
-                                    <th>    
-                                        <?php
-                                        //   INPUT -                              
-                                        criar_input_select('Tipo Processo', 'tipo_anexo', 'tipo_anexo', array('required' => 'true'), fun_retorna_tipo_processo_existente($pdo), '');
-                                        ?>
-                                    </th>
-                                    <th>    
-                                        <?php
-                                        //   INPUT -                              
-                                        criar_input_text('NÚMERO', 'numero_anexo', 'numero_anexo', array('maxlength' => '6', 'placeholder' => 'Informe o Número Anexo', 'onkeypress' => 'return SomenteNumero(event)'), '');
-                                        ?>
-                                    </th>
-                                    <th>   
-                                        <?php
-                                        //   INPUT -                              
-                                        criar_input_text('ANO', 'ano_anexo', 'ano_anexo', array('maxlength' => '4', 'placeholder' => 'Informe o Ano Anexo', 'onkeypress' => 'return SomenteNumero(event)'), '');
-                                        ?>
-                                    </th>
-                                    <th>  
-                                        <button type="button" id="id_vericar_processo_anexo" class="btn btn-large btn-primary">Procurar</button>
-                                    </th>
-                                </tr>
-                            </thead>
+                            <?php
+                            if ($_POST['id_insere_exclui'] === "incluir") {
+                                ?>
+                                <thead>
+                                    <tr>
+                                        <th>    
+                                            <?php
+                                            //   INPUT -                              
+                                            criar_input_select('Tipo Processo', 'tipo_anexo', 'tipo_anexo', array('required' => 'true'), fun_retorna_tipo_processo_existente($pdo), '');
+                                            ?>
+                                        </th>
+                                        <th>    
+                                            <?php
+                                            //   INPUT -                              
+                                            criar_input_text('NÚMERO', 'numero_anexo', 'numero_anexo', array('maxlength' => '6', 'placeholder' => 'Informe o Número Anexo', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                            ?>
+                                        </th>
+                                        <th>   
+                                            <?php
+                                            //   INPUT -                              
+                                            criar_input_text('ANO', 'ano_anexo', 'ano_anexo', array('maxlength' => '4', 'placeholder' => 'Informe o Ano Anexo', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                            ?>
+                                        </th>
+                                        <th>  
+                                            <button type="button" id="id_vericar_processo_anexo" class="btn btn-large btn-primary">Procurar</button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <?php
+                            }
+                            ?>
                             <?php
                             $sql = "SELECT * FROM apenso a, cadastro_processo cp WHERE a.id_processo_pai = '{$_POST['codigo']}' AND a.id_processo_filho = cp.idProcesso";
                             $query = $pdo->prepare($sql);
@@ -88,17 +101,26 @@ function func_prosseguir_anexo($pdo) {
 
                                 <tr>
                                     <th>    
-                                        <input type="text" class="form-control" name ="txt_array_tipo_anexo[]" required="true" value="<?php print fun_retorna_descricao_tipo_processo($pdo,$dados['tipoProcesso']);?>" maxlength="12" placeholder="" readonly="true"/>
+                                        <input type="text" class="form-control" name ="txt_array_tipo_anexo[]" required="true" value="<?php print fun_retorna_descricao_tipo_processo($pdo, $dados['tipoProcesso']); ?>" maxlength="12" placeholder="" readonly="true"/>
                                     </th>
                                     <th>    
-                                        <input type="text" class="form-control" name ="txt_array_numero_anexo[]" required="true" value="<?php print $dados['numeroProcesso'];?>" maxlength="12" placeholder="" readonly="true"/>
+                                        <input type="text" class="form-control" name ="txt_array_numero_anexo[]" required="true" value="<?php print $dados['numeroProcesso']; ?>" maxlength="12" placeholder="" readonly="true"/>
                                     </th>
                                     <th>   
-                                        <input type="text" class="form-control" name ="txt_array_ano_anexo[]" required="true" value="<?php print $dados['anoProcesso'];?>" maxlength="12" placeholder="" readonly="true"/>
+                                        <input type="text" class="form-control" name ="txt_array_ano_anexo[]" required="true" value="<?php print $dados['anoProcesso']; ?>" maxlength="12" placeholder="" readonly="true"/>
                                     </th>
                                     <th>  
-                                        <input type="hidden" class="form-control" name ="txt_array_codigo_anexo[]"  required="true" value="<?php print $dados['idProcesso'];?>" maxlength="11" placeholder="" readonly="true"/>
+                                        <input type="hidden" class="form-control" name ="txt_array_codigo_anexo[]"  required="true" value="<?php print $dados['idProcesso']; ?>" maxlength="11" placeholder="" readonly="true"/>
                                     </th>
+                                    <?php
+                                    if ($_POST['id_insere_exclui'] !== "incluir") {
+                                        ?>
+                                        <td class="actions">  
+                                            <button class="btn btn-large btn-danger" onclick="RemoveTableRow(this)" type="button">Remover</button>
+                                        </td>
+                                        <?php
+                                    }
+                                    ?>
                                 </tr>
 
                                 <?php
@@ -111,7 +133,14 @@ function func_prosseguir_anexo($pdo) {
                     </div>
                     <div class="row">
                         <div class="col-sm-2">
-                            <button type="button" class="btn btn-success" id="id_realizar_apenso">APENSAR PROCESSOS</button>
+                            <?php
+                            if ($_POST['id_insere_exclui'] === "excluir") {
+                                ?>
+                                <button type="submit" class="btn btn-success" id="">DESAPENSAR PROCESSOS</button>
+                            <?php } else { ?>
+                                <button type="button" class="btn btn-success" id="id_realizar_apenso">APENSAR PROCESSOS</button>
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>  

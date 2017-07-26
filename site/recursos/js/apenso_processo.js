@@ -114,12 +114,13 @@ $(function () {
     });
 
     $(document).on('click', '#id_prosseguir_com_apenso', function (e) {
+        var insere_exclui = $("#id_insere_exclui").val();
         var id_apensado = $("#id_apensado").val();
         var id_processo = $("#id_processo").val();
         var numero_processo = $("#id_numero_processo").val();
         var ano_processo = $("#id_ano_processo").val();
         var tipo_processo = $("#id_tipo_processo").val();
-        var parametros = {id_programa: 1, apensado : id_apensado, codigo: id_processo, numero: numero_processo, ano: ano_processo, tipo: tipo_processo};
+        var parametros = {id_insere_exclui: insere_exclui, id_programa: 1, apensado : id_apensado, codigo: id_processo, numero: numero_processo, ano: ano_processo, tipo: tipo_processo};
         var url = 'recursos/includes/apenso/adicionar_apenso.php';
         var listar = "prosseguindo";
         $("#" + listar).html('<div style="margin-top:50px; margin-left:50%"><img src="recursos/imagens/ajax-loader.gif" alt="carregando" title="carregando" width="20px"></div>');
