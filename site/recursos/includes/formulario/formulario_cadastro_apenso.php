@@ -6,17 +6,14 @@ include_once '../funcoes/funcaoCriacaoInput.php';
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
 //inclusao da conexao com o banco de dados
 include_once '../estrutura/conexao/conexao.php';
-
 ?>
 <?php
 if (empty($_POST['id'])) {
-    
     formulario($pdo, validar_titulo_pagina());
 }
 ?>
 
 <?php
-
 function formulario($pdo,$titulo) {
     ?>
 

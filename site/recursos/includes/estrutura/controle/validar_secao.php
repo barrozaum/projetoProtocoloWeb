@@ -18,6 +18,8 @@ if (isset($_SESSION['NAO_MOSTRAR_SETOR'])) {
 
 if (!isset($_SESSION["LOGADO_SISTEMA"])) {
     session_destroy();
-    header("Location: ../");
+    header("Location: sessao_expirada.php");
     exit();
 }
+
+//error_reporting(0);

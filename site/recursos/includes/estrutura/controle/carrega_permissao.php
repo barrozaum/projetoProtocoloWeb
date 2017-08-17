@@ -43,7 +43,11 @@ if (isset($_SESSION['VALIDA_LOGIN']) && isset($_SESSION['VALIDA_PARAMETROS'])) {
 
 
         if (fun_carrega_permissao()) {
-            header("Location:../../../../inicial.php");
+            if($_SESSION['LOGIN_CODIGO_SETOR_USUARIO']==='14'){
+                header("Location: carrega_permissao_juridico.php");
+            }else{
+                header("Location:../../../../inicial.php");
+            }
         } else {
             $_SESSION['MENSAGEM_ERRO_MENU_SISTEMA'];
             header("Location:../error.php");

@@ -15,7 +15,7 @@ function inserindo_carga($pdo, $id_proceso) {
     $sql_carga = "INSERT INTO carga_processo ";
     $sql_carga = $sql_carga . "(idProcesso, idSetorOrigem, idSetorEntrada, idSetorPresente, tramite, idUsuarioCarga, dataCarga, idUsuarioRecebimento, dataRecebimento, seq_carga, data_carga_sistema, data_recebimento_sistema, hora_carga, hora_recebimento)";
     $sql_carga = $sql_carga . " VALUES ";
-    $sql_carga = $sql_carga . "({$id_proceso},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']},{$_SESSION['LOGIN_CODIGO_SETOR_USUARIO']}, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}', '{$hora_carga}', '{$hora_carga}')";
+    $sql_carga = $sql_carga . "({$id_proceso},1,1,1, 1,  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}',  {$_SESSION['LOGIN_ID_USUARIO']}, '{$dia_atual}', 0, '{$dia_atual}', '{$dia_atual}', '{$hora_carga}', '{$hora_carga}')";
 
 
     $executa = $pdo->query($sql_carga);

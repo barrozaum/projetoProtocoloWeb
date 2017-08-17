@@ -65,7 +65,7 @@ function criar_input_data($label, $name, $id, $extras = array(), $value = '', $s
         $saida = $saida . " $k = \"$v\" ";
     }
 
-    $saida = $saida . "value='" . $value . "' onkeypress='return SomenteNumero(event)' OnKeyUp='return mascaraData(this)' >";
+    $saida = $saida . "value='" . $value . "' maxlength='10' onkeypress='return SomenteNumero(event)' OnKeyUp='return mascaraData(this)' >";
     $saida = $saida . '<span class="help-block">' . $span . '</span>';
     $saida = $saida . "</div>";
     print $saida;

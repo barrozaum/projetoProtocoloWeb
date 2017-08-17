@@ -411,13 +411,11 @@ function mostrar_dados_processo($pdo, $dados) {
                                                 <td><?php echo dataBrasileiro($dados_carga['dataCarga']); ?></td>
                                                 <td><?php echo $dados_carga['hora_carga']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorOrigem']); ?></td>
-                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);
-                                            ; ?></td>
+                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioCarga']);?></td>
                                                 <td><?php echo dataBrasileiro($dados_carga['dataRecebimento']); ?></td>
                                                 <td><?php echo $dados_carga['hora_recebimento']; ?></td>
                                                 <td><?php echo func_retorna_descricao_setor($pdo, $dados_carga['idSetorEntrada']); ?></td>
-                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);
-                                            ; ?></td>
+                                                <td><?php echo func_retorna_usuario($pdo, $dados_carga['idUsuarioRecebimento']);?></td>
                                                 <td><?php echo $dados_carga['parecer']; ?></td>
 
                                             </tr>
@@ -453,7 +451,7 @@ function mostrar_dados_processo($pdo, $dados) {
 function fun_verificar_apensado($pdo, $id_processo_filho){
     $sql_filho = "SELECT cp.numeroProcesso, cp.anoProcesso, t.descricao_tipo_processo FROM apenso a, cadastro_processo cp, tipo_processo t";
     $sql_filho = $sql_filho . " WHERE $id_processo_filho = a.id_processo_filho";
-    $sql_filho = $sql_filho . " AND $id_processo_filho = cp.idProcesso";
+    $sql_filho = $sql_filho . " AND a.id_processo_pai = cp.idProcesso";
     $sql_filho = $sql_filho . " AND cp.tipoProcesso = t.id_tipo_processo";
     $query_filho = $pdo->prepare($sql_filho);
     $query_filho->execute();

@@ -54,7 +54,8 @@ $data_final = dataAmericano(letraMaiuscula($_POST['dt_final']));
                     $sql = $sql . " WHERE  o.obs like '%$observacao%'";
                     $sql = $sql . " AND o.idProcesso = c.idProcesso";
                     $sql = $sql . " AND c.tipoProcesso = t.id_tipo_processo";
-                    
+                    $sql = $sql . " AND c.dataProcesso >= '$data_inicial' ";
+                    $sql = $sql . " AND c.dataProcesso <= '$data_final' ";
                     $sql = $sql . " ORDER BY  c.idProcesso   ";
                     $query = $pdo->prepare($sql);
                     //executo o comando sql

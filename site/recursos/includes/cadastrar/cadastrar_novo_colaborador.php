@@ -1,4 +1,5 @@
 <?php
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 
@@ -12,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // biblioteca para validar string informada    
     include ('../funcoes/function_letraMaiscula.php');
+//    incluindo programa pra dar permissões
+    include ('../funcoes/func_permissoes.php');
+    
+    
 //    aplica filtro na string enviada (LetraMaiuscula)
     $colaborador_login = letraMaiuscula($_POST['txt_novo_login']);
     $colaborador_email = letraMaiuscula($_POST['txt_novo_email']);
@@ -83,6 +88,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //      execução com comando sql    
             $executa = $pdo->query($sql);
 
+            $id_colaborador = $pdo->lastInsertId();
+
+//            insere permissões de acordo com o nivel
+            func_insere_permissoes_protocolo($pdo, $id_colaborador, $colaborador_permissao);
+
+//            insere permissão consulta no modulo juridico caso o usuário seja do setor juridico
+            if($colaborador_codigo_setor === '14'){
+                func_insere_permissoes_juridico($pdo, $id_colaborador);
+            }
+            
+            
 //          salvo alteração no banco de dados
             $pdo->commit(); /* Se não houve erro nas querys, confirma os dados no banco */
 
@@ -91,12 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $msg = $ex->getMessage();
         }
 //        fecho conexao
-            $pdo = null;
+        $pdo = null;
 
-            echo '<script>window.alert("' . $msg . '");
+        echo '<script>window.alert("' . $msg . '");
                location.href = "../../../novo_usuario.php";
         </script>';
-       
+
 //  if (empty($array_erros)) {
     } else {
         $msg_erro = '';

@@ -28,12 +28,12 @@ function formulario() {
                         <div class="row">
                             <div class="col-sm-6">
                                 <?php
-                                criar_input_data('Data Inicial', 'dt_inicial', 'dt_inicial', array('required' => 'true', 'placeholder' => '00/00/0000', 'maxlength' => '14'), '', 'somente numeros');
+                                criar_input_data('Data Inicial', 'dt_inicial', 'dt_inicial', array('required' => 'true', 'placeholder' => '00/00/0000'), '', 'somente numeros');
                                 ?>
                             </div>
                             <div class="col-sm-6">
                                 <?php
-                                criar_input_data('Data Final', 'dt_final', 'dt_final', array('required' => 'true', 'placeholder' => '00/00/0000', 'maxlength' => '14'), date('d/m/Y'), 'somente numeros');
+                                criar_input_data('Data Final', 'dt_final', 'dt_final', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'), 'somente numeros');
                                 ?>
                             </div>
                         </div>

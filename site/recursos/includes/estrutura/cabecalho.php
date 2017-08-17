@@ -57,7 +57,9 @@ include_once './controle/validar_secao.php';
                                             <li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CARGA</a>
                                                 <ul class="dropdown-menu">
                                                     <?php if (in_array("4", $_SESSION['PERMISSAO_MENU'])) { ?>
-                                                        <li><a href="cadastro_carga_individual.php">INCLUIR</a></li>
+                                                        <li><a href="cadastro_carga_individual.php">INDIVIDUAL</a></li>
+                                                    <?php } if (in_array("37", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                                        <li><a href="cadastro_carga_coletiva.php">COLETIVA</a></li>
                                                     <?php } if (in_array("5", $_SESSION['PERMISSAO_MENU'])) { ?>
                                                         <li><a href="excluir_carga.php">EXCLUIR</a></li>
                                                     <?php } ?>
@@ -95,7 +97,8 @@ include_once './controle/validar_secao.php';
                                         <?php if (in_array("7", $_SESSION['PERMISSAO_MENU'])) { ?>
                                             <li><a href="segunda_via_etiqueta.php">2° VIA ETIQUETA</a></li>
                                         <?php } ?>
-
+                                       
+                                        <li><a href="modulo_juridico/inicial.php">JURÍDICO</a></li>
                                     </ul>
                                 </li>
                             <?php } ?>
