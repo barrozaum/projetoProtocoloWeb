@@ -1,4 +1,6 @@
 <?php
+//die(print_r($_FILES));
+
 //valido a sessão do usuário 
 include_once '../estrutura/controle/validar_secao.php';
 include_once '../funcoes/func_retorna_documento.php';

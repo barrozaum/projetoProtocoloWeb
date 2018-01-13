@@ -53,12 +53,13 @@ function func_retorna_dados_oficio($pdo, $numero_oficio, $ano_oficio) {
 
     try {
 
-        $ano_atual = date('Y');
+      
         $sql = "SELECT * ";
         $sql = $sql . " FROM oficio ";
         $sql = $sql . " WHERE numero_oficio = '{$numero_oficio}' AND  ano_oficio = '{$ano_oficio}' Limit 1";
         $executa = $pdo->prepare($sql);
         $executa->execute();
+//        echo $sql;
 
         if ($dados = $executa->fetch()) {
             $observacao_oficio = $dados['observacao_oficio'];
@@ -87,6 +88,8 @@ function func_retorna_dados_oficio($pdo, $numero_oficio, $ano_oficio) {
                 "sql " =>$sql
             );
         }
+        
+      
 
 // convertemos em json e colocamos na tela
         echo json_encode($var);

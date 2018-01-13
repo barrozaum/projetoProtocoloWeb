@@ -38,7 +38,7 @@ function fun_retorna_documento_presente_processo($pdo, $id_processo) {
 
     $linha = array();
     for ($i = 0; $dados = $query_documento_processo->fetch(); $i++) {
-       
+
 
         $linha[$i] = array("codigo_documento" => "{$dados['idDocumento']}", "documento" => "{$dados['descricao_documento']}", "numero" => "{$dados['numeroDocumento']}", "ano" => "{$dados['anoDocumento']}");
     }
@@ -66,17 +66,16 @@ function inserindo_documentos($pdo, $id_proceso) {
             $descricao_documento[$i];
             $ano_documento[$i];
 
-            if(empty($codigo_documento[$i])){
-               $codigo_documento[$i] =  0;
+            if (empty($codigo_documento[$i])) {
+                $codigo_documento[$i] = 0;
             }
             $sql_doc = "INSERT INTO documento_processo (idProcesso, idDocumento, anoDocumento, numeroDocumento, descricao_documento, usuario)";
             $sql_doc = $sql_doc . " VALUES ";
             $sql_doc = $sql_doc . "('{$id_proceso}', '{$codigo_documento[$i]}', {$ano_documento[$i]}, {$numero_documento[$i]}, '{$descricao_documento[$i]}' , '{$_SESSION['LOGIN_USUARIO']}')";
-           
+
             $executa = $pdo->query($sql_doc);
         }
     }
-   
 }
 
 function fun_limpar_documentos_processo($pdo, $id_proceso) {
@@ -86,4 +85,23 @@ function fun_limpar_documentos_processo($pdo, $id_proceso) {
     } else {
         return false;
     }
+}
+
+//função retornar todos os tipos de documentos
+function fun_retorna_tipos_documentos($pdo) {
+   
+    $array_retorno[0] = "SELECIONE O TIPO DO DOCUMENTO";
+
+
+    $sql_tipo_processo = "SELECT * FROM documento ORDER BY descricao_documento ASC";
+    $query_consulta = $pdo->query($sql_tipo_processo);
+    if ($query_consulta->execute()) {
+        while ($dados = $query_consulta->fetch()) {
+             $array_retorno[$dados['idDocumento']] = $dados['descricao_documento'];
+        }
+    }
+
+
+// convertemos em json e colocamos na tela
+    return $array_retorno;
 }

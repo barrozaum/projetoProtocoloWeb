@@ -35,10 +35,9 @@ $(function () {
         } else {
 //        atribuo o valor informado pelo usario no campo
             $(this).val(valor);
-
         }
-
     });
+
 
 
 
@@ -48,6 +47,7 @@ $(function () {
         var numero_processo = $("#id_numero_processo").val();
         var ano_processo = $("#id_ano_processo").val();
         var tipo_processo = $("#id_tipo_processo").val();
+        var setor_usuario_que_dar_carga = $("#id_alterar_colaborador_codigo_setor").val();
 
 
         if (numero_processo.length < 6 || numero_processo === '000000') {
@@ -73,7 +73,7 @@ $(function () {
                     txt_tipo_processo: tipo_processo,
                     txt_numero_processo: numero_processo,
                     txt_ano_processo: ano_processo,
-                    codigo_setor_usuario_carga: 1
+                    codigo_setor_usuario_carga: setor_usuario_que_dar_carga
                 },
         function (html) {
             $(".modal-content").removeClass('loader');
@@ -118,7 +118,7 @@ $(function () {
                 '</td>';
         cols += '<td>     <input type="text" class="form-control" name ="txt_array_numero_processo[]" required="true" value="' + numero_processo + '" maxlength="12" placeholder="" readonly="true"/></td>';
         cols += '<td>     <input type="text" class="form-control" name ="txt_array_ano_processo[]"  required="true" value="' + ano_processo + '" maxlength="12" placeholder="" readonly="true"/></td>';
-        cols += '<td>     <input type="text" class="form-control" name ="txt_array_parecer_processo[]" required="true" value="' + parecer_processo + '" maxlength="12" placeholder="" readonly="true"/></td>';
+        cols += '<td>     <input type="text" class="form-control" name ="txt_array_parecer_processo[]" required="true" value="' + parecer_processo + '" maxlength="12" placeholder="Parecer" readonly="true"/></td>';
         cols += '<td class="actions">';
         cols += '<button class="btn btn-large btn-danger" onclick="RemoveTableRow(this)" type="button">Remover</button>';
         cols += '</td>';
@@ -154,11 +154,11 @@ $(function () {
 
         var cod_setor_origem = $("#id_alterar_colaborador_codigo_setor").val();
         var cod_setor_entrada = $("#id_codigo_setor").val();
-        if(cod_setor_entrada > 0 && cod_setor_origem > 0){
+        if (cod_setor_entrada > 0 && cod_setor_origem > 0) {
             $("#id_formulario_carga_coletiva").submit();
-        } else if(cod_setor_origem < 1 ){
+        } else if (cod_setor_origem < 1) {
             $("#msg_erro").html("<div class='alert alert-danger'>SELECIONE O SETOR DE ORIGEM </div>")
-        }else{
+        } else {
             $("#msg_erro").html("<div class='alert alert-danger'>SELECIONE O SETOR DE DESTINO </div>")
         }
 

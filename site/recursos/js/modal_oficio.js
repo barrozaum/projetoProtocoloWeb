@@ -213,7 +213,7 @@ function alterar(param1, param2) {
         // Adquirente --
 
         success: function (data) {
-           
+           $("#msg").html(data);
             if (data.achou == 1) {
                 $("#formularioOficio").attr({"action": "recursos/includes/alterar/alterar_oficio.php"});
                 
@@ -236,7 +236,7 @@ function alterar(param1, param2) {
 
             }
         }, error: function (error) {
-            console.log(error.responseText);
+             $("#msg").html(error.responseText);
         }
 
     }); //termina o ajax

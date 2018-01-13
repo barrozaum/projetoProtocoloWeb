@@ -6,6 +6,8 @@ include_once '../funcoes/funcaoCriacaoInput.php';
 include_once '../estrutura/conexao/conexao.php';
 // RETORNA TIPOS PROCESSO
 include_once '../funcoes/func_retorna_tipos_processos_existentes.php';
+// retorna tipos de documento
+include_once '../funcoes/func_retorna_documento.php';
 ?>
 <?php
 if (isset($_GET['cmd'])) {
@@ -39,7 +41,7 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
         </div>
     </div>
     <!-- fim do bloco mensagens retornadas pelo sistema -->
-    <form  method="post" action="<?php print $acao_formulario; ?>" name="formulario_processo" id="id_formulario_processo">   <!-- inicio do formulário --> 
+    <form  method="post" action="<?php print $acao_formulario; ?>" name="formulario_processo" id="id_formulario_processo" enctype="multipart/form-data">   <!-- inicio do formulário --> 
         <div class="mainbox col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0"> <!-- div que posiciona o formulário na tela -->
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <P ALIGN="CENTER"><?php print $titulo_pagina; ?></P>
@@ -209,11 +211,9 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                 ?>
                                             </div>
                                         </div> 
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div><!-- fim da segunda aba -->
                     <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -228,7 +228,9 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div id="msg_doc_erro"></div>
+                                                <div class="alert alert-danger text-center" >
+                                                    SOMENTE ARQUIVOS PDFS SERÃO SALVOS !!!
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
@@ -239,20 +241,19 @@ function formulario($pdo, $titulo_pagina, $acao_formulario) {
                                                             <th>    
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text_com_lupa_e_com_adicionar('DOCUMENTO', 'documento', 'documento', array('required' => 'true', 'maxlength' => '50', 'placeholder' => 'Informe o Documento'), '');
-                                                                criar_input_hidden('codigo_documento', array(), '');
+                                                                criar_input_select("Documento", "documento[]", "documento", array("required"=>"true"), fun_retorna_tipos_documentos($pdo));
                                                                 ?>
                                                             </th>
                                                             <th>    
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('NÚMERO', 'numero_documento', 'numero_documento', array('maxlength' => '6', 'placeholder' => 'Informe o Documento','onkeypress' => 'return SomenteNumero(event)'), '');
+                                                                criar_input_file("ARQUIVO", "documento_arquivo", "documento_arquivo");
                                                                 ?>
                                                             </th>
                                                             <th>   
                                                                 <?php
                                                                 //   INPUT -                              
-                                                                criar_input_text('ANO', 'ano_documento', 'ano_documento', array('maxlength' => '4', 'placeholder' => 'Informe o Documento','onkeypress' => 'return SomenteNumero(event)'), '');
+                                                                criar_input_text('DESCRIÇÃO', 'descricao_documento', 'descricao_documento', array('maxlength' => '50', 'placeholder' => 'Informe a Descrição'), '');
                                                                 ?>
                                                             </th>
                                                             <th>  

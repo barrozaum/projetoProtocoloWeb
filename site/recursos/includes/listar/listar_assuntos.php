@@ -23,7 +23,6 @@ include_once '../estrutura/controle/validar_secao.php';
                         <th>Descrição Assunto</th>
                         <th>Alterar</th>
                         <th>Excluir</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +40,6 @@ include_once '../estrutura/controle/validar_secao.php';
                     for ($i = 0; $dados = $query->fetch(); $i++) {
                         ?>   	
 
-
                         <tr>
                             <td><?php echo $dados['idAssunto']; ?></td>
                             <td><?php echo $dados['descricao_assunto']; ?></td>
@@ -49,7 +47,6 @@ include_once '../estrutura/controle/validar_secao.php';
                             <td><a href="#" id="edit-excluir"  data-id="<?php echo $dados['idAssunto']; ?>|<?php echo $dados['descricao_assunto']; ?>"><img src="recursos/imagens/estrutura/lixeira.png" alt="excluir" height="20px;"></a></td>
 
                         </tr>
-
 
                         <?php
                     }

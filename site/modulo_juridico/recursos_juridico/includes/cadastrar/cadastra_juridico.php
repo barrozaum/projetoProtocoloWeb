@@ -56,21 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             foreach ($_FILES["txt_documento"]["error"] as $key => $error) {
                 if ($error == UPLOAD_ERR_OK) {
-                    $tmp_name = $_FILES["txt_documento"]["tmp_name"][$key];
-                    $extensao = func_descobri_extensao_arquivo($_FILES["txt_documento"]["name"][$key]);
-                    $name = substr(md5(uniqid(time())), 0, 50) . "." . $extensao;
+                        if ($_FILES['txt_documento']['type'] == "application/pdf ") { 
+                        $tmp_name = $_FILES["txt_documento"]["tmp_name"][$key];
+                        $extensao = func_descobri_extensao_arquivo($_FILES["txt_documento"]["name"][$key]);
+                        $name = substr(md5(uniqid(time())), 0, 50) . "." . $extensao;
 
-                    move_uploaded_file($tmp_name, "../documentos_uploader/$name");
+                        move_uploaded_file($tmp_name, "../documentos_uploader/$name");
 
 
-//                    inserindo a referencia no banco de dados
-                    $descricao = $_POST['txt_descricao_documento'];
-                    $sql_upload = "INSERT INTO upload_judiciais (id_processo_judicial,arquivo, descricao, usuario, dataUploader) ";
-                    $sql_upload = $sql_upload . " VALUE ";
-                    $sql_upload = $sql_upload . " ('{$ultima_id_inserida}','{$name}', '{$descricao[$key]}', '{$_SESSION['LOGIN_USUARIO']}', now())";
-                    $query_upload = $pdo->prepare($sql_upload);
-                    $query_upload->execute();
-                }
+    //                    inserindo a referencia no banco de dados
+                        $descricao = $_POST['txt_descricao_documento'];
+                        $sql_upload = "INSERT INTO upload_judiciais (id_processo_judicial,arquivo, descricao, usuario, dataUploader) ";
+                        $sql_upload = $sql_upload . " VALUE ";
+                        $sql_upload = $sql_upload . " ('{$ultima_id_inserida}','{$name}', '{$descricao[$key]}', '{$_SESSION['LOGIN_USUARIO']}', now())";
+                        $query_upload = $pdo->prepare($sql_upload);
+                        $query_upload->execute();
+                        }
+                    }
             }
         }
 

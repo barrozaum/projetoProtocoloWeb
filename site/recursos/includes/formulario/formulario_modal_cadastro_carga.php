@@ -13,7 +13,7 @@ if ($_POST['id'] === '1') {
     $tipo_processo = letraMaiuscula($_POST['txt_tipo_processo']);
     $numero_processo = letraMaiuscula($_POST['txt_numero_processo']);
     $ano_processo = letraMaiuscula($_POST['txt_ano_processo']);
-    $codigo_setor_usuario_carga = 1; // só quem pode apensar processo é o protocolo
+    $codigo_setor_usuario_carga = letraMaiuscula($_POST['codigo_setor_usuario_carga']); // SETOR DO USUARIO 
 
     mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_processo, $codigo_setor_usuario_carga);
     $pdo = null;
@@ -44,7 +44,7 @@ function mostrar_formulario($pdo, $tipo_processo, $numero_processo, $ano_process
     <form name="formulario_carga" id="id_formulario_carga" action="recursos/includes/cadastrar/cadastro_carga_individual.php" method="POST">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title"> <p class="text-info">APENSO PROCESSO !!!</p></h4>
+            <h4 class="modal-title"> <p class="text-info">ADICIONAR PROCESSO !!!</p></h4>
             <div id="error_modal"></div>
         </div>
         <div class="modal-body">
