@@ -6,14 +6,7 @@ include_once './controle/validar_secao.php';
 ?>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="alert alert-success text-center">
-                <h3 class="h3">BOAS FESTAS !!! </h3>
-                <p><strong>Feliz Natal e um próspero Ano Novo</strong></p>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="row">
          <?php if (in_array("1", $_SESSION['PERMISSAO_MENU']) || in_array("4", $_SESSION['PERMISSAO_MENU']) ||in_array("6", $_SESSION['PERMISSAO_MENU']) || in_array("7", $_SESSION['PERMISSAO_MENU']) )  { ?>
