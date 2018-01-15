@@ -18,6 +18,27 @@ $(document).on('blur', "#id_numero_protocolo", function (e) {
 });
 
 // quando o campo código sofrer alteração executo
+$(document).on('blur', "#id_consulta_numero_protocolo", function (e) {
+
+
+// pego o valor informado no campo
+// coloco no formato correto 
+// atribuo o valor formatado na variavel valor
+    var valor = preencheZeros(this.value, 6);
+//    comparo se o valor é menor que
+    if (valor < '000001') {
+//        zero o campo cdigo
+        $(this).val('000000');
+
+    } else {
+//        atribuo o valor informado pelo usario no campo
+        $(this).val(valor);
+
+    }
+
+});
+
+// quando o campo código sofrer alteração executo
 $(document).on('blur', "#id_numero_processo_protocolo", function (e) {
 // pego o valor informado no campo
 // coloco no formato correto 
@@ -46,6 +67,25 @@ $(document).on('blur', "#id_ano_processo_protocolo", function (e) {
     if (valor < 2000) {
 //        zero o campo cdigo
         $(this).val('2000');
+
+    } else {
+//        atribuo o valor informado pelo usario no campo
+        $(this).val(valor);
+
+    }
+
+});
+
+// quando o campo código sofrer alteração executo
+$(document).on('blur', "#id_consulta_ano_protocolo", function (e) {
+// pego o valor informado no campo
+// coloco no formato correto 
+// atribuo o valor formatado na variavel valor
+    var valor = preencheZeros(this.value, 4);
+//    comparo se o valor é menor que
+    if (valor < 0001) {
+//        zero o campo cdigo
+        $(this).val('0000');
 
     } else {
 //        atribuo o valor informado pelo usario no campo
@@ -98,7 +138,7 @@ function controllerAcao() {
 
 //busca o próximo valor a ser inserido no banco de dados
 function cadastrar() {
-    $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
+    $("#formularioCadastroProtocolado").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
 
     limparCampos('');
 //    adiciono a uma variavel local o valor passado 
@@ -153,8 +193,8 @@ function limparCampos(valor) {
     $('#id_numero_processo_protocolo').val(valor);
     $('#id_ano_processo_protocolo').val('2017');
     selecionar("id_tipo_processo", "0");
-    
-    
+
+
 
 }
 
@@ -183,14 +223,14 @@ $(document).on('click', "#btn_inserir_protocolo", function (e) {
         $("#msg_erro").html("<div class='alert alert-danger'>" + msg + "</div>");
     } else {
 
-        $('#formularioOficio').submit();
+        $('#formularioCadastroProtocolado').submit();
     }
 });
 
 
 // retorna com o itbi já cadastrado
 function alterar(param1, param2) {
-    $("#formularioItbi").attr({"action": "recursos/includes/alterar/alterar_protocolo.php"});
+    $("#formularioCadastroProtocolado").attr({"action": "recursos/includes/alterar/alterar_protocolo.php"});
 //    adiciono a uma variavel local o valor passado 
     var op = 2;
 //    zero a div de erro 
@@ -213,10 +253,10 @@ function alterar(param1, param2) {
         // Adquirente --
 
         success: function (data) {
-           $("#msg").html(data);
+            $("#msg").html(data);
             if (data.achou == 1) {
                 $("#formularioOficio").attr({"action": "recursos/includes/alterar/alterar_protocolo.php"});
-                
+
                 $("#msg").html('<div class="alert alert-info" style="text-align:center; font-size:15px;"><strong>ALTERAR </strong></div>');
 //                preenchendo o formulario
                 $("#id_assunto").val(data.assunto_protocolo);
@@ -230,13 +270,13 @@ function alterar(param1, param2) {
                 $("#divButonn").html(' <button type="button" class="btn btn-info" id="btn_inserir_protocolo" >Alterar </button>');
 
             } else {
-                $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
+                $("#formularioCadastroProtocolado").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
                 $("#msg").html('<div class="alert alert-success" style="text-align:center; font-size:15px;"><strong>Cadastrar </strong></div>');
                 $("#divButonn").html(' <button type="button" class="btn btn-success" id="btn_inserir_protocolo" >Cadastrar </button>');
 
             }
         }, error: function (error) {
-             $("#msg").html(error.responseText);
+            $("#msg").html(error.responseText);
         }
 
     }); //termina o ajax
@@ -245,3 +285,68 @@ function alterar(param1, param2) {
 }
 
 
+
+$(document).on('click', '#btn_consultar_protocolado', function (e) {
+
+//limpando a busca 
+    $("#listar").html("");
+
+    var numero = $('#id_consulta_numero_protocolo').val();
+    var ano = $('#id_consulta_ano_protocolo').val();
+    var requerente = $('#id_requerente').val();
+    var assunto = $('#id_assunto').val();
+    var observacao = $('#id_obs_protocolo').val();
+    var msg = "";
+
+
+    if ((numero !== "000000" && ano === "0000") || (numero === "000000" && ano !== "0000")) {
+        msg = "VERIFICAR NUMERO E ANO !!!<BR />";
+    }
+
+    if (requerente.length > 0 && requerente.length < 3) {
+        msg = msg + "REQUERENTE DEVE CONTER NO MINIMO 3 CARACTERES !!!<BR />";
+
+    }
+    if (assunto.length > 0 && assunto.length < 3) {
+        msg = msg + "ASSUNTO DEVE CONTER NO MINIMO 3 CARACTERES !!!<BR />";
+
+    }
+    if (observacao.length > 0 && observacao.length < 3) {
+        msg = msg + "OBSERVAÇÃO DEVE CONTER NO MINIMO 3 CARACTERES !!!<BR />";
+
+    }
+
+
+    if (msg !== "") {
+        $('#msg_erro').html("<div class='alert alert-danger'>" + msg + "</div>");
+
+        return false;
+    } else {
+        buscar_consulta_protocolado(numero, ano, assunto, requerente, observacao);
+        $('#msg_erro').html("");
+    }
+
+
+});
+
+
+
+
+function  buscar_consulta_protocolado(numero, ano, assunto, requerente, observacao) {
+    $.ajax({
+        url: "recursos/includes/consulta/consulta_protocolo.php",
+        method: "post",
+        data: {
+            numero: numero,
+            ano: ano,
+            requerente: requerente,
+            assunto: assunto,
+            observacao: observacao
+        }, success: function (data) {
+            $("#listar").html(data);
+        }, error: function (erro) {
+            $("#listar").html(erro.responseText)
+        }
+    });
+
+}

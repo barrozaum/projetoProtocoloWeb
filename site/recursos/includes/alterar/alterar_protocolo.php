@@ -55,15 +55,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pdo->beginTransaction();
 
 //      Comando sql a ser executado  
-            $sql = "INSERT INTO protocolo (numero_protocolo, ano_protocolo, data_protocolo, requerente_protocolo, observacao_protocolo,origem_protocolo, assunto_protocolo, numero_processo_protocolo, ano_processo_protocolo, tipo_processo_protocolo, usuario)";
-            $sql = $sql . " VALUES ";
-            $sql = $sql . "  ('{$numero_protocolo}', '{$ano_protocolo}', '{$data_protocolo}','{$requerente_protocolo}', '{$obs_protocolo}', '{$origem_protocolo}', '{$assunto_protocolo}', '{$numero_processo_protocolo}', '{$ano_processo_protocolo}', '{$tipo_processo_protocolo}', '{$_SESSION['LOGIN_USUARIO']}')"; 
+            $sql = "UPDATE protocolo";
+            $sql = $sql . " SET requerente_protocolo = '{$requerente_protocolo}', "; 
+            $sql = $sql . " observacao_protocolo = '{$obs_protocolo}', "; 
+            $sql = $sql . " origem_protocolo = '{$origem_protocolo}', "; 
+            $sql = $sql . " assunto_protocolo = '{$assunto_protocolo}',"; 
+            $sql = $sql . " numero_processo_protocolo = '{$numero_processo_protocolo}', "; 
+            $sql = $sql . " ano_processo_protocolo = '{$ano_processo_protocolo}', "; 
+            $sql = $sql . " tipo_processo_protocolo = '{$tipo_processo_protocolo}', "; 
+            $sql = $sql . " usuario='{$_SESSION['LOGIN_USUARIO']}' "; 
+            $sql = $sql . " WHERE numero_protocolo = '{$numero_protocolo}' AND ano_protocolo = '{$ano_protocolo}'";
+            
            
 //      execução com comando sql    
             $executa = $pdo->query($sql);
 
 //            mensagem de sucesso
-            $msg = "PROTOCOLO CADASTRADO COM SUCESSO !!!";
+            $msg = "PROTOCOLO ALTERADO COM SUCESSO !!!";
             
 //            salvando no banco de dados
             $pdo->commit();

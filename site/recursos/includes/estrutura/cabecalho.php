@@ -111,6 +111,12 @@ include_once './controle/validar_secao.php';
                                         <?php if (in_array("8", $_SESSION['PERMISSAO_MENU'])) { ?>
                                             <li><a href="cadastro_protocolo.php">NOVO</a></li>
                                         <?php } ?>
+                                        <?php if (in_array("36", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="consulta_protocolo.php">CONSULTA</a></li>
+                                        <?php } ?>
+                                        <?php if (in_array("37", $_SESSION['PERMISSAO_MENU'])) { ?>
+                                            <li><a href="relacao_protocolo.php">RELAÇÃO PROTOCOLADOS</a></li>
+                                        <?php } ?>
                                     </ul>
                                 </li>
                             <?php } ?>
