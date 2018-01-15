@@ -24,7 +24,7 @@ function formularioCadastro($pdo) {
             <div class="well"><!-- div que coloca a cor no formulário -->
                 <div class="panel panel-default">
                     <!-- INICIO Dados do imóvel -->
-                    <div class="panel-heading text-center">CADASTRO OFÍCIO</div>
+                    <div class="panel-heading text-center">CADASTRO PROTOCOLO</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-12">
@@ -36,13 +36,19 @@ function formularioCadastro($pdo) {
                             <div class="col-sm-4">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('NUMERO OFÍCIO', 'numero_oficio', 'numero_oficio', array('required' => 'true', 'maxlength' => '6', 'placeholder' => 'xxxxxx', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                criar_input_text('NUMERO', 'numero_protocolo', 'numero_protocolo', array('required' => 'true', 'maxlength' => '6', 'placeholder' => 'xxxxxx', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                 ?>
                             </div>
                             <div class="col-sm-4">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('ANO OFÍCIO', 'ano_oficio', 'ano_oficio', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
+                                criar_input_text('ANO', 'ano_protocolo', 'ano_protocolo', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
+                                ?>
+                            </div>
+                            <div class="col-sm-4">
+                                <?php
+                                //   INPUT -                              
+                                criar_input_text('DATA', 'data_protocolo', 'data_protocolo', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)', 'readonly' => 'true'), date('d/m/Y'));
                                 ?>
                             </div>
                         </div> 
@@ -86,7 +92,7 @@ function formularioCadastro($pdo) {
                         <div class="row">
                             <div class="col-sm-12">
                                 <?php
-                                criar_textarea('OBSERVAÇÃO', 'obs_oficio', 'obs_oficio', '', array('required' => 'true', 'maxlength' => '240', 'rows' => '5'));
+                                criar_textarea('OBSERVAÇÃO', 'obs_protocolo', 'obs_protocolo', '', array('required' => 'true', 'maxlength' => '240', 'rows' => '5'));
                                 ?>
                             </div>
                         </div> 
@@ -108,13 +114,13 @@ function formularioCadastro($pdo) {
                             <div class="col-sm-6">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('NUMERO PROCESSO OFÍCIO', 'numero_processo_oficio', 'numero_processo_oficio', array('required' => 'true', 'maxlength' => '6', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
+                                criar_input_text('NUMERO PROCESSO OFÍCIO', 'numero_processo_protocolo', 'numero_processo_protocolo', array('required' => 'true', 'maxlength' => '6', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), '');
                                 ?>
                             </div>
                             <div class="col-sm-6">
                                 <?php
                                 //   INPUT -                              
-                                criar_input_text('ANO PROCESSO OFÍCIO', 'ano_processo_oficio', 'ano_processo_oficio', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
+                                criar_input_text('ANO PROCESSO OFÍCIO', 'ano_processo_protocolo', 'ano_processo_protocolo', array('required' => 'true', 'maxlength' => '4', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)'), date('Y'));
                                 ?>
                             </div>
                         </div> 

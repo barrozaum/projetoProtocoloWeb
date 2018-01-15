@@ -1,5 +1,5 @@
 // quando o campo código sofrer alteração executo
-$(document).on('blur', "#id_numero_oficio", function (e) {
+$(document).on('blur', "#id_numero_protocolo", function (e) {
 // pego o valor informado no campo
 // coloco no formato correto 
 // atribuo o valor formatado na variavel valor
@@ -18,7 +18,7 @@ $(document).on('blur', "#id_numero_oficio", function (e) {
 });
 
 // quando o campo código sofrer alteração executo
-$(document).on('blur', "#id_numero_processo_oficio", function (e) {
+$(document).on('blur', "#id_numero_processo_protocolo", function (e) {
 // pego o valor informado no campo
 // coloco no formato correto 
 // atribuo o valor formatado na variavel valor
@@ -37,7 +37,7 @@ $(document).on('blur', "#id_numero_processo_oficio", function (e) {
 });
 
 // quando o campo código sofrer alteração executo
-$(document).on('blur', "#id_ano_processo_oficio", function (e) {
+$(document).on('blur', "#id_ano_processo_protocolo", function (e) {
 // pego o valor informado no campo
 // coloco no formato correto 
 // atribuo o valor formatado na variavel valor
@@ -56,7 +56,7 @@ $(document).on('blur', "#id_ano_processo_oficio", function (e) {
 });
 
 // quando o campo código sofrer alteração executo
-$(document).on('blur', "#id_ano_oficio", function (e) {
+$(document).on('blur', "#id_ano_protocolo", function (e) {
 // pego o valor informado no campo
 // coloco no formato correto 
 // atribuo o valor formatado na variavel valor
@@ -83,8 +83,8 @@ function controllerAcao() {
     $("#msg_erro").html('');
     $("#divButonn").html('');
     limparCampos("");
-    var param1 = $('#id_numero_oficio').val();
-    var param2 = $('#id_ano_oficio').val();
+    var param1 = $('#id_numero_protocolo').val();
+    var param2 = $('#id_ano_protocolo').val();
 
 
     if (param1 === "" || param2 === "" || param1 < '000001' || param2 < '1990') {
@@ -98,7 +98,7 @@ function controllerAcao() {
 
 //busca o próximo valor a ser inserido no banco de dados
 function cadastrar() {
-    $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_oficio.php"});
+    $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
 
     limparCampos('');
 //    adiciono a uma variavel local o valor passado 
@@ -110,7 +110,7 @@ function cadastrar() {
 //      Requisição pelo Method POST
         method: "POST",
 //      url para o arquivo para validação
-        url: "recursos/includes/funcoes/func_retorna_oficio.php",
+        url: "recursos/includes/funcoes/func_retorna_protocolo.php",
 //      dados passados
         data: {
             op: op
@@ -120,9 +120,9 @@ function cadastrar() {
         // função para de sucesso
         success: function (data) {
             $("#msg").html('<div class="alert alert-success" style="text-align:center; font-size:15px;"><strong>Cadastrar </strong></div>');
-            $("#id_numero_oficio").val(data.numero_oficio);
-            $("#id_ano_oficio").val(data.ano_oficio);
-            $("#divButonn").html(' <button type="button" class="btn btn-success" id="btn_inserir_oficio" >Cadastrar</button>');
+            $("#id_numero_protocolo").val(data.numero_protocolo);
+            $("#id_ano_protocolo").val(data.ano_protocolo);
+            $("#divButonn").html(' <button type="button" class="btn btn-success" id="btn_inserir_protocolo" >Cadastrar</button>');
 
         }, error: function (error) {
             console.log(error.responseText);
@@ -149,9 +149,9 @@ function limparCampos(valor) {
     $('#id_codigo_assunto').val(valor);
     $('#id_origem').val(valor);
     $('#id_codigo_origem').val(valor);
-    $('#id_obs_oficio').val(valor);
-    $('#id_numero_processo_oficio').val(valor);
-    $('#id_ano_processo_oficio').val('2017');
+    $('#id_obs_protocolo').val(valor);
+    $('#id_numero_processo_protocolo').val(valor);
+    $('#id_ano_processo_protocolo').val('2017');
     selecionar("id_tipo_processo", "0");
     
     
@@ -161,7 +161,7 @@ function limparCampos(valor) {
 
 
 // VALIDANDO DADOS DO FORMULARIO
-$(document).on('click', "#btn_inserir_oficio", function (e) {
+$(document).on('click', "#btn_inserir_protocolo", function (e) {
 
 //    variaveis
     var msg = "";
@@ -190,7 +190,7 @@ $(document).on('click', "#btn_inserir_oficio", function (e) {
 
 // retorna com o itbi já cadastrado
 function alterar(param1, param2) {
-    $("#formularioItbi").attr({"action": "recursos/includes/alterar/alterar_oficio.php"});
+    $("#formularioItbi").attr({"action": "recursos/includes/alterar/alterar_protocolo.php"});
 //    adiciono a uma variavel local o valor passado 
     var op = 2;
 //    zero a div de erro 
@@ -200,12 +200,12 @@ function alterar(param1, param2) {
 //      Requisição pelo Method POST
         method: "POST",
 //      url para o arquivo para validação
-        url: "recursos/includes/funcoes/func_retorna_oficio.php",
+        url: "recursos/includes/funcoes/func_retorna_protocolo.php",
 //      dados passados
         data: {
             op: op,
-            numero_oficio: param1,
-            ano_oficio: param2
+            numero_protocolo: param1,
+            ano_protocolo: param2
         },
         // dataType json
         dataType: "json",
@@ -215,24 +215,24 @@ function alterar(param1, param2) {
         success: function (data) {
            $("#msg").html(data);
             if (data.achou == 1) {
-                $("#formularioOficio").attr({"action": "recursos/includes/alterar/alterar_oficio.php"});
+                $("#formularioOficio").attr({"action": "recursos/includes/alterar/alterar_protocolo.php"});
                 
                 $("#msg").html('<div class="alert alert-info" style="text-align:center; font-size:15px;"><strong>ALTERAR </strong></div>');
 //                preenchendo o formulario
-                $("#id_assunto").val(data.assunto_oficio);
-                $("#id_requerente").val(data.requerente_oficio);
-                $("#id_obs_oficio").val(data.observacao_oficio);
-                $("#id_origem").val(data.origem_oficio);
+                $("#id_assunto").val(data.assunto_protocolo);
+                $("#id_requerente").val(data.requerente_protocolo);
+                $("#id_obs_protocolo").val(data.observacao_protocolo);
+                $("#id_origem").val(data.origem_protocolo);
                 selecionar('id_tipo_processo', data.tipo_processo);
-                $("#id_numero_processo_oficio").val(data.numero_processo);
-                $("#id_ano_processo_oficio").val(data.ano_processo);
+                $("#id_numero_processo_protocolo").val(data.numero_processo);
+                $("#id_ano_processo_protocolo").val(data.ano_processo);
 //                fim dados formulario
-                $("#divButonn").html(' <button type="button" class="btn btn-info" id="btn_inserir_oficio" >Alterar </button>');
+                $("#divButonn").html(' <button type="button" class="btn btn-info" id="btn_inserir_protocolo" >Alterar </button>');
 
             } else {
-                $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_oficio.php"});
+                $("#formularioOficio").attr({"action": "recursos/includes/cadastrar/cadastrar_protocolo.php"});
                 $("#msg").html('<div class="alert alert-success" style="text-align:center; font-size:15px;"><strong>Cadastrar </strong></div>');
-                $("#divButonn").html(' <button type="button" class="btn btn-success" id="btn_inserir_oficio" >Cadastrar </button>');
+                $("#divButonn").html(' <button type="button" class="btn btn-success" id="btn_inserir_protocolo" >Cadastrar </button>');
 
             }
         }, error: function (error) {

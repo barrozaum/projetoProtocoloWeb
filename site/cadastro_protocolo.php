@@ -20,7 +20,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/estrutura.js"></script>
         <script src="recursos/js/adiciona_zero.js"></script>
         <script src="recursos/js/Selecionar_Dentro_Select.js"></script>
-        <script src="recursos/js/modal_oficio.js"></script>
+        <script src="recursos/js/modal_protocolo.js"></script>
         <script src="recursos/js/camposNumeros.js"></script>
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/mascaraValor.js"></script>
@@ -34,7 +34,7 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
             });
 
             function estruturaPagina() {
-                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_oficio.php');
+                $('#formulario').load('recursos/includes/formulario/formulario_cadastro_protocolo.php');
                 $('#modal').load('recursos/includes/estrutura/modal_grande.html');
             }
         </script>

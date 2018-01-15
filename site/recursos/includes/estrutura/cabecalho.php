@@ -106,10 +106,10 @@ include_once './controle/validar_secao.php';
                             if (in_array("32", $_SESSION['PERMISSAO_MENU'])) {
                                 ?>
                                 <li class="root">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">OFÍCIO <b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">PROTOCOLAR <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <?php if (in_array("8", $_SESSION['PERMISSAO_MENU'])) { ?>
-                                            <li><a href="cadastro_oficio.php">NOVO</a></li>
+                                            <li><a href="cadastro_protocolo.php">NOVO</a></li>
                                         <?php } ?>
                                     </ul>
                                 </li>
