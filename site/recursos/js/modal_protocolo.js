@@ -260,6 +260,7 @@ function alterar(param1, param2) {
                 $("#msg").html('<div class="alert alert-info" style="text-align:center; font-size:15px;"><strong>ALTERAR </strong></div>');
 //                preenchendo o formulario
                 $("#id_assunto").val(data.assunto_protocolo);
+                $("#id_data_protocolo").val(data.data_protocolo);
                 $("#id_requerente").val(data.requerente_protocolo);
                 $("#id_obs_protocolo").val(data.observacao_protocolo);
                 $("#id_origem").val(data.origem_protocolo);

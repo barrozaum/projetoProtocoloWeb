@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $origem_protocolo = letraMaiuscula($_POST['txt_origem']);
     $obs_protocolo= letraMaiuscula($_POST['txt_obs_protocolo']);
     $tipo_processo_protocolo= letraMaiuscula($_POST['txt_tipo_processo']);
-    $data_protocolo= dataAmericano(date('d/m/Y'));
+    $data_protocolo= dataAmericano($_POST['txt_data_protocolo']);
     $numero_processo_protocolo= letraMaiuscula($_POST['txt_numero_processo_protocolo']);
     $ano_processo_protocolo= letraMaiuscula($_POST['txt_ano_processo_protocolo']);
     

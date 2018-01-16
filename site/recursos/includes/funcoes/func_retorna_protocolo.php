@@ -2,6 +2,7 @@
 
 include_once '../estrutura/controle/validar_secao.php';
 include_once './function_letraMaiscula.php';
+include_once './funcao_formata_data.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -63,6 +64,7 @@ function func_retorna_dados_protocolo($pdo, $numero_protocolo, $ano_protocolo) {
 
         if ($dados = $executa->fetch()) {
             $observacao_protocolo = $dados['observacao_protocolo'];
+            $data_protocolo = dataBrasileiro($dados['data_protocolo']);
             $origem_protocolo = $dados['origem_protocolo'];
             $assunto_protocolo = $dados['assunto_protocolo'];
             $requerente_protocolo = $dados['requerente_protocolo'];
@@ -74,6 +76,7 @@ function func_retorna_dados_protocolo($pdo, $numero_protocolo, $ano_protocolo) {
                 "achou" => 1,
                 "numero_protocolo" => $numero_protocolo,
                 "ano_protocolo" => $ano_protocolo,
+                "data_protocolo" => $data_protocolo,
                 "observacao_protocolo" => $observacao_protocolo,
                 "origem_protocolo" => $origem_protocolo,
                 "assunto_protocolo" => $assunto_protocolo,

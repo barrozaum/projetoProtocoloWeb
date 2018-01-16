@@ -25,7 +25,14 @@ include "recursos/includes/estrutura/controle/validar_secao.php";
         <script src="recursos/js/chamada_de_janelas.js"></script>
         <script src="recursos/js/mascaraValor.js"></script>
         <script src="recursos/js/func_botao_adiciona_processo.js"></script>
-
+        
+        <!-- Includes para Colocar o Calendário na data -->
+        <link rel="stylesheet" href="recursos/css/redmond/jquery-ui-1.10.1.custom.css" />
+        <script src="recursos/js/data_calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/calendario.js" type="text/javascript"></script>
+        <script src="recursos/js/mascaraData.js"></script>
+        <!-- fim dos includes para Colocar a Data -->
+        
         <link rel="stylesheet" href="recursos/css/jquery.dataTables.min.css">
         <script src="recursos/js/jquery.dataTables.min.js"></script>
         <script>

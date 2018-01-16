@@ -47,8 +47,8 @@ function formularioCadastro($pdo) {
                             </div>
                             <div class="col-sm-4">
                                 <?php
-                                //   INPUT -                              
-                                criar_input_text('DATA', 'data_protocolo', 'data_protocolo', array('required' => 'true', 'maxlength' => '10', 'placeholder' => '', 'onkeypress' => 'return SomenteNumero(event)', 'readonly' => 'true'), date('d/m/Y'));
+                                //   INPUT -    
+                                criar_input_data('Data Processo', 'data_protocolo', 'data_protocolo', array('required' => 'true', 'placeholder' => '00/00/0000'), date('d/m/Y'));
                                 ?>
                             </div>
                         </div> 
